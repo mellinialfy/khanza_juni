@@ -858,7 +858,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.setBackground(new java.awt.Color(255, 255, 255));
         FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(870, 1200));
+        FormInput.setPreferredSize(new java.awt.Dimension(470, 1400));
         FormInput.setLayout(null);
 
         TNoRw.setHighlighter(null);
@@ -950,7 +950,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
 
-        Jk.setEditable(false);
         Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
@@ -1123,7 +1122,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel33);
         jLabel33.setBounds(0, 1180, 150, 23);
 
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox1.setText("Lainnya");
         jCheckBox1.setName("Pit. Alba"); // NOI18N
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -1132,9 +1133,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox1);
-        jCheckBox1.setBounds(530, 250, 70, 19);
+        jCheckBox1.setBounds(640, 250, 70, 19);
 
+        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox2.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox2.setText("Dengie-Morgagni");
         jCheckBox2.setName("jCheckBox2"); // NOI18N
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -1143,9 +1146,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox2);
-        jCheckBox2.setBounds(400, 250, 120, 19);
+        jCheckBox2.setBounds(530, 250, 110, 19);
 
+        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox3.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox3.setText("Ikhtiosis");
         jCheckBox3.setName("jCheckBox3"); // NOI18N
         jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -1154,9 +1159,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox3);
-        jCheckBox3.setBounds(240, 250, 80, 19);
+        jCheckBox3.setBounds(330, 250, 80, 19);
 
+        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox4.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox4.setText("Pit. Alba");
         jCheckBox4.setName("jCheckBox4"); // NOI18N
         jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
@@ -1165,9 +1172,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox4);
-        jCheckBox4.setBounds(170, 250, 63, 19);
+        jCheckBox4.setBounds(170, 250, 80, 19);
 
+        jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox5.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox5.setText("Keratosis");
         jCheckBox5.setName("jCheckBox5"); // NOI18N
         jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
@@ -1176,7 +1185,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox5);
-        jCheckBox5.setBounds(320, 250, 80, 19);
+        jCheckBox5.setBounds(430, 250, 80, 19);
 
         Jk1.setEditable(false);
         Jk1.setHighlighter(null);
@@ -1190,35 +1199,32 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel36);
         jLabel36.setBounds(0, 250, 150, 23);
 
-        Jk2.setEditable(false);
         Jk2.setHighlighter(null);
         Jk2.setName("Jk2"); // NOI18N
         FormInput.add(Jk2);
-        Jk2.setBounds(610, 250, 150, 23);
+        Jk2.setBounds(720, 250, 150, 23);
 
         jLabel37.setText("Kuku:");
         jLabel37.setToolTipText("");
         jLabel37.setName("jLabel37"); // NOI18N
         FormInput.add(jLabel37);
-        jLabel37.setBounds(550, 280, 40, 23);
+        jLabel37.setBounds(660, 280, 40, 23);
 
-        Jk3.setEditable(false);
         Jk3.setHighlighter(null);
         Jk3.setName("Jk3"); // NOI18N
         FormInput.add(Jk3);
-        Jk3.setBounds(610, 280, 150, 23);
+        Jk3.setBounds(720, 280, 150, 23);
 
         jLabel38.setText("Rambut:");
         jLabel38.setToolTipText("");
         jLabel38.setName("jLabel38"); // NOI18N
         FormInput.add(jLabel38);
-        jLabel38.setBounds(320, 280, 60, 23);
+        jLabel38.setBounds(430, 280, 60, 23);
 
-        Jk4.setEditable(false);
         Jk4.setHighlighter(null);
         Jk4.setName("Jk4"); // NOI18N
         FormInput.add(Jk4);
-        Jk4.setBounds(400, 280, 150, 23);
+        Jk4.setBounds(510, 280, 150, 23);
 
         jLabel39.setText("Kelenjar limfe:");
         jLabel39.setToolTipText("");
@@ -1226,7 +1232,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel39);
         jLabel39.setBounds(0, 340, 150, 23);
 
+        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox6.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox6.setText("Hiperhidrosis");
         jCheckBox6.setName("jCheckBox6"); // NOI18N
         jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
@@ -1235,9 +1243,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox6);
-        jCheckBox6.setBounds(170, 310, 84, 19);
+        jCheckBox6.setBounds(170, 310, 100, 19);
 
+        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox7.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox7.setText("Anshidrosis");
         jCheckBox7.setName("jCheckBox7"); // NOI18N
         jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
@@ -1246,7 +1256,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox7);
-        jCheckBox7.setBounds(320, 310, 90, 19);
+        jCheckBox7.setBounds(330, 310, 90, 19);
 
         jLabel40.setText("Mukosa:");
         jLabel40.setToolTipText("");
@@ -1254,7 +1264,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel40);
         jLabel40.setBounds(0, 280, 150, 23);
 
-        Jk5.setEditable(false);
         Jk5.setHighlighter(null);
         Jk5.setName("Jk5"); // NOI18N
         FormInput.add(Jk5);
@@ -1266,7 +1275,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel41);
         jLabel41.setBounds(0, 310, 150, 23);
 
+        jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox8.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox8.setText("Penebalan saraf perifer");
         jCheckBox8.setName("jCheckBox8"); // NOI18N
         jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
@@ -1277,7 +1288,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox8);
         jCheckBox8.setBounds(170, 370, 150, 19);
 
+        jCheckBox10.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox10.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox10.setText("Parestesi");
         jCheckBox10.setName("jCheckBox10"); // NOI18N
         jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
@@ -1286,9 +1299,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox10);
-        jCheckBox10.setBounds(320, 370, 80, 19);
+        jCheckBox10.setBounds(330, 370, 80, 19);
 
+        jCheckBox11.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox11.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox11.setText("Makula-Anestesi");
         jCheckBox11.setName("jCheckBox11"); // NOI18N
         jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
@@ -1297,9 +1312,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox11);
-        jCheckBox11.setBounds(400, 370, 120, 19);
+        jCheckBox11.setBounds(430, 370, 110, 19);
 
+        jCheckBox12.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox12.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox12.setText("Lainnya");
         jCheckBox12.setName("jCheckBox12"); // NOI18N
         jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
@@ -1308,9 +1325,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox12);
-        jCheckBox12.setBounds(530, 370, 70, 19);
+        jCheckBox12.setBounds(640, 370, 70, 19);
 
-        Jk6.setEditable(false);
         Jk6.setHighlighter(null);
         Jk6.setName("Jk6"); // NOI18N
         FormInput.add(Jk6);
@@ -1422,7 +1438,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel46);
         jLabel46.setBounds(260, 1360, 100, 23);
 
+        jCheckBox14.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox14.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox14.setText("Boleh pulang");
         jCheckBox14.setName("jCheckBox14"); // NOI18N
         jCheckBox14.addActionListener(new java.awt.event.ActionListener() {
@@ -1431,9 +1449,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox14);
-        jCheckBox14.setBounds(170, 1300, 150, 19);
+        jCheckBox14.setBounds(170, 1300, 130, 19);
 
+        jCheckBox15.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox15.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox15.setText("Kontrol");
         jCheckBox15.setName("jCheckBox15"); // NOI18N
         jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
@@ -1442,7 +1462,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox15);
-        jCheckBox15.setBounds(170, 1330, 150, 19);
+        jCheckBox15.setBounds(170, 1330, 130, 19);
 
         jLabel47.setText("Kepala:");
         jLabel47.setToolTipText("");
@@ -1462,19 +1482,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel49);
         jLabel49.setBounds(440, 1330, 40, 23);
 
-        Jk7.setEditable(false);
         Jk7.setHighlighter(null);
         Jk7.setName("Jk7"); // NOI18N
         FormInput.add(Jk7);
-        Jk7.setBounds(610, 370, 150, 23);
+        Jk7.setBounds(720, 370, 150, 23);
 
-        Jk8.setEditable(false);
         Jk8.setHighlighter(null);
         Jk8.setName("Jk8"); // NOI18N
         FormInput.add(Jk8);
         Jk8.setBounds(370, 1360, 64, 23);
 
-        Jk9.setEditable(false);
         Jk9.setHighlighter(null);
         Jk9.setName("Jk9"); // NOI18N
         FormInput.add(Jk9);
@@ -1492,7 +1509,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel51);
         jLabel51.setBounds(260, 1330, 100, 23);
 
-        Jk10.setEditable(false);
         Jk10.setHighlighter(null);
         Jk10.setName("Jk10"); // NOI18N
         FormInput.add(Jk10);
@@ -1525,7 +1541,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel52);
         jLabel52.setBounds(0, 1300, 150, 23);
 
+        jCheckBox16.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox16.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox16.setText("Dirawat");
         jCheckBox16.setName("jCheckBox16"); // NOI18N
         jCheckBox16.addActionListener(new java.awt.event.ActionListener() {
@@ -1534,9 +1552,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox16);
-        jCheckBox16.setBounds(170, 1360, 150, 19);
+        jCheckBox16.setBounds(170, 1360, 130, 19);
 
+        jCheckBox9.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox9.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox9.setText("Simetri");
         jCheckBox9.setName("jCheckBox9"); // NOI18N
         jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
@@ -1545,10 +1565,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox9);
-        jCheckBox9.setBounds(170, 640, 55, 19);
+        jCheckBox9.setBounds(170, 640, 80, 19);
 
+        jCheckBox18.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox18.setText("Asimetris");
+        jCheckBox18.setForeground(new java.awt.Color(50, 50, 50));
+        jCheckBox18.setText("Microcephal");
         jCheckBox18.setName("jCheckBox18"); // NOI18N
         jCheckBox18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1556,9 +1578,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox18);
-        jCheckBox18.setBounds(300, 640, 80, 19);
+        jCheckBox18.setBounds(330, 640, 100, 19);
 
+        jCheckBox19.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox19.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox19.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox19.setText("Cephal Hematoma");
         jCheckBox19.setName("jCheckBox19"); // NOI18N
         jCheckBox19.addActionListener(new java.awt.event.ActionListener() {
@@ -1567,9 +1591,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox19);
-        jCheckBox19.setBounds(400, 640, 120, 19);
+        jCheckBox19.setBounds(430, 640, 140, 19);
 
+        jCheckBox20.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox20.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox20.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox20.setText("Caput Succedasinium");
         jCheckBox20.setName("jCheckBox20"); // NOI18N
         jCheckBox20.addActionListener(new java.awt.event.ActionListener() {
@@ -1578,16 +1604,17 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox20);
-        jCheckBox20.setBounds(530, 640, 140, 19);
+        jCheckBox20.setBounds(640, 640, 130, 19);
 
-        Jk11.setEditable(false);
         Jk11.setHighlighter(null);
         Jk11.setName("Jk11"); // NOI18N
         FormInput.add(Jk11);
-        Jk11.setBounds(610, 700, 150, 23);
+        Jk11.setBounds(720, 700, 150, 23);
 
+        jCheckBox13.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox13.setText("Microcephal");
+        jCheckBox13.setForeground(new java.awt.Color(50, 50, 50));
+        jCheckBox13.setText("Asimetris");
         jCheckBox13.setName("jCheckBox13"); // NOI18N
         jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1597,7 +1624,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox13);
         jCheckBox13.setBounds(170, 670, 120, 19);
 
+        jCheckBox21.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox21.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox21.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox21.setText("Hydrocephalus");
         jCheckBox21.setName("jCheckBox21"); // NOI18N
         jCheckBox21.addActionListener(new java.awt.event.ActionListener() {
@@ -1606,9 +1635,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox21);
-        jCheckBox21.setBounds(300, 670, 100, 19);
+        jCheckBox21.setBounds(330, 670, 100, 19);
 
+        jCheckBox22.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox22.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox22.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox22.setText("Anecephali");
         jCheckBox22.setName("jCheckBox22"); // NOI18N
         jCheckBox22.addActionListener(new java.awt.event.ActionListener() {
@@ -1617,9 +1648,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox22);
-        jCheckBox22.setBounds(400, 670, 120, 19);
+        jCheckBox22.setBounds(430, 670, 120, 19);
 
+        jCheckBox23.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox23.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox23.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox23.setText("Lainnya");
         jCheckBox23.setName("jCheckBox23"); // NOI18N
         jCheckBox23.addActionListener(new java.awt.event.ActionListener() {
@@ -1628,7 +1661,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox23);
-        jCheckBox23.setBounds(530, 670, 70, 19);
+        jCheckBox23.setBounds(640, 670, 70, 19);
 
         jLabel53.setText("UUB:");
         jLabel53.setToolTipText("");
@@ -1636,7 +1669,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel53);
         jLabel53.setBounds(0, 700, 150, 23);
 
+        jCheckBox24.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox24.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox24.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox24.setText("Datar");
         jCheckBox24.setName("jCheckBox24"); // NOI18N
         jCheckBox24.addActionListener(new java.awt.event.ActionListener() {
@@ -1645,9 +1680,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox24);
-        jCheckBox24.setBounds(170, 700, 50, 19);
+        jCheckBox24.setBounds(170, 700, 70, 19);
 
+        jCheckBox25.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox25.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox25.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox25.setText("Cembung");
         jCheckBox25.setName("jCheckBox25"); // NOI18N
         jCheckBox25.addActionListener(new java.awt.event.ActionListener() {
@@ -1656,9 +1693,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox25);
-        jCheckBox25.setBounds(300, 700, 80, 19);
+        jCheckBox25.setBounds(330, 700, 80, 19);
 
+        jCheckBox26.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox26.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox26.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox26.setText("Cekung");
         jCheckBox26.setName("jCheckBox26"); // NOI18N
         jCheckBox26.addActionListener(new java.awt.event.ActionListener() {
@@ -1667,9 +1706,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox26);
-        jCheckBox26.setBounds(400, 700, 120, 19);
+        jCheckBox26.setBounds(430, 700, 100, 19);
 
+        jCheckBox27.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox27.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox27.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox27.setText("Lainnya");
         jCheckBox27.setName("jCheckBox27"); // NOI18N
         jCheckBox27.addActionListener(new java.awt.event.ActionListener() {
@@ -1678,13 +1719,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox27);
-        jCheckBox27.setBounds(530, 700, 80, 19);
+        jCheckBox27.setBounds(640, 700, 80, 19);
 
-        Jk12.setEditable(false);
         Jk12.setHighlighter(null);
         Jk12.setName("Jk12"); // NOI18N
         FormInput.add(Jk12);
-        Jk12.setBounds(610, 670, 150, 23);
+        Jk12.setBounds(720, 670, 150, 23);
 
         jLabel54.setText("Mata:");
         jLabel54.setToolTipText("");
@@ -1692,7 +1732,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel54);
         jLabel54.setBounds(0, 730, 150, 23);
 
+        jCheckBox28.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox28.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox28.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox28.setText("Normal");
         jCheckBox28.setName("jCheckBox28"); // NOI18N
         jCheckBox28.addActionListener(new java.awt.event.ActionListener() {
@@ -1703,7 +1745,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox28);
         jCheckBox28.setBounds(170, 730, 60, 19);
 
+        jCheckBox29.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox29.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox29.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox29.setText("Anemia");
         jCheckBox29.setName("jCheckBox29"); // NOI18N
         jCheckBox29.addActionListener(new java.awt.event.ActionListener() {
@@ -1712,9 +1756,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox29);
-        jCheckBox29.setBounds(240, 730, 80, 19);
+        jCheckBox29.setBounds(330, 730, 80, 19);
 
+        jCheckBox30.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox30.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox30.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox30.setText("Sekret");
         jCheckBox30.setName("jCheckBox30"); // NOI18N
         jCheckBox30.addActionListener(new java.awt.event.ActionListener() {
@@ -1723,9 +1769,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox30);
-        jCheckBox30.setBounds(400, 730, 120, 19);
+        jCheckBox30.setBounds(540, 730, 100, 19);
 
+        jCheckBox31.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox31.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox31.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox31.setText("Lainnya");
         jCheckBox31.setName("jCheckBox31"); // NOI18N
         jCheckBox31.addActionListener(new java.awt.event.ActionListener() {
@@ -1734,15 +1782,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox31);
-        jCheckBox31.setBounds(530, 730, 80, 19);
+        jCheckBox31.setBounds(640, 730, 80, 19);
 
-        Jk13.setEditable(false);
         Jk13.setHighlighter(null);
         Jk13.setName("Jk13"); // NOI18N
         FormInput.add(Jk13);
-        Jk13.setBounds(610, 730, 150, 23);
+        Jk13.setBounds(720, 730, 150, 23);
 
+        jCheckBox32.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox32.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox32.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox32.setText("Ikterus");
         jCheckBox32.setName("jCheckBox32"); // NOI18N
         jCheckBox32.addActionListener(new java.awt.event.ActionListener() {
@@ -1751,7 +1800,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox32);
-        jCheckBox32.setBounds(300, 730, 80, 19);
+        jCheckBox32.setBounds(430, 730, 80, 19);
 
         jLabel55.setText("THT:");
         jLabel55.setToolTipText("");
@@ -1759,7 +1808,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel55);
         jLabel55.setBounds(0, 760, 150, 23);
 
+        jCheckBox33.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox33.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox33.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox33.setText("Normal");
         jCheckBox33.setName("jCheckBox33"); // NOI18N
         jCheckBox33.addActionListener(new java.awt.event.ActionListener() {
@@ -1770,7 +1821,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox33);
         jCheckBox33.setBounds(170, 760, 60, 19);
 
+        jCheckBox35.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox35.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox35.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox35.setText("Sianosis");
         jCheckBox35.setName("jCheckBox35"); // NOI18N
         jCheckBox35.addActionListener(new java.awt.event.ActionListener() {
@@ -1779,9 +1832,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox35);
-        jCheckBox35.setBounds(300, 760, 80, 19);
+        jCheckBox35.setBounds(330, 760, 80, 19);
 
+        jCheckBox36.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox36.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox36.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox36.setText("Sekret");
         jCheckBox36.setName("jCheckBox36"); // NOI18N
         jCheckBox36.addActionListener(new java.awt.event.ActionListener() {
@@ -1790,8 +1845,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox36);
-        jCheckBox36.setBounds(400, 760, 120, 19);
+        jCheckBox36.setBounds(430, 760, 120, 19);
 
+        jCheckBox37.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox37.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox37.setText("Lainnya");
         jCheckBox37.setName("jCheckBox37"); // NOI18N
@@ -1801,21 +1857,22 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox37);
-        jCheckBox37.setBounds(530, 820, 80, 19);
+        jCheckBox37.setBounds(640, 820, 80, 19);
 
-        Jk14.setEditable(false);
         Jk14.setHighlighter(null);
         Jk14.setName("Jk14"); // NOI18N
         FormInput.add(Jk14);
-        Jk14.setBounds(610, 760, 150, 23);
+        Jk14.setBounds(720, 760, 150, 23);
 
         jLabel56.setText("Mukosa: warna");
         jLabel56.setToolTipText("");
         jLabel56.setName("jLabel56"); // NOI18N
         FormInput.add(jLabel56);
-        jLabel56.setBounds(170, 820, 90, 23);
+        jLabel56.setBounds(170, 820, 80, 23);
 
+        jCheckBox38.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox38.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox38.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox38.setText("Normal");
         jCheckBox38.setName("jCheckBox38"); // NOI18N
         jCheckBox38.addActionListener(new java.awt.event.ActionListener() {
@@ -1826,7 +1883,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox38);
         jCheckBox38.setBounds(170, 790, 60, 19);
 
+        jCheckBox39.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox39.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox39.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox39.setText("Labiodchizis");
         jCheckBox39.setName("jCheckBox39"); // NOI18N
         jCheckBox39.addActionListener(new java.awt.event.ActionListener() {
@@ -1835,9 +1894,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox39);
-        jCheckBox39.setBounds(300, 790, 80, 19);
+        jCheckBox39.setBounds(330, 790, 100, 19);
 
+        jCheckBox40.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox40.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox40.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox40.setText("Labiopalatoshizis");
         jCheckBox40.setName("jCheckBox40"); // NOI18N
         jCheckBox40.addActionListener(new java.awt.event.ActionListener() {
@@ -1846,9 +1907,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox40);
-        jCheckBox40.setBounds(400, 790, 120, 19);
+        jCheckBox40.setBounds(430, 790, 120, 19);
 
+        jCheckBox41.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox41.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox41.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox41.setText("Labiogenatopalatoschizis");
         jCheckBox41.setName("jCheckBox41"); // NOI18N
         jCheckBox41.addActionListener(new java.awt.event.ActionListener() {
@@ -1857,13 +1920,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox41);
-        jCheckBox41.setBounds(530, 790, 160, 19);
+        jCheckBox41.setBounds(640, 790, 160, 19);
 
-        Jk15.setEditable(false);
         Jk15.setHighlighter(null);
         Jk15.setName("Jk15"); // NOI18N
         FormInput.add(Jk15);
-        Jk15.setBounds(300, 820, 150, 23);
+        Jk15.setBounds(260, 820, 150, 23);
 
         jLabel57.setText("Mulut:");
         jLabel57.setToolTipText("");
@@ -1871,13 +1933,14 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel57);
         jLabel57.setBounds(0, 790, 150, 23);
 
-        Jk16.setEditable(false);
         Jk16.setHighlighter(null);
         Jk16.setName("Jk16"); // NOI18N
         FormInput.add(Jk16);
-        Jk16.setBounds(610, 820, 150, 23);
+        Jk16.setBounds(720, 820, 150, 23);
 
+        jCheckBox42.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox42.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox42.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox42.setText("Lainnya");
         jCheckBox42.setName("jCheckBox42"); // NOI18N
         jCheckBox42.addActionListener(new java.awt.event.ActionListener() {
@@ -1886,7 +1949,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox42);
-        jCheckBox42.setBounds(530, 760, 80, 19);
+        jCheckBox42.setBounds(640, 760, 80, 19);
 
         jLabel58.setText("Thorax:");
         jLabel58.setToolTipText("");
@@ -1894,7 +1957,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel58);
         jLabel58.setBounds(0, 850, 150, 23);
 
+        jCheckBox43.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox43.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox43.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox43.setText("Normal");
         jCheckBox43.setName("jCheckBox43"); // NOI18N
         jCheckBox43.addActionListener(new java.awt.event.ActionListener() {
@@ -1905,7 +1970,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox43);
         jCheckBox43.setBounds(170, 850, 60, 19);
 
+        jCheckBox44.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox44.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox44.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox44.setText("Retraksi");
         jCheckBox44.setName("jCheckBox44"); // NOI18N
         jCheckBox44.addActionListener(new java.awt.event.ActionListener() {
@@ -1914,9 +1981,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox44);
-        jCheckBox44.setBounds(300, 850, 80, 19);
+        jCheckBox44.setBounds(330, 850, 80, 19);
 
+        jCheckBox45.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox45.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox45.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox45.setText("Lainnya");
         jCheckBox45.setName("jCheckBox45"); // NOI18N
         jCheckBox45.addActionListener(new java.awt.event.ActionListener() {
@@ -1925,13 +1994,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox45);
-        jCheckBox45.setBounds(530, 850, 80, 19);
+        jCheckBox45.setBounds(640, 850, 80, 19);
 
-        Jk17.setEditable(false);
         Jk17.setHighlighter(null);
         Jk17.setName("Jk17"); // NOI18N
         FormInput.add(Jk17);
-        Jk17.setBounds(610, 850, 150, 23);
+        Jk17.setBounds(720, 850, 150, 23);
 
         jLabel59.setText("Abdomen:");
         jLabel59.setToolTipText("");
@@ -1939,7 +2007,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel59);
         jLabel59.setBounds(0, 880, 150, 23);
 
+        jCheckBox46.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox46.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox46.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox46.setText("Normal");
         jCheckBox46.setName("jCheckBox46"); // NOI18N
         jCheckBox46.addActionListener(new java.awt.event.ActionListener() {
@@ -1950,7 +2020,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox46);
         jCheckBox46.setBounds(170, 880, 60, 19);
 
+        jCheckBox47.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox47.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox47.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox47.setText("Distensi");
         jCheckBox47.setName("jCheckBox47"); // NOI18N
         jCheckBox47.addActionListener(new java.awt.event.ActionListener() {
@@ -1959,9 +2031,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox47);
-        jCheckBox47.setBounds(300, 880, 80, 19);
+        jCheckBox47.setBounds(330, 880, 80, 19);
 
+        jCheckBox48.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox48.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox48.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox48.setText("Omphalocele");
         jCheckBox48.setName("jCheckBox48"); // NOI18N
         jCheckBox48.addActionListener(new java.awt.event.ActionListener() {
@@ -1970,9 +2044,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox48);
-        jCheckBox48.setBounds(400, 880, 120, 19);
+        jCheckBox48.setBounds(430, 880, 120, 19);
 
+        jCheckBox49.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox49.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox49.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox49.setText("Lainnya");
         jCheckBox49.setName("jCheckBox49"); // NOI18N
         jCheckBox49.addActionListener(new java.awt.event.ActionListener() {
@@ -1981,13 +2057,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox49);
-        jCheckBox49.setBounds(530, 880, 80, 19);
+        jCheckBox49.setBounds(640, 880, 80, 19);
 
-        Jk18.setEditable(false);
         Jk18.setHighlighter(null);
         Jk18.setName("Jk18"); // NOI18N
         FormInput.add(Jk18);
-        Jk18.setBounds(610, 880, 150, 23);
+        Jk18.setBounds(720, 880, 150, 23);
 
         jLabel60.setText("Tali pusat:");
         jLabel60.setToolTipText("");
@@ -1995,7 +2070,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel60);
         jLabel60.setBounds(0, 910, 150, 23);
 
+        jCheckBox50.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox50.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox50.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox50.setText("Segar");
         jCheckBox50.setName("jCheckBox50"); // NOI18N
         jCheckBox50.addActionListener(new java.awt.event.ActionListener() {
@@ -2006,7 +2083,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox50);
         jCheckBox50.setBounds(170, 910, 60, 19);
 
+        jCheckBox51.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox51.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox51.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox51.setText("Tidak segar");
         jCheckBox51.setName("jCheckBox51"); // NOI18N
         jCheckBox51.addActionListener(new java.awt.event.ActionListener() {
@@ -2015,9 +2094,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox51);
-        jCheckBox51.setBounds(300, 910, 80, 19);
+        jCheckBox51.setBounds(330, 910, 80, 19);
 
+        jCheckBox52.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox52.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox52.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox52.setText("Lainnya");
         jCheckBox52.setName("jCheckBox52"); // NOI18N
         jCheckBox52.addActionListener(new java.awt.event.ActionListener() {
@@ -2026,13 +2107,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox52);
-        jCheckBox52.setBounds(530, 910, 80, 19);
+        jCheckBox52.setBounds(640, 910, 80, 19);
 
-        Jk19.setEditable(false);
         Jk19.setHighlighter(null);
         Jk19.setName("Jk19"); // NOI18N
         FormInput.add(Jk19);
-        Jk19.setBounds(610, 910, 150, 23);
+        Jk19.setBounds(720, 910, 150, 23);
 
         jLabel61.setText("Punggung:");
         jLabel61.setToolTipText("");
@@ -2040,7 +2120,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel61);
         jLabel61.setBounds(0, 940, 150, 23);
 
+        jCheckBox53.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox53.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox53.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox53.setText("Normal");
         jCheckBox53.setName("jCheckBox53"); // NOI18N
         jCheckBox53.addActionListener(new java.awt.event.ActionListener() {
@@ -2051,7 +2133,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox53);
         jCheckBox53.setBounds(170, 940, 60, 19);
 
+        jCheckBox54.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox54.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox54.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox54.setText("Spina bifida");
         jCheckBox54.setName("jCheckBox54"); // NOI18N
         jCheckBox54.addActionListener(new java.awt.event.ActionListener() {
@@ -2060,9 +2144,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox54);
-        jCheckBox54.setBounds(300, 940, 80, 19);
+        jCheckBox54.setBounds(330, 940, 80, 19);
 
+        jCheckBox55.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox55.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox55.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox55.setText("Lainnya");
         jCheckBox55.setName("jCheckBox55"); // NOI18N
         jCheckBox55.addActionListener(new java.awt.event.ActionListener() {
@@ -2071,13 +2157,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox55);
-        jCheckBox55.setBounds(530, 940, 80, 19);
+        jCheckBox55.setBounds(640, 940, 80, 19);
 
-        Jk20.setEditable(false);
         Jk20.setHighlighter(null);
         Jk20.setName("Jk20"); // NOI18N
         FormInput.add(Jk20);
-        Jk20.setBounds(610, 940, 150, 23);
+        Jk20.setBounds(720, 940, 150, 23);
 
         jLabel62.setText("Genetalia");
         jLabel62.setToolTipText("");
@@ -2085,7 +2170,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel62);
         jLabel62.setBounds(0, 970, 150, 23);
 
+        jCheckBox56.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox56.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox56.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox56.setText("Normal");
         jCheckBox56.setName("jCheckBox56"); // NOI18N
         jCheckBox56.addActionListener(new java.awt.event.ActionListener() {
@@ -2096,7 +2183,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox56);
         jCheckBox56.setBounds(170, 970, 60, 19);
 
+        jCheckBox57.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox57.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox57.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox57.setText("Kelainan");
         jCheckBox57.setName("jCheckBox57"); // NOI18N
         jCheckBox57.addActionListener(new java.awt.event.ActionListener() {
@@ -2105,13 +2194,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox57);
-        jCheckBox57.setBounds(530, 970, 80, 19);
+        jCheckBox57.setBounds(640, 970, 80, 19);
 
-        Jk21.setEditable(false);
         Jk21.setHighlighter(null);
         Jk21.setName("Jk21"); // NOI18N
         FormInput.add(Jk21);
-        Jk21.setBounds(610, 970, 150, 23);
+        Jk21.setBounds(720, 970, 150, 23);
 
         jLabel63.setText("Anus:");
         jLabel63.setToolTipText("");
@@ -2119,7 +2207,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel63);
         jLabel63.setBounds(0, 1000, 150, 23);
 
+        jCheckBox58.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox58.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox58.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox58.setText("Ada");
         jCheckBox58.setName("jCheckBox58"); // NOI18N
         jCheckBox58.addActionListener(new java.awt.event.ActionListener() {
@@ -2130,7 +2220,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox58);
         jCheckBox58.setBounds(170, 1000, 60, 19);
 
+        jCheckBox59.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox59.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox59.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox59.setText("Tidak ada");
         jCheckBox59.setName("jCheckBox59"); // NOI18N
         jCheckBox59.addActionListener(new java.awt.event.ActionListener() {
@@ -2139,7 +2231,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox59);
-        jCheckBox59.setBounds(300, 1000, 80, 19);
+        jCheckBox59.setBounds(330, 1000, 80, 19);
 
         jLabel64.setText("Ekstremnitas:");
         jLabel64.setToolTipText("");
@@ -2147,7 +2239,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel64);
         jLabel64.setBounds(0, 1030, 150, 23);
 
+        jCheckBox60.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox60.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox60.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox60.setText("Simetris");
         jCheckBox60.setName("jCheckBox60"); // NOI18N
         jCheckBox60.addActionListener(new java.awt.event.ActionListener() {
@@ -2156,9 +2250,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox60);
-        jCheckBox60.setBounds(170, 1030, 60, 19);
+        jCheckBox60.setBounds(170, 1030, 90, 19);
 
+        jCheckBox61.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox61.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox61.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox61.setText("Asimetris");
         jCheckBox61.setName("jCheckBox61"); // NOI18N
         jCheckBox61.addActionListener(new java.awt.event.ActionListener() {
@@ -2167,9 +2263,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox61);
-        jCheckBox61.setBounds(300, 1030, 80, 19);
+        jCheckBox61.setBounds(330, 1030, 80, 19);
 
+        jCheckBox62.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox62.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox62.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox62.setText("Lainnya");
         jCheckBox62.setName("jCheckBox62"); // NOI18N
         jCheckBox62.addActionListener(new java.awt.event.ActionListener() {
@@ -2178,13 +2276,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox62);
-        jCheckBox62.setBounds(530, 1030, 80, 19);
+        jCheckBox62.setBounds(640, 1030, 80, 19);
 
-        Jk22.setEditable(false);
         Jk22.setHighlighter(null);
         Jk22.setName("Jk22"); // NOI18N
         FormInput.add(Jk22);
-        Jk22.setBounds(610, 1030, 150, 23);
+        Jk22.setBounds(720, 1030, 150, 23);
 
         jLabel65.setText("Kulit:");
         jLabel65.setToolTipText("");
@@ -2192,7 +2289,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel65);
         jLabel65.setBounds(0, 1060, 150, 23);
 
+        jCheckBox34.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox34.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox34.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox34.setText("Turgor");
         jCheckBox34.setName("jCheckBox34"); // NOI18N
         jCheckBox34.addActionListener(new java.awt.event.ActionListener() {
@@ -2203,7 +2302,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox34);
         jCheckBox34.setBounds(170, 1060, 60, 19);
 
+        jCheckBox63.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox63.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox63.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox63.setText("Sianosis");
         jCheckBox63.setName("jCheckBox63"); // NOI18N
         jCheckBox63.addActionListener(new java.awt.event.ActionListener() {
@@ -2212,9 +2313,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox63);
-        jCheckBox63.setBounds(470, 1060, 61, 19);
+        jCheckBox63.setBounds(540, 1060, 90, 19);
 
+        jCheckBox64.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox64.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox64.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox64.setText("Pendarahan");
         jCheckBox64.setName("jCheckBox64"); // NOI18N
         jCheckBox64.addActionListener(new java.awt.event.ActionListener() {
@@ -2223,9 +2326,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox64);
-        jCheckBox64.setBounds(300, 1060, 90, 19);
+        jCheckBox64.setBounds(330, 1060, 90, 19);
 
+        jCheckBox65.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox65.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox65.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox65.setText("Hematoma");
         jCheckBox65.setName("jCheckBox65"); // NOI18N
         jCheckBox65.addActionListener(new java.awt.event.ActionListener() {
@@ -2234,9 +2339,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox65);
-        jCheckBox65.setBounds(390, 1060, 80, 19);
+        jCheckBox65.setBounds(430, 1060, 80, 19);
 
+        jCheckBox66.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox66.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox66.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox66.setText("Lainnya");
         jCheckBox66.setName("jCheckBox66"); // NOI18N
         jCheckBox66.addActionListener(new java.awt.event.ActionListener() {
@@ -2245,19 +2352,17 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox66);
-        jCheckBox66.setBounds(530, 1060, 80, 19);
+        jCheckBox66.setBounds(640, 1060, 80, 19);
 
-        Jk23.setEditable(false);
         Jk23.setHighlighter(null);
         Jk23.setName("Jk23"); // NOI18N
         FormInput.add(Jk23);
-        Jk23.setBounds(760, 1090, 64, 23);
+        Jk23.setBounds(810, 1090, 64, 23);
 
-        Jk24.setEditable(false);
         Jk24.setHighlighter(null);
         Jk24.setName("Jk24"); // NOI18N
         FormInput.add(Jk24);
-        Jk24.setBounds(610, 1060, 150, 23);
+        Jk24.setBounds(720, 1060, 150, 23);
 
         jLabel66.setText("Reflek:");
         jLabel66.setToolTipText("");
@@ -2265,7 +2370,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel66);
         jLabel66.setBounds(0, 1090, 150, 23);
 
+        jCheckBox17.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox17.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox17.setText("Moro");
         jCheckBox17.setToolTipText("");
         jCheckBox17.setName("jCheckBox17"); // NOI18N
@@ -2275,9 +2382,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox17);
-        jCheckBox17.setBounds(170, 1090, 47, 19);
+        jCheckBox17.setBounds(170, 1090, 80, 19);
 
+        jCheckBox67.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox67.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox67.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox67.setText("Grasping/genggam");
         jCheckBox67.setName("jCheckBox67"); // NOI18N
         jCheckBox67.addActionListener(new java.awt.event.ActionListener() {
@@ -2286,9 +2395,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox67);
-        jCheckBox67.setBounds(320, 1090, 120, 19);
+        jCheckBox67.setBounds(330, 1090, 120, 19);
 
+        jCheckBox68.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox68.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox68.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox68.setText("Sucking/isap");
         jCheckBox68.setName("jCheckBox68"); // NOI18N
         jCheckBox68.addActionListener(new java.awt.event.ActionListener() {
@@ -2297,9 +2408,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox68);
-        jCheckBox68.setBounds(530, 1090, 120, 19);
+        jCheckBox68.setBounds(540, 1090, 90, 19);
 
+        jCheckBox69.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox69.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox69.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox69.setText("Rooting");
         jCheckBox69.setName("jCheckBox69"); // NOI18N
         jCheckBox69.addActionListener(new java.awt.event.ActionListener() {
@@ -2308,33 +2421,31 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox69);
-        jCheckBox69.setBounds(690, 1090, 70, 19);
+        jCheckBox69.setBounds(740, 1090, 70, 19);
 
-        Jk25.setEditable(false);
         Jk25.setHighlighter(null);
         Jk25.setName("Jk25"); // NOI18N
         FormInput.add(Jk25);
-        Jk25.setBounds(230, 1060, 64, 23);
+        Jk25.setBounds(260, 1060, 64, 23);
 
-        Jk26.setEditable(false);
         Jk26.setHighlighter(null);
         Jk26.setName("Jk26"); // NOI18N
         FormInput.add(Jk26);
-        Jk26.setBounds(250, 1090, 64, 23);
+        Jk26.setBounds(260, 1090, 64, 23);
 
-        Jk27.setEditable(false);
         Jk27.setHighlighter(null);
         Jk27.setName("Jk27"); // NOI18N
         FormInput.add(Jk27);
-        Jk27.setBounds(440, 1090, 64, 23);
+        Jk27.setBounds(460, 1090, 64, 23);
 
-        Jk28.setEditable(false);
         Jk28.setHighlighter(null);
         Jk28.setName("Jk28"); // NOI18N
         FormInput.add(Jk28);
-        Jk28.setBounds(610, 1090, 64, 23);
+        Jk28.setBounds(630, 1090, 64, 23);
 
+        jCheckBox70.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox70.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox70.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox70.setText("Tonick neck");
         jCheckBox70.setToolTipText("");
         jCheckBox70.setName("jCheckBox70"); // NOI18N
@@ -2346,13 +2457,14 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox70);
         jCheckBox70.setBounds(170, 1120, 90, 19);
 
-        Jk29.setEditable(false);
         Jk29.setHighlighter(null);
         Jk29.setName("Jk29"); // NOI18N
         FormInput.add(Jk29);
-        Jk29.setBounds(250, 1120, 64, 23);
+        Jk29.setBounds(260, 1120, 64, 23);
 
+        jCheckBox71.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox71.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox71.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox71.setText("Swallowing/menelan");
         jCheckBox71.setName("jCheckBox71"); // NOI18N
         jCheckBox71.addActionListener(new java.awt.event.ActionListener() {
@@ -2361,15 +2473,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox71);
-        jCheckBox71.setBounds(320, 1120, 120, 19);
+        jCheckBox71.setBounds(330, 1120, 130, 19);
 
-        Jk30.setEditable(false);
         Jk30.setHighlighter(null);
         Jk30.setName("Jk30"); // NOI18N
         FormInput.add(Jk30);
-        Jk30.setBounds(440, 1120, 64, 23);
+        Jk30.setBounds(460, 1120, 64, 23);
 
+        jCheckBox72.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox72.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox72.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox72.setText("Stepping");
         jCheckBox72.setName("jCheckBox72"); // NOI18N
         jCheckBox72.addActionListener(new java.awt.event.ActionListener() {
@@ -2378,15 +2491,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox72);
-        jCheckBox72.setBounds(530, 1120, 120, 19);
+        jCheckBox72.setBounds(540, 1120, 90, 19);
 
-        Jk31.setEditable(false);
         Jk31.setHighlighter(null);
         Jk31.setName("Jk31"); // NOI18N
         FormInput.add(Jk31);
-        Jk31.setBounds(610, 1120, 64, 23);
+        Jk31.setBounds(630, 1120, 64, 23);
 
+        jCheckBox73.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox73.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox73.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox73.setText("Babinski");
         jCheckBox73.setName("jCheckBox73"); // NOI18N
         jCheckBox73.addActionListener(new java.awt.event.ActionListener() {
@@ -2395,15 +2509,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox73);
-        jCheckBox73.setBounds(690, 1120, 70, 19);
+        jCheckBox73.setBounds(740, 1120, 70, 19);
 
-        Jk32.setEditable(false);
         Jk32.setHighlighter(null);
         Jk32.setName("Jk32"); // NOI18N
         FormInput.add(Jk32);
-        Jk32.setBounds(760, 1120, 64, 23);
+        Jk32.setBounds(810, 1120, 64, 23);
 
+        jCheckBox74.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox74.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox74.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox74.setText("Lainnya");
         jCheckBox74.setToolTipText("");
         jCheckBox74.setName("jCheckBox74"); // NOI18N
@@ -2413,13 +2528,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox74);
-        jCheckBox74.setBounds(170, 1150, 90, 19);
+        jCheckBox74.setBounds(170, 1150, 80, 19);
 
-        Jk33.setEditable(false);
         Jk33.setHighlighter(null);
         Jk33.setName("Jk33"); // NOI18N
         FormInput.add(Jk33);
-        Jk33.setBounds(250, 1150, 64, 23);
+        Jk33.setBounds(260, 1150, 64, 23);
 
         jLabel67.setText("Hasil Pemeriksaan Penunjang:");
         jLabel67.setToolTipText("");
@@ -2527,7 +2641,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel71);
         jLabel71.setBounds(0, 520, 150, 23);
 
+        jCheckBox75.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox75.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox75.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox75.setText("Boleh pulang");
         jCheckBox75.setName("jCheckBox75"); // NOI18N
         jCheckBox75.addActionListener(new java.awt.event.ActionListener() {
@@ -2536,9 +2652,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox75);
-        jCheckBox75.setBounds(170, 520, 150, 19);
+        jCheckBox75.setBounds(170, 520, 130, 19);
 
+        jCheckBox76.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox76.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox76.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox76.setText("Kontrol");
         jCheckBox76.setName("jCheckBox76"); // NOI18N
         jCheckBox76.addActionListener(new java.awt.event.ActionListener() {
@@ -2547,9 +2665,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox76);
-        jCheckBox76.setBounds(170, 550, 150, 19);
+        jCheckBox76.setBounds(170, 550, 130, 19);
 
+        jCheckBox77.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox77.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jCheckBox77.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox77.setText("Dirawat");
         jCheckBox77.setName("jCheckBox77"); // NOI18N
         jCheckBox77.addActionListener(new java.awt.event.ActionListener() {
@@ -2558,7 +2678,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(jCheckBox77);
-        jCheckBox77.setBounds(170, 580, 150, 19);
+        jCheckBox77.setBounds(170, 580, 130, 19);
 
         jLabel72.setText("Jam keluar:");
         jLabel72.setToolTipText("");
@@ -2578,19 +2698,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel74);
         jLabel74.setBounds(260, 580, 100, 23);
 
-        Jk34.setEditable(false);
         Jk34.setHighlighter(null);
         Jk34.setName("Jk34"); // NOI18N
         FormInput.add(Jk34);
         Jk34.setBounds(370, 520, 64, 23);
 
-        Jk35.setEditable(false);
         Jk35.setHighlighter(null);
         Jk35.setName("Jk35"); // NOI18N
         FormInput.add(Jk35);
         Jk35.setBounds(370, 550, 64, 23);
 
-        Jk36.setEditable(false);
         Jk36.setHighlighter(null);
         Jk36.setName("Jk36"); // NOI18N
         FormInput.add(Jk36);
@@ -2608,7 +2725,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel76);
         jLabel76.setBounds(440, 550, 40, 23);
 
-        Jk37.setEditable(false);
         Jk37.setHighlighter(null);
         Jk37.setName("Jk37"); // NOI18N
         FormInput.add(Jk37);
