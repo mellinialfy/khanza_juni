@@ -89,6 +89,7 @@ import rekammedis.RMMCU;
 import rekammedis.RMPemantauanMEOWS;
 import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPemantauanPEWSD;
+import rekammedis.RMPemeriksaanUrologi;
 import rekammedis.RMPenilaianAwalKeperawatanBayiAnak;
 import rekammedis.RMPenilaianAwalKeperawatanGigi;
 import rekammedis.RMPenilaianAwalKeperawatanIGD;
@@ -778,6 +779,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnERm = new javax.swing.JMenu();
         MnAsesmenAwalMedisKulitKelamin = new javax.swing.JMenuItem();
         MnUsgUrologi = new javax.swing.JMenuItem();
+        MnAsesmenAwalMedisAnak = new javax.swing.JMenuItem();
         MnUrut = new javax.swing.JMenu();
         MnUrutNoRawatDesc = new javax.swing.JMenuItem();
         MnUrutNoRawatAsc = new javax.swing.JMenuItem();
@@ -3957,6 +3959,23 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
         MnERm.add(MnUsgUrologi);
 
+        MnAsesmenAwalMedisAnak.setBackground(new java.awt.Color(255, 255, 254));
+        MnAsesmenAwalMedisAnak.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnAsesmenAwalMedisAnak.setForeground(new java.awt.Color(50, 50, 50));
+        MnAsesmenAwalMedisAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnAsesmenAwalMedisAnak.setText("Asesmen Awal Medis Anak");
+        MnAsesmenAwalMedisAnak.setToolTipText("");
+        MnAsesmenAwalMedisAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnAsesmenAwalMedisAnak.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnAsesmenAwalMedisAnak.setName("MnAsesmenAwalMedisAnak"); // NOI18N
+        MnAsesmenAwalMedisAnak.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnAsesmenAwalMedisAnak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnAsesmenAwalMedisAnakBtnPrintActionPerformed(evt);
+            }
+        });
+        MnERm.add(MnAsesmenAwalMedisAnak);
+
         jPopupMenu1.add(MnERm);
 
         MnUrut.setBackground(new java.awt.Color(255, 255, 254));
@@ -5950,7 +5969,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5997,7 +6016,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -6269,7 +6288,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6282,7 +6301,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -13092,7 +13111,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     rmasesawlmedkulitkelamin.setLocationRelativeTo(internalFrame1);
 //                    rmasesawlmedkulitkelamin.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
 //                    rmasesawlmedkulitkelamin.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
-//                    rmasesawlmedkulitkelamin.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());    
+                    rmasesawlmedkulitkelamin.setNoRm(TNoRw.getText(),DTPCari2.getDate());    
                     rmasesawlmedkulitkelamin.setVisible(true);
                 } 
             }                               
@@ -13101,7 +13120,45 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
 
     private void MnUsgUrologiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUsgUrologiBtnPrintActionPerformed
         // TODO add your handling code here:
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{ 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPemeriksaanUrologi form=new RMPemeriksaanUrologi(null,false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_MnUsgUrologiBtnPrintActionPerformed
+
+    private void MnAsesmenAwalMedisAnakBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAsesmenAwalMedisAnakBtnPrintActionPerformed
+        // TODO add your handling code here:
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
+                    JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+                }else {
+                    RMAsesmenAwalMedisAnak formmedisanak=new RMAsesmenAwalMedisAnak(null,false);
+                    rmasesawlmedkulitkelamin.isCek();
+                    rmasesawlmedkulitkelamin.emptTeks();
+                    rmasesawlmedkulitkelamin.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                    rmasesawlmedkulitkelamin.setLocationRelativeTo(internalFrame1);
+//                    rmasesawlmedkulitkelamin.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
+//                    rmasesawlmedkulitkelamin.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
+                    rmasesawlmedkulitkelamin.setNoRm(TNoRw.getText(),DTPCari2.getDate());    
+                    rmasesawlmedkulitkelamin.setVisible(true);
+                } 
+            }                               
+        }
+    }//GEN-LAST:event_MnAsesmenAwalMedisAnakBtnPrintActionPerformed
 
     /**
     * @param args the command line arguments
@@ -13154,6 +13211,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.Label LabelCatatan;
     private javax.swing.JMenu MenuInputData;
     private javax.swing.JMenu MenuInputData1;
+    private javax.swing.JMenuItem MnAsesmenAwalMedisAnak;
     private javax.swing.JMenuItem MnAsesmenAwalMedisKulitKelamin;
     private javax.swing.JMenu MnAwalKeperawatan;
     private javax.swing.JMenu MnAwalMedis;
