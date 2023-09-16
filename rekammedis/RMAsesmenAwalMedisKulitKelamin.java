@@ -775,7 +775,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023 13:19:00" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2023 15:02:58" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2531,7 +2531,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2545,7 +2545,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3737,7 +3737,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            KelenjarLimfe.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
+            Jk1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
             Eflorisensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             HasilPenunjangNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
@@ -3767,7 +3767,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 if(rs.next()){
                     TNoRM.setText(rs.getString("no_rkm_medis"));
                     TPasien.setText(rs.getString("nm_pasien"));
-                    KelenjarLimfe.setText(rs.getString("jk"));
+                    Jk1.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
                 }
             } catch (Exception e) {

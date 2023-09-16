@@ -116,7 +116,7 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
         };
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        Eflorisensi.setDocument(new batasInput((int)150).getKata(Eflorisensi));
+//        Eflorisensi.setDocument(new batasInput((int)150).getKata(Eflorisensi));
         HasilPenunjangNeonatologi.setDocument(new batasInput((int)150).getKata(HasilPenunjangNeonatologi));
        
         
@@ -1820,17 +1820,18 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
-        }else 
-            if(Eflorisensi.getText().trim().equals("")){
-            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
-        }else if(HasilPenunjangNeonatologi.getText().trim().equals("")){
+//        }else 
+//            if(Eflorisensi.getText().trim().equals("")){
+//            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
+        }
+            else if(HasilPenunjangNeonatologi.getText().trim().equals("")){
             Valid.textKosong(HasilPenunjangNeonatologi,"Ginjal Kiri");
         }else{
             if(Sequel.menyimpantf("penilaian_usg_urologi","?,?,?,?,?,?"
                     + "","No.Rawat",6,new String[]{
                     TNoRw.getText(),
                         Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
-                        Eflorisensi.getText(),
+//                        Eflorisensi.getText(),
                 HasilPenunjangNeonatologi.getText(),
                     KdPetugas.getText()
                 })==true){
@@ -1891,9 +1892,9 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
-        }else 
-            if(Eflorisensi.getText().trim().equals("")){
-            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
+//        }else 
+//            if(Eflorisensi.getText().trim().equals("")){
+//            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
         }else if(HasilPenunjangNeonatologi.getText().trim().equals("")){
             Valid.textKosong(HasilPenunjangNeonatologi,"Ginjal Kiri");
         }else{
@@ -1901,7 +1902,8 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
                 if(Sequel.mengedittf("penilaian_usg_urologi","no_rawat=?","no_rawat=?,tanggal=?,ginjal_kanan=?,ginjal_kiri=?,buli=?,"+
                     "kd_dokter=?",7,new String[]{
                     TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
-                        Eflorisensi.getText(),HasilPenunjangNeonatologi.getText(),KdPetugas.getText(),TNoRw.getText()
+//                        Eflorisensi.getText(),
+                        HasilPenunjangNeonatologi.getText(),KdPetugas.getText(),TNoRw.getText()
                      })==true){
                     
                         tampil();
@@ -2582,7 +2584,7 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
 
     public void emptTeks() {
         TglAsuhan.setDate(new Date());
-        Eflorisensi.setText("");
+//        Eflorisensi.setText("");
         HasilPenunjangNeonatologi.setText("");
         
         for (i = 0; i < tabModeMasalah.getRowCount(); i++) {
@@ -2608,9 +2610,9 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            KelenjarLimfe.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
+//            KelenjarLimfe.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
-            Eflorisensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+//            Eflorisensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             HasilPenunjangNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
@@ -2638,7 +2640,7 @@ public final class RMAsesmenAwalMedisAnak extends javax.swing.JDialog {
                 if(rs.next()){
                     TNoRM.setText(rs.getString("no_rkm_medis"));
                     TPasien.setText(rs.getString("nm_pasien"));
-                    KelenjarLimfe.setText(rs.getString("jk"));
+//                    KelenjarLimfe.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
                 }
             } catch (Exception e) {
