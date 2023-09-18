@@ -40,6 +40,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
+import widget.TextBox;
 
 
 /**
@@ -55,6 +56,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
+    private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
     private boolean[] pilih; 
     private String[] kode,masalah;
     private String masalahkeperawatanigd=""; 
@@ -244,14 +246,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         scrollPane5 = new widget.ScrollPane();
         RiwPenyakitSkrg = new widget.TextArea();
         jLabel33 = new widget.Label();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
         Jk1 = new widget.TextBox();
         jLabel36 = new widget.Label();
-        Jk2 = new widget.TextBox();
+        StigAtopik = new widget.TextBox();
         jLabel37 = new widget.Label();
         Kuku = new widget.TextBox();
         jLabel38 = new widget.Label();
@@ -418,6 +415,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel75 = new widget.Label();
         jLabel76 = new widget.Label();
         TempatDerma = new widget.TextBox();
+        BtnStigAtopik = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -689,7 +687,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnDokter);
-        BtnDokter.setBounds(358, 40, 28, 23);
+        BtnDokter.setBounds(360, 40, 28, 23);
 
         jLabel8.setText("Tgl.Lahir :");
         jLabel8.setName("jLabel8"); // NOI18N
@@ -775,7 +773,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2023 15:02:58" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2023 13:48:27" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -874,71 +872,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel33);
         jLabel33.setBounds(0, 1180, 150, 23);
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox1.setText("Lainnya");
-        jCheckBox1.setName("Pit. Alba"); // NOI18N
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox1);
-        jCheckBox1.setBounds(640, 250, 70, 19);
-
-        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox2.setText("Dengie-Morgagni");
-        jCheckBox2.setName("jCheckBox2"); // NOI18N
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox2);
-        jCheckBox2.setBounds(530, 250, 110, 19);
-
-        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox3.setText("Ikhtiosis");
-        jCheckBox3.setName("jCheckBox3"); // NOI18N
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox3);
-        jCheckBox3.setBounds(330, 250, 80, 19);
-
-        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox4.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox4.setText("Pit. Alba");
-        jCheckBox4.setName("jCheckBox4"); // NOI18N
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox4);
-        jCheckBox4.setBounds(170, 250, 80, 19);
-
-        jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox5.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox5.setText("Keratosis");
-        jCheckBox5.setName("jCheckBox5"); // NOI18N
-        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox5ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox5);
-        jCheckBox5.setBounds(430, 250, 80, 19);
-
         Jk1.setEditable(false);
         Jk1.setHighlighter(null);
         Jk1.setName("Jk1"); // NOI18N
@@ -951,10 +884,15 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel36);
         jLabel36.setBounds(0, 250, 150, 23);
 
-        Jk2.setHighlighter(null);
-        Jk2.setName("Jk2"); // NOI18N
-        FormInput.add(Jk2);
-        Jk2.setBounds(720, 250, 150, 23);
+        StigAtopik.setHighlighter(null);
+        StigAtopik.setName("StigAtopik"); // NOI18N
+        StigAtopik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StigAtopikActionPerformed(evt);
+            }
+        });
+        FormInput.add(StigAtopik);
+        StigAtopik.setBounds(170, 250, 660, 23);
 
         jLabel37.setText("Kuku:");
         jLabel37.setToolTipText("");
@@ -2482,6 +2420,24 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(TempatDerma);
         TempatDerma.setBounds(490, 550, 64, 23);
 
+        BtnStigAtopik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnStigAtopik.setMnemonic('2');
+        BtnStigAtopik.setToolTipText("Alt+2");
+        BtnStigAtopik.setName("BtnStigAtopik"); // NOI18N
+        BtnStigAtopik.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnStigAtopik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnStigAtopikActionPerformed(evt);
+            }
+        });
+        BtnStigAtopik.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnStigAtopikKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnStigAtopik);
+        BtnStigAtopik.setBounds(840, 250, 28, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -2531,7 +2487,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2545,7 +2501,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3024,26 +2980,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_RiwPenyakitSkrgKeyPressed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
-
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
-
-    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox5ActionPerformed
-
     private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox6ActionPerformed
@@ -3364,6 +3300,24 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox77ActionPerformed
 
+    private void StigAtopikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StigAtopikActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_StigAtopikActionPerformed
+
+    private void BtnStigAtopikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStigAtopikActionPerformed
+        // TODO add your handling code here:
+        stigatopik.isCek();
+        stigatopik.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        stigatopik.setLocationRelativeTo(internalFrame1);
+        stigatopik.setAlwaysOnTop(false);
+        stigatopik.setVisible(true);
+    }//GEN-LAST:event_BtnStigAtopikActionPerformed
+
+    private void BtnStigAtopikKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnStigAtopikKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnStigAtopikKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -3390,6 +3344,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnStigAtopik;
     private widget.CekBox ChkAccor;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
@@ -3413,7 +3368,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextBox Jk17;
     private widget.TextBox Jk18;
     private widget.TextBox Jk19;
-    private widget.TextBox Jk2;
     private widget.TextBox Jk20;
     private widget.TextBox Jk21;
     private widget.TextBox Jk22;
@@ -3446,6 +3400,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextBox RuangDerma;
     private widget.TextBox RuangNeonatologi;
     private widget.ScrollPane Scroll;
+    private widget.TextBox StigAtopik;
     private widget.TextBox TCari;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRM1;
@@ -3465,7 +3420,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
@@ -3476,7 +3430,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox17;
     private javax.swing.JCheckBox jCheckBox18;
     private javax.swing.JCheckBox jCheckBox19;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox20;
     private javax.swing.JCheckBox jCheckBox21;
     private javax.swing.JCheckBox jCheckBox22;
@@ -3487,7 +3440,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox27;
     private javax.swing.JCheckBox jCheckBox28;
     private javax.swing.JCheckBox jCheckBox29;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox30;
     private javax.swing.JCheckBox jCheckBox31;
     private javax.swing.JCheckBox jCheckBox32;
@@ -3498,7 +3450,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox37;
     private javax.swing.JCheckBox jCheckBox38;
     private javax.swing.JCheckBox jCheckBox39;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox40;
     private javax.swing.JCheckBox jCheckBox41;
     private javax.swing.JCheckBox jCheckBox42;
@@ -3509,7 +3460,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox47;
     private javax.swing.JCheckBox jCheckBox48;
     private javax.swing.JCheckBox jCheckBox49;
-    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox50;
     private javax.swing.JCheckBox jCheckBox51;
     private javax.swing.JCheckBox jCheckBox52;
