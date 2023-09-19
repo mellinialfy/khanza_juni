@@ -28,11 +28,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -55,6 +60,8 @@ public class MasterStigAtopik extends javax.swing.JDialog {
     private DlgCariSpesialis spesial=new DlgCariSpesialis(null,false);
     private PreparedStatement stat;
     private ResultSet rs;
+    // frame
+    static JFrame f;
 
     /** Creates new form DlgDokter
      * @param parent
@@ -66,11 +73,14 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] row={"Stigmata Atopik"};
+       
+    
+    
+        Object[] row={"Stigmata Atopik", "id"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        tbStigAtopik.setModel(tabMode);
+//        tbStigAtopik.setModel(tabMode);
 
         //tampil();
 
@@ -78,34 +88,12 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         tbStigAtopik.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbStigAtopik.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 2; i++) {
             TableColumn column = tbStigAtopik.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
-            }else if(i==1){
-                column.setPreferredWidth(200);
-            }else if(i==2){
-                column.setPreferredWidth(40);
-            }else if(i==3){
-                column.setPreferredWidth(100);
-            }else if(i==4){
-                column.setPreferredWidth(100);
-            }else if(i==5){
-                column.setPreferredWidth(40);
-            }else if(i==6){
-                column.setPreferredWidth(150);
-            }else if(i==7){
-                column.setPreferredWidth(150);
-            }else if(i==8){
-                column.setPreferredWidth(100);
-            }else if(i==9){
-                column.setPreferredWidth(100);
-            }else if(i==10){
-                column.setPreferredWidth(150);
-            }else if(i==11){
-                column.setPreferredWidth(200);
-            }else if(i==12){
-                column.setPreferredWidth(100);
+            } else if(i==1){
+                column.setPreferredWidth(0);
             }
         }
         tbStigAtopik.setDefaultRenderer(Object.class, new WarnaTable());
@@ -211,7 +199,6 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
-        BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
         jLabel10 = new widget.Label();
         LCount = new widget.Label();
@@ -254,7 +241,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Dokter ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Stigmata Atopik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -361,24 +348,6 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         panelGlass6.add(BtnEdit);
         BtnEdit.setBounds(312, 10, 100, 30);
 
-        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
-        BtnPrint.setText("Cetak");
-        BtnPrint.setToolTipText("Alt+T");
-        BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
-            }
-        });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnPrintKeyPressed(evt);
-            }
-        });
-        panelGlass6.add(BtnPrint);
-        BtnPrint.setBounds(414, 10, 100, 30);
-
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
@@ -395,7 +364,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
             }
         });
         panelGlass6.add(BtnAll);
-        BtnAll.setBounds(516, 10, 100, 30);
+        BtnAll.setBounds(420, 10, 100, 30);
 
         jLabel10.setText("Record :");
         jLabel10.setName("jLabel10"); // NOI18N
@@ -475,7 +444,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(1331, 50));
+        FormInput.setPreferredSize(new java.awt.Dimension(1331, 20));
         FormInput.setLayout(null);
 
         jLabel4.setText("Stigmata Atopik :");
@@ -533,27 +502,35 @@ public class MasterStigAtopik extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
 //        if(TKd.getText().trim().equals("")){
 //            Valid.textKosong(TKd,"kode dokter");
-//        }else if(TNm.getText().trim().equals("")){
-//            Valid.textKosong(TNm,"nama dokter");
-//        }else if(TSpesialis.getText().trim().equals("")||KdSps.getText().trim().equals("")){
+//        }else 
+if(TNm.getText().trim().equals("")){
+            Valid.textKosong(TNm,"stigmata atopik");
+        
+//else if(TSpesialis.getText().trim().equals("")||KdSps.getText().trim().equals("")){
 //            Valid.textKosong(KdSps,"spesialis");
-//        }else{
+        }else{
             try { 
+                LocalDateTime now = LocalDateTime.now();
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDateTime = now.format(formatter);
+
                 Sequel.AutoComitFalse();
-                Sequel.menyimpanignore("jnj_jabatan","'-','-','0','0'");
-                Sequel.menyimpanignore("departemen","'-','-'");
-                Sequel.menyimpanignore("bidang","'-'");
-                Sequel.menyimpanignore("bank","'T'");
-                Sequel.menyimpanignore("stts_wp","'-','-'");
-                Sequel.menyimpanignore("stts_kerja","'-','-','0'");
-                Sequel.menyimpanignore("kelompok_jabatan","'-','-','0'");
-                Sequel.menyimpanignore("resiko_kerja","'-','-','0'");
-                Sequel.menyimpanignore("emergency_index","'-','-','0'");
-                Sequel.menyimpanignore("pendidikan","'-','0','0','0','0'");
+//                Sequel.menyimpanignore("jnj_jabatan","'-','-','0','0'");
+//                Sequel.menyimpanignore("departemen","'-','-'");
+//                Sequel.menyimpanignore("bidang","'-'");
+//                Sequel.menyimpanignore("bank","'T'");
+//                Sequel.menyimpanignore("stts_wp","'-','-'");
+//                Sequel.menyimpanignore("stts_kerja","'-','-','0'");
+//                Sequel.menyimpanignore("kelompok_jabatan","'-','-','0'");
+//                Sequel.menyimpanignore("resiko_kerja","'-','-','0'");
+//                Sequel.menyimpanignore("emergency_index","'-','-','0'");
+//                Sequel.menyimpanignore("pendidikan","'-','0','0','0','0'");
 //                Sequel.menyimpanignore("pegawai","'0','"+TKd.getText()+"','"+TNm.getText()+"','"+CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN","Wanita").replaceAll("LAKI-LAKI","Pria")+"',"+
 //                        "'-','-','-','-','-','-','-','-','-','-','-','0','"+TTmp.getText()+"','"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"','"+TAlmt.getText()+"','-','1900-01-01','<1','-','T','-','AKTIF','0','0','0','1900-01-01','0','0','pages/pegawai/photo/','-'");        
-//                Sequel.menyimpan2("dokter","'"+Integer.parseInt(TNm.getText())+"','"+
-//                        TNm.getText()+"','"
+                Sequel.menyimpan2("tb_stigmata_atopik(stigmata_atopik, created_at)","'"+TNm.getText()+","+formattedDateTime+"'","id");
+                
+                        
 //                        
 //                
 //                );
@@ -564,7 +541,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
             } catch (Exception ex) {
                 return;
             }            
-//        }
+        }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -606,50 +583,6 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         }
 }//GEN-LAST:event_BtnHapusKeyPressed
 
-    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                Valid.MyReportqry("rptDokter.jasper","report","::[ Data Dokter ]::",
-                        "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir, "+
-                   "dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "+
-                   "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek "+
-                   "from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "+
-//                   "where dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and  dokter.kd_dokter like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.nm_dokter like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.tmp_lahir like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.tgl_lahir like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.agama like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.almt_tgl like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.no_telp like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and spesialis.nm_sps like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.alumni like '%"+TCari.getText().trim()+"%' or "+
-//                   "dokter.status='1' and dokter.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and dokter.gol_drh like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and dokter.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and dokter.no_ijn_praktek like '%"+TCari.getText().trim()+"%' "+
-                   "order by dokter.kd_dokter",param);
-            
-        }
-        this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
-
-    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnPrintActionPerformed(null);
-        }else{
-            Valid.pindah(evt, BtnHapus, BtnAll);
-        }
-}//GEN-LAST:event_BtnPrintKeyPressed
-
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -659,22 +592,6 @@ public class MasterStigAtopik extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
-
-    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-//        CmbCrStts.setSelectedIndex(0);
-//        cmbCrJk.setSelectedIndex(0);
-//        CmbCrGd.setSelectedIndex(0);
-        TCari.setText("");
-        tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
-
-    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnAllActionPerformed(null);
-        }else{
-            Valid.pindah(evt, BtnPrint, BtnKeluar);
-        }
-}//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
 //        if(TKd.getText().trim().equals("")){
@@ -718,7 +635,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
-            Valid.pindah(evt, BtnHapus, BtnPrint);
+//            Valid.pindah(evt, BtnHapus);
         }
 }//GEN-LAST:event_BtnEditKeyPressed
 
@@ -789,6 +706,22 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_tbStigAtopikKeyReleased
 
+    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnAllActionPerformed(null);
+        }else{
+//            Valid.pindah(evt, BtnPrint, BtnKeluar);
+        }
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        //        CmbCrStts.setSelectedIndex(0);
+        //        cmbCrJk.setSelectedIndex(0);
+        //        CmbCrGd.setSelectedIndex(0);
+        TCari.setText("");
+        tampil();
+    }//GEN-LAST:event_BtnAllActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -803,6 +736,41 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             });
             dialog.setVisible(true);
         });
+//        
+//        // create a new frame
+//        f = new JFrame("Stigmata Atopik");
+//
+//        // set layout of frame
+//        f.setLayout(new FlowLayout());
+
+        int num = tabMode.getRowCount();
+        JCheckBox[] checkBoxList = new JCheckBox[num];
+
+
+        for(int i = 0; i < num; i++) {
+//                checkBoxList[i] = new JCheckBox("CheckBox" + i);
+            checkBoxList[i] = new JCheckBox("'"+tabMode.getValueAt(0, i)+"'");
+            Scroll.add(checkBoxList[i]);
+        }
+                
+                
+                
+  
+        // create checkbox
+        JCheckBox c1 = new JCheckBox("checkbox 1");
+        JCheckBox c2 = new JCheckBox("checkbox 2");
+  
+        // create a new panel
+        JPanel p = new JPanel();
+  
+        // add checkbox to panel
+        p.add(c1);
+        p.add(c2);
+  
+        // add panel to frame
+        internalFrame1.add(p);
+  
+        internalFrame1.show();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -812,7 +780,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
-    private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.CekBox ChkInput;
     private widget.PanelBiasa FormInput;
@@ -837,51 +804,19 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Valid.tabelKosong(tabMode);
         try {
             stat=koneksi.prepareStatement(
-                   "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir, "+
-                   "dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "+
-                   "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek "+
-                   "from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "+
-                   "where dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.kd_dokter like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.nm_dokter like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.tmp_lahir like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.tgl_lahir like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.agama like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.almt_tgl like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.no_telp like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.stts_nikah like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and spesialis.nm_sps like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.alumni like ? or "+
-                   "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.no_ijn_praktek like ? "+
-                   "order by dokter.kd_dokter");
+                   "select stigmata_atopik, id from tb_stigmata_atopik where status=1");
             try{
-                stat.setString(4,"%"+TCari.getText().trim()+"%");
-                stat.setString(8,"%"+TCari.getText().trim()+"%");
-                stat.setString(12,"%"+TCari.getText().trim()+"%");
-                stat.setString(16,"%"+TCari.getText().trim()+"%");
-                stat.setString(20,"%"+TCari.getText().trim()+"%");
-                stat.setString(24,"%"+TCari.getText().trim()+"%");
-                stat.setString(28,"%"+TCari.getText().trim()+"%");
-                stat.setString(32,"%"+TCari.getText().trim()+"%");
-                stat.setString(36,"%"+TCari.getText().trim()+"%");
-                stat.setString(40,"%"+TCari.getText().trim()+"%");
-                stat.setString(44,"%"+TCari.getText().trim()+"%");
                 rs=stat.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        rs.getString(1),
-                                   rs.getString(2),
-                                   rs.getString(3),
-                                   rs.getString(4),
-                                   rs.getString(5),
-                                   rs.getString(6),
-                                   rs.getString(7),
-                                   rs.getString(8),
-                                   rs.getString(9),
-                                   rs.getString(10),
-                                   rs.getString(11),
-                                   rs.getString(12),
-                                   rs.getString(13)});
+                        rs.getString(0),
+                        rs.getString(1)
+                                   });
+                                   
                 }
+                
+            
+            
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
@@ -901,7 +836,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     public void emptTeks() {
         TNm.setText("");
-        Valid.autoNomer(" dokter ","D",7,TNm);
+//        Valid.autoNomer(" dokter ","D",7,TNm);
     }
 
     private void getData() {
@@ -952,7 +887,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         BtnSimpan.setEnabled(akses.getdokter());
         BtnHapus.setEnabled(akses.getdokter());
         BtnEdit.setEnabled(akses.getdokter());
-        BtnPrint.setEnabled(akses.getdokter());
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);
         }else{
