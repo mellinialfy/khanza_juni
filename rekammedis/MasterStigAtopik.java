@@ -60,8 +60,6 @@ public class MasterStigAtopik extends javax.swing.JDialog {
     private DlgCariSpesialis spesial=new DlgCariSpesialis(null,false);
     private PreparedStatement stat;
     private ResultSet rs;
-    // frame
-    static JFrame f;
 
     /** Creates new form DlgDokter
      * @param parent
@@ -80,9 +78,9 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-//        tbStigAtopik.setModel(tabMode);
+        tbStigAtopik.setModel(tabMode);
 
-        //tampil();
+//        tampil();
 
         //tbPetugas.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPetugas.getBackground()));
         tbStigAtopik.setPreferredScrollableViewportSize(new Dimension(800,800));
@@ -191,6 +189,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         Popup = new javax.swing.JPopupMenu();
         MnRestore = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
+        jPanel1 = new javax.swing.JPanel();
         Scroll = new widget.ScrollPane();
         tbStigAtopik = new widget.Table();
         jPanel2 = new javax.swing.JPanel();
@@ -244,6 +243,9 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Stigmata Atopik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        jPanel1.setName("jPanel1"); // NOI18N
+        internalFrame1.add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         Scroll.setComponentPopupMenu(Popup);
         Scroll.setName("Scroll"); // NOI18N
@@ -489,7 +491,6 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
-        internalFrame1.getAccessibleContext().setAccessibleName("::[ Stigmata Atopik ]::");
         internalFrame1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -570,8 +571,9 @@ if(TNm.getText().trim().equals("")){
 //            Sequel.mengedit("pegawai","nik='"+TKd.getText()+"'","stts_aktif='KELUAR'");
             tampil();
             emptTeks();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
         } 
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -726,6 +728,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     * @param args the command line arguments
     */
     public static void main(String args[]) {
+        
         java.awt.EventQueue.invokeLater(() -> {
             MasterStigAtopik dialog = new MasterStigAtopik(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -735,43 +738,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             });
             dialog.setVisible(true);
+            
         });
 //        
-//        // create a new frame
-//        f = new JFrame("Stigmata Atopik");
-//
-//        // set layout of frame
-//        f.setLayout(new FlowLayout());
-
-        int num = tabMode.getRowCount();
-        JCheckBox[] checkBoxList = new JCheckBox[num];
-
-
-        for(int i = 0; i < num; i++) {
-//                checkBoxList[i] = new JCheckBox("CheckBox" + i);
-            checkBoxList[i] = new JCheckBox("'"+tabMode.getValueAt(0, i)+"'");
-            Scroll.add(checkBoxList[i]);
-        }
-                
-                
-                
-  
-        // create checkbox
-        JCheckBox c1 = new JCheckBox("checkbox 1");
-        JCheckBox c2 = new JCheckBox("checkbox 2");
-  
-        // create a new panel
-        JPanel p = new JPanel();
-  
-        // add checkbox to panel
-        p.add(c1);
-        p.add(c2);
-  
-        // add panel to frame
-        internalFrame1.add(p);
-  
-        internalFrame1.show();
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
@@ -794,6 +765,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel10;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass8;
@@ -806,19 +778,41 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             stat=koneksi.prepareStatement(
                    "select stigmata_atopik, id from tb_stigmata_atopik where status=1");
             try{
+                
                 rs=stat.executeQuery();
+                
+                
+        
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        rs.getString(0),
-                        rs.getString(1)
-                                   });
-                                   
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
                 }
-                
+        
             
-            
+                int num = tabMode.getRowCount();
+//                JCheckBox[] checkBoxList = new JCheckBox[num];
+
+                System.out.println(num);
+                for(int i = 0; i < num; i++) {
+//                    checkBoxList[i] = new JCheckBox("CheckBox" + i);
+//                    contentPane.add(checkBoxList[i]);
+                    
+                    
+                    JCheckBox checkBoxList = new JCheckBox(String.valueOf(tabMode.getValueAt(i, 0)));
+                    
+//                    checkBoxList[i].setText(String.valueOf(tabMode.getValueAt(i, 0)));
+                    
+                    
+                    jPanel1.add(checkBoxList);
+                    jPanel1.repaint();
+                    i++;
+                    System.out.println(i);
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
             }finally{
                 if(rs != null){
                     rs.close();
@@ -830,6 +824,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -840,23 +835,23 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void getData() {
-        int row=tbStigAtopik.getSelectedRow();
-        if(row!= -1){
-            
-            TNm.setText(tbStigAtopik.getValueAt(row,1).toString());
-            Sequel.cariIsi("select kd_sps from spesialis where nm_sps='"+tbStigAtopik.getValueAt(row,10).toString()+"'", TNm);
-            
-            switch (tbStigAtopik.getValueAt(row,2).toString()) {
-                case "L":
-//                    CmbJk.setSelectedItem("LAKI-LAKI");
-                    break;
-                case "P":
-//                    CmbJk.setSelectedItem("PEREMPUAN");
-                    break;
-            }
-            
-//            Valid.SetTgl(DTPLahir,tbStigAtopik.getValueAt(row,4).toString());
-        }
+//        int row=tbStigAtopik.getSelectedRow();
+//        if(row!= -1){
+//            
+//            TNm.setText(tbStigAtopik.getValueAt(row,1).toString());
+//            Sequel.cariIsi("select kd_sps from spesialis where nm_sps='"+tbStigAtopik.getValueAt(row,10).toString()+"'", TNm);
+//            
+//            switch (tbStigAtopik.getValueAt(row,2).toString()) {
+//                case "L":
+////                    CmbJk.setSelectedItem("LAKI-LAKI");
+//                    break;
+//                case "P":
+////                    CmbJk.setSelectedItem("PEREMPUAN");
+//                    break;
+//            }
+//            
+////            Valid.SetTgl(DTPLahir,tbStigAtopik.getValueAt(row,4).toString());
+//        }
     }
 
     
