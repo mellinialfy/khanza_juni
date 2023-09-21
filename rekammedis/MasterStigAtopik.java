@@ -18,8 +18,11 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -244,7 +247,12 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         internalFrame1.add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         Scroll.setComponentPopupMenu(Popup);
@@ -529,7 +537,7 @@ if(TNm.getText().trim().equals("")){
 //                Sequel.menyimpanignore("pendidikan","'-','0','0','0','0'");
 //                Sequel.menyimpanignore("pegawai","'0','"+TKd.getText()+"','"+TNm.getText()+"','"+CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN","Wanita").replaceAll("LAKI-LAKI","Pria")+"',"+
 //                        "'-','-','-','-','-','-','-','-','-','-','-','0','"+TTmp.getText()+"','"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"','"+TAlmt.getText()+"','-','1900-01-01','<1','-','T','-','AKTIF','0','0','0','1900-01-01','0','0','pages/pegawai/photo/','-'");        
-                Sequel.menyimpan2("tb_stigmata_atopik(stigmata_atopik, created_at)","'"+TNm.getText()+","+formattedDateTime+"'","id");
+                Sequel.simpan("tb_stigmata_atopik(stigmata_atopik, created_at)","'"+TNm.getText()+"'","'"+formattedDateTime+"'","id");
                 
                         
 //                        
@@ -780,8 +788,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             try{
                 
                 rs=stat.executeQuery();
-                
-                
         
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -789,26 +795,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs.getString(2)
                                    }); 
                 }
-        
             
                 int num = tabMode.getRowCount();
-//                JCheckBox[] checkBoxList = new JCheckBox[num];
 
-                System.out.println(num);
                 for(int i = 0; i < num; i++) {
-//                    checkBoxList[i] = new JCheckBox("CheckBox" + i);
-//                    contentPane.add(checkBoxList[i]);
-                    
-                    
+
                     JCheckBox checkBoxList = new JCheckBox(String.valueOf(tabMode.getValueAt(i, 0)));
+                    checkBoxList.setBackground(Color.white);
+                    checkBoxList.setFont(
+                        checkBoxList.getFont().deriveFont(
+                          Font.PLAIN,
+                          checkBoxList.getFont().getSize()
+                        ));
+                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
+//                    jPanel1.add(checkBoxList);
                     
-//                    checkBoxList[i].setText(String.valueOf(tabMode.getValueAt(i, 0)));
-                    
-                    
-                    jPanel1.add(checkBoxList);
-                    jPanel1.repaint();
-                    i++;
-                    System.out.println(i);
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
