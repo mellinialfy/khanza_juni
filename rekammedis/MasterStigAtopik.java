@@ -20,13 +20,20 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,10 +42,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -63,6 +74,10 @@ public class MasterStigAtopik extends javax.swing.JDialog {
     private DlgCariSpesialis spesial=new DlgCariSpesialis(null,false);
     private PreparedStatement stat;
     private ResultSet rs;
+    JCheckBox checkBoxList;
+    JLabel editButton;
+    JLabel deleteButton;
+    
 
     /** Creates new form DlgDokter
      * @param parent
@@ -545,6 +560,11 @@ if(TNm.getText().trim().equals("")){
 //                );
                 Sequel.Commit();
                 Sequel.AutoComitTrue();
+                
+                
+//                checkBoxList.removeAll();
+//                checkBoxList.revalidate();
+//                checkBoxList.repaint();
                 tampil();
                 emptTeks();
             } catch (Exception ex) {
@@ -732,6 +752,45 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TNm.getText().trim().equals("")){
+            Valid.textKosong(TNm,"stigmata atopik");
+        }else{
+            try { 
+                LocalDateTime now = LocalDateTime.now();
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDateTime = now.format(formatter);
+                
+                koneksi.setAutoCommit(false);
+                Sequel.edit("tb_stigmata_atopik",
+                        "stigmata_atopik='"+TNm.getText()+"',updated_at='"+formattedDateTime+"'",
+                        "stigmata_atopik='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),0).toString()+"'");
+//                Sequel.mengedit("dokter","kd_dokter='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),0).toString()+"'","kd_dokter='"+TKd.getText()+"',nm_dokter='"+TNm.getText()+
+//                        "',jk='"+CmbJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+
+//                        "',tmp_lahir='"+TTmp.getText()+
+//                        "',tgl_lahir='"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+
+//                        "',gol_drh='"+CMbGd.getSelectedItem()+
+//                        "',agama='"+cmbAgama.getSelectedItem()+
+//                        "',almt_tgl='"+TAlmt.getText()+
+//                        "',no_telp='"+TTlp.getText()+
+//                        "',stts_nikah='"+CmbStts.getSelectedItem()+
+//                        "',kd_sps='"+KdSps.getText()+
+//                        "',alumni='"+TAlumni.getText()+
+//                        "',no_ijn_praktek='"+TNoi.getText()+"'");
+                koneksi.setAutoCommit(true);
+                if(tabMode.getRowCount()!=0){tampil();}
+                emptTeks();
+            } catch (SQLException ex) {
+                return;
+            }            
+        }
+    }
+    
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -795,20 +854,53 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs.getString(2)
                                    }); 
                 }
-            
+                
+                // Get all of the components in the panel.
+                Component[] components = jPanel1.getComponents();
+
+                // Iterate over the components and remove all of the checkboxes.
+                for (Component component : components) {
+                    if (component instanceof JPanel) {
+                        jPanel1.remove(component);
+                    }
+                }
+                
                 int num = tabMode.getRowCount();
 
                 for(int i = 0; i < num; i++) {
 
-                    JCheckBox checkBoxList = new JCheckBox(String.valueOf(tabMode.getValueAt(i, 0)));
+                    ImageIcon editIcon = new ImageIcon(new ImageIcon("src/picture/EDIT2.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
+                    ImageIcon deleteIcon = new ImageIcon(new ImageIcon("src/picture/cross.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
+
+                    editButton = new JLabel(editIcon);
+                    JButton deleteButton = new JButton(deleteIcon);
+                    
+                    checkBoxList = new JCheckBox(String.valueOf(tabMode.getValueAt(i, 0)));
+                    checkBoxList.setName(String.valueOf(tabMode.getValueAt(i, 1)));
+                    editButton.setName(String.valueOf(tabMode.getValueAt(i, 1)));
+                    deleteButton.setName(String.valueOf(tabMode.getValueAt(i, 1)));
+
+                    deleteButton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            System.out.println("You clicked button "+e.getSource().toString());
+                        }
+                    });
+                    
                     checkBoxList.setBackground(Color.white);
                     checkBoxList.setFont(
                         checkBoxList.getFont().deriveFont(
                           Font.PLAIN,
                           checkBoxList.getFont().getSize()
                         ));
-                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
-//                    jPanel1.add(checkBoxList);
+                    JPanel panel = new JPanel();
+                    panel.setBackground(Color.white);
+                    panel.setName(String.valueOf(tabMode.getValueAt(i, 1)));
+                    panel.add(checkBoxList,BorderLayout.PAGE_START);
+                    panel.add(editButton);
+                    panel.add(deleteButton);
+//                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
+                    jPanel1.add(panel);
                     
                 }
             }catch(Exception e){
