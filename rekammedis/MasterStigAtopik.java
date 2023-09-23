@@ -19,6 +19,8 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -29,6 +31,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
@@ -752,7 +757,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void editButtonActionPerformed(MouseEvent evt) {
         if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"stigmata atopik");
         }else{
@@ -874,12 +879,34 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
                     editButton = new JLabel(editIcon);
                     JButton deleteButton = new JButton(deleteIcon);
+                    deleteButton.setBorderPainted( false );
+                    
+                    CheckboxGroup cbg = new CheckboxGroup();
+                    Checkbox checkbox1 = new Checkbox(String.valueOf(tabMode.getValueAt(i, 0)), cbg, false);
+                    checkbox1.setName(String.valueOf(tabMode.getValueAt(i, 1)));
+                    
                     
                     checkBoxList = new JCheckBox(String.valueOf(tabMode.getValueAt(i, 0)));
                     checkBoxList.setName(String.valueOf(tabMode.getValueAt(i, 1)));
                     editButton.setName(String.valueOf(tabMode.getValueAt(i, 1)));
                     deleteButton.setName(String.valueOf(tabMode.getValueAt(i, 1)));
 
+                    editButton.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent evt) {
+                            System.out.println("Yay you clicked me");
+                            System.out.println(editButton.getName());
+                            System.out.println(checkbox1.getName());
+                            editButtonActionPerformed(evt);
+                        }
+
+                    });
+//                    editButton.addMouseListener(new MouseListener() {
+//                        public void mouseListener(ActionEvent e)
+//                        {
+//                            System.out.println("You clicked button "+e.getSource().toString());
+//                        }
+//                    });
                     deleteButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e)
                         {
@@ -896,7 +923,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     JPanel panel = new JPanel();
                     panel.setBackground(Color.white);
                     panel.setName(String.valueOf(tabMode.getValueAt(i, 1)));
-                    panel.add(checkBoxList,BorderLayout.PAGE_START);
+                    panel.add(checkbox1,BorderLayout.PAGE_START);
                     panel.add(editButton);
                     panel.add(deleteButton);
 //                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
