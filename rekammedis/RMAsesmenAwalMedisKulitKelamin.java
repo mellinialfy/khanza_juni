@@ -13,10 +13,20 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
+import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -29,9 +39,15 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -48,11 +64,11 @@ import widget.TextBox;
  * @author perpustakaan
  */
 public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode,tabModeMasalah,tabModeDetailMasalah;
+    private final DefaultTableModel tabMode,tabModeMasalah,tabModeDetailMasalah, tabModeStig;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps,ps2;
+    private PreparedStatement ps,ps2,stat;
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
@@ -70,6 +86,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private FileReader myObj;
     String no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,
             sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
+    JPanel jPanel1;
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -77,6 +94,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     public RMAsesmenAwalMedisKulitKelamin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        jPanel1 = new JPanel();
+        jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+        jPanel1.setVisible(false);
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","J.K.",
@@ -92,6 +113,14 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        
+        Object[] row={"Stigmata Atopik", "id"};
+        tabModeStig=new DefaultTableModel(null,row){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+//        tbStigAtopik.setModel(tabModeStig);
+        
         
         tabModeMasalah=new DefaultTableModel(null,new Object[]{
                 "P","KODE","MASALAH KEPERAWATAN"
@@ -223,7 +252,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDokter = new widget.Button();
         jLabel8 = new widget.Label();
         TglLahir = new widget.TextBox();
-        KelenjarLimfe = new widget.TextBox();
         jLabel10 = new widget.Label();
         label11 = new widget.Label();
         jLabel11 = new widget.Label();
@@ -303,6 +331,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jCheckBox22 = new javax.swing.JCheckBox();
         jCheckBox23 = new javax.swing.JCheckBox();
         jLabel53 = new widget.Label();
+        KelenjarLimfe = new widget.TextBox();
         jCheckBox24 = new javax.swing.JCheckBox();
         jCheckBox25 = new javax.swing.JCheckBox();
         jCheckBox26 = new javax.swing.JCheckBox();
@@ -416,6 +445,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel76 = new widget.Label();
         TempatDerma = new widget.TextBox();
         BtnStigAtopik = new widget.Button();
+        BtnDropStig = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -700,11 +730,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
 
-        KelenjarLimfe.setHighlighter(null);
-        KelenjarLimfe.setName("KelenjarLimfe"); // NOI18N
-        FormInput.add(KelenjarLimfe);
-        KelenjarLimfe.setBounds(170, 340, 150, 23);
-
         jLabel10.setText("No.Rawat :");
         jLabel10.setName("jLabel10"); // NOI18N
         FormInput.add(jLabel10);
@@ -773,7 +798,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2023 13:48:27" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023 13:54:51" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -892,7 +917,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(StigAtopik);
-        StigAtopik.setBounds(170, 250, 660, 23);
+        StigAtopik.setBounds(170, 250, 640, 23);
 
         jLabel37.setText("Kuku:");
         jLabel37.setToolTipText("");
@@ -1358,6 +1383,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel53.setName("jLabel53"); // NOI18N
         FormInput.add(jLabel53);
         jLabel53.setBounds(0, 700, 150, 23);
+
+        KelenjarLimfe.setHighlighter(null);
+        KelenjarLimfe.setName("KelenjarLimfe"); // NOI18N
+        FormInput.add(KelenjarLimfe);
+        KelenjarLimfe.setBounds(170, 340, 150, 23);
 
         jCheckBox24.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox24.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2438,6 +2468,24 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(BtnStigAtopik);
         BtnStigAtopik.setBounds(840, 250, 28, 23);
 
+        BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
+        BtnDropStig.setMnemonic('2');
+        BtnDropStig.setToolTipText("Alt+2");
+        BtnDropStig.setName("BtnDropStig"); // NOI18N
+        BtnDropStig.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDropStig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDropStigActionPerformed(evt);
+            }
+        });
+        BtnDropStig.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnDropStigKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnDropStig);
+        BtnDropStig.setBounds(810, 250, 28, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -2487,7 +2535,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2501,7 +2549,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3302,6 +3350,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void StigAtopikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StigAtopikActionPerformed
         // TODO add your handling code here:
+        tampilStigAtopik();
         
     }//GEN-LAST:event_StigAtopikActionPerformed
 
@@ -3318,6 +3367,93 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnStigAtopikKeyPressed
 
+    private void BtnDropStigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropStigActionPerformed
+        // TODO add your handling code here:
+        
+        
+        ImageIcon icon = new ImageIcon(new ImageIcon("src/picture/arrow-up.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
+        ImageIcon dropdown_icon = new ImageIcon(new ImageIcon("src/picture/dropdown-24.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
+        if(!jPanel1.isVisible()) {
+            jPanel1.setVisible(true);
+            BtnDropStig.setIcon(icon);
+            
+            tampilStigAtopik();
+        
+            // Get all of the components in the panel.
+            Component[] components = jPanel1.getComponents();
+
+            // Iterate over the components and remove all of the checkboxes.
+            for (Component component : components) {
+                if (component instanceof JPanel) {
+                    jPanel1.remove(component);
+                }
+            }
+
+            int num = tabModeStig.getRowCount();
+
+            for(int i = 0; i < num; i++) {
+
+    //            ImageIcon editIcon = new ImageIcon(new ImageIcon("src/picture/EDIT2.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
+    //            ImageIcon deleteIcon = new ImageIcon(new ImageIcon("src/picture/cross.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
+
+    //            JLabel editButton = new JLabel(editIcon);
+    //            JButton deleteButton = new JButton(deleteIcon);
+    //            deleteButton.setBorderPainted( false );
+
+        //                    CheckboxGroup cbg = new CheckboxGroup();
+        //                    Checkbox checkbox1 = new Checkbox(String.valueOf(tabModeStig.getValueAt(i, 0)), cbg, false);
+        //                    checkbox1.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
+
+
+                JCheckBox checkBoxList = new JCheckBox(String.valueOf(tabModeStig.getValueAt(i, 0)));
+                checkBoxList.setActionCommand( String.valueOf(tabModeStig.getValueAt(i, 1)));
+    //            checkBoxList.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
+
+
+                checkBoxList.setBackground(Color.white);
+                checkBoxList.setFont(
+                    checkBoxList.getFont().deriveFont(
+                      Font.PLAIN,
+                      checkBoxList.getFont().getSize()
+                    ));
+                
+                JButton saveBtn = new JButton("OK");
+
+                saveBtn.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent ae) {
+                        String idStig = checkBoxList.getActionCommand();
+                        System.out.println(idStig);
+                        StigAtopik.setText(idStig);
+//                       if (!textField.getText().equals(""))
+//                          saveBtn.setText(textField.getText());
+                    }
+                 });
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+                panel.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
+                panel.add(checkBoxList,BorderLayout.PAGE_START);
+    //            panel.add(editButton);
+    //            panel.add(deleteButton);
+        //                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+
+
+            }
+        } else {
+            jPanel1.setVisible(false);
+            BtnDropStig.setIcon(dropdown_icon);
+        }
+        
+        
+
+        
+    }//GEN-LAST:event_BtnDropStigActionPerformed
+
+    private void BtnDropStigKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropStigKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDropStigKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -3330,6 +3466,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     System.exit(0);
                 }
             });
+            
             dialog.setVisible(true);
         });
     }
@@ -3339,6 +3476,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnDokter;
+    private widget.Button BtnDropStig;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
@@ -3657,6 +3795,44 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
             e.printStackTrace();
         }
+    }
+    
+    
+
+    private void tampilStigAtopik() {
+        Valid.tabelKosong(tabModeStig);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select stigmata_atopik, id from tb_stigmata_atopik where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeStig.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeStig.getRowCount());
     }
 
     public void emptTeks() {

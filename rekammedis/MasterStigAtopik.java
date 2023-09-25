@@ -897,6 +897,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             System.out.println("Yay you clicked me");
                             System.out.println(editButton.getName());
                             System.out.println(checkbox1.getName());
+                            System.out.println(checkBoxList.getName());
                             editButtonActionPerformed(evt);
                         }
 
