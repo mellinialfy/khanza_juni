@@ -22,6 +22,7 @@ import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,7 +71,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps,ps2,stat;
     private ResultSet rs,rs2;
-    private int i=0,jml=0,index=0;
+    private int i=0,jml=0,index=0, stigclick=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
     private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
     private boolean[] pilih; 
@@ -86,7 +87,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private FileReader myObj;
     String no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,
             sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
-    JPanel jPanel1;
+    
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -95,9 +96,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        jPanel1 = new JPanel();
-        jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
-        jPanel1.setVisible(false);
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","J.K.",
@@ -798,7 +796,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023 13:54:51" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2023 10:05:44" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2535,7 +2533,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2549,7 +2547,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3370,24 +3368,85 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private void BtnDropStigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropStigActionPerformed
         // TODO add your handling code here:
         
+        JPanel jPanel1 = new JPanel(new GridLayout(0, 5));
         
-        ImageIcon icon = new ImageIcon(new ImageIcon("src/picture/arrow-up.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+//        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        FormInput.add(jPanel1);
+        jPanel1.setBounds(170, 280, 640, 80);
+        
+        // Get all of the components in the panel.
+        Component[] components = jPanel1.getComponents();
+
+        // Iterate over the components and remove all of the checkboxes.
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                jPanel1.remove(component);
+            }
+        }
+        
+        JButton saveBtn = new JButton("OK");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        saveBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                Object source = ae.getSource();
+                if (source instanceof JCheckBox) {
+                    JCheckBox checkBoxList = (JCheckBox) source;
+                    JPanel panel = (JPanel) checkBoxList.getParent();
+                    String checkBoxListId = panel.getName();
+                    System.out.println(checkBoxListId);
+                    StigAtopik.setText(checkBoxListId);
+                }
+
+//                       if (!textField.getText().equals(""))
+//                          saveBtn.setText(textField.getText());
+            }
+         });
+//        BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
+//        BtnDropStig.setMnemonic('2');
+//        BtnDropStig.setToolTipText("Alt+2");
+//        BtnDropStig.setName("BtnDropStig"); // NOI18N
+//        BtnDropStig.setPreferredSize(new java.awt.Dimension(28, 23));
+//        BtnDropStig.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                BtnDropStigActionPerformed(evt);
+//            }
+//        });
+//        BtnDropStig.addKeyListener(new java.awt.event.KeyAdapter() {
+//            public void keyPressed(java.awt.event.KeyEvent evt) {
+//                BtnDropStigKeyPressed(evt);
+//            }
+//        });
+//        FormInput.add(BtnDropStig);
+//        BtnDropStig.setBounds(810, 250, 28, 23);
+        
+        ImageIcon icon = new ImageIcon(new ImageIcon("src/picture/drowup-24.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
         ImageIcon dropdown_icon = new ImageIcon(new ImageIcon("src/picture/dropdown-24.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
-        if(!jPanel1.isVisible()) {
-            jPanel1.setVisible(true);
-            BtnDropStig.setIcon(icon);
-            
-            tampilStigAtopik();
-        
-            // Get all of the components in the panel.
-            Component[] components = jPanel1.getComponents();
+        if(stigclick==0) {
+            stigclick = 1;
 
             // Iterate over the components and remove all of the checkboxes.
             for (Component component : components) {
-                if (component instanceof JPanel) {
+                if (component instanceof JCheckBox) {
                     jPanel1.remove(component);
                 }
             }
+        
+            jPanel1.setVisible(true);
+            BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+//            BtnDropStig.setIcon(icon);
+            
+            
+            tampilStigAtopik();
+        
+            
 
             int num = tabModeStig.getRowCount();
 
@@ -3417,32 +3476,38 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                       checkBoxList.getFont().getSize()
                     ));
                 
-                JButton saveBtn = new JButton("OK");
-
-                saveBtn.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent ae) {
-                        String idStig = checkBoxList.getActionCommand();
-                        System.out.println(idStig);
-                        StigAtopik.setText(idStig);
-//                       if (!textField.getText().equals(""))
-//                          saveBtn.setText(textField.getText());
-                    }
-                 });
                 
-                JPanel panel = new JPanel();
-                panel.setBackground(Color.white);
-                panel.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
-                panel.add(checkBoxList,BorderLayout.PAGE_START);
+                
+//                JPanel panel = new JPanel();
+//                panel.setBackground(Color.white);
+//                panel.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
+                jPanel1.add(checkBoxList,BorderLayout.PAGE_START);
+                
     //            panel.add(editButton);
     //            panel.add(deleteButton);
         //                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
-                jPanel1.add(panel);
+//                jPanel1.add(panel);
 
 
             }
+            
+            
+//            jPanel1.add(saveBtn);
+            
         } else {
+            stigclick = 0;
+            
+            // Iterate over the components and remove all of the checkboxes.
+            for (Component component : components) {
+                if (component instanceof JCheckBox) {
+                    jPanel1.remove(component);
+                }
+            }
             jPanel1.setVisible(false);
-            BtnDropStig.setIcon(dropdown_icon);
+            
+            jPanel1.setVisible(false);
+            BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+//            BtnDropStig.setIcon(dropdown_icon);
         }
         
         
