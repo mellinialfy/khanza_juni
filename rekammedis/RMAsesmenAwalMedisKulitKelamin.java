@@ -272,7 +272,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         scrollPane5 = new widget.ScrollPane();
         RiwPenyakitSkrg = new widget.TextArea();
         jLabel33 = new widget.Label();
-        Jk1 = new widget.TextBox();
+        Jk = new widget.TextBox();
         jLabel36 = new widget.Label();
         StigAtopik = new widget.TextBox();
         jLabel37 = new widget.Label();
@@ -895,11 +895,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel33);
         jLabel33.setBounds(0, 1180, 150, 23);
 
-        Jk1.setEditable(false);
-        Jk1.setHighlighter(null);
-        Jk1.setName("Jk1"); // NOI18N
-        FormInput.add(Jk1);
-        Jk1.setBounds(774, 10, 80, 23);
+        Jk.setEditable(false);
+        Jk.setHighlighter(null);
+        Jk.setName("Jk"); // NOI18N
+        FormInput.add(Jk);
+        Jk.setBounds(774, 10, 80, 23);
 
         jLabel36.setText("Stigma Atopik:");
         jLabel36.setToolTipText("");
@@ -2688,13 +2688,14 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
-        }else 
-            if(Eflorisensi.getText().trim().equals("")){
-            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
-        }else if(HasilPenunjangNeonatologi.getText().trim().equals("")){
-            Valid.textKosong(HasilPenunjangNeonatologi,"Ginjal Kiri");
+        }else if(RiwPenyakitSkrg.getText().trim().equals("")){
+            Valid.textKosong(RiwPenyakitSkrg,"Riwayat Penyakit Sekarang");
+        }else if(Eflorisensi.getText().trim().equals("")){
+            Valid.textKosong(Eflorisensi,"Eflorisensi");
+        }else if(Lokalisasi.getText().trim().equals("")){
+            Valid.textKosong(Lokalisasi,"Lokalisasi");
         }else{
-            if(Sequel.menyimpantf("penilaian_usg_urologi","?,?,?,?,?,?"
+            if(Sequel.menyimpantf("tb_asesmen_awal_medis_kulit_kelamin","?,?,?,?,?,?"
                     + "","No.Rawat",6,new String[]{
                     TNoRw.getText(),
                         Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
@@ -3562,7 +3563,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextArea HasilPenunjangNeonatologi;
     private widget.TextBox JamKeluarDerma;
     private widget.TextBox JamNeonatologi;
-    private widget.TextBox Jk1;
+    private widget.TextBox Jk;
     private widget.TextBox Jk11;
     private widget.TextBox Jk12;
     private widget.TextBox Jk13;
@@ -3928,7 +3929,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            Jk1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
             Eflorisensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             HasilPenunjangNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
@@ -3958,7 +3959,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 if(rs.next()){
                     TNoRM.setText(rs.getString("no_rkm_medis"));
                     TPasien.setText(rs.getString("nm_pasien"));
-                    Jk1.setText(rs.getString("jk"));
+                    Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
                 }
             } catch (Exception e) {
