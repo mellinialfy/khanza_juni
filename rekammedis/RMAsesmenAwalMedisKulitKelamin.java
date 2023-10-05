@@ -26,6 +26,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowEvent;
@@ -796,7 +797,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2023 10:05:44" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-10-2023 11:08:14" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2533,7 +2534,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2547,7 +2548,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3371,10 +3372,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         
         JPanel jPanel1 = new JPanel(new GridLayout(0, 5));
         
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
-//        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
@@ -3382,16 +3381,24 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jPanel1);
         jPanel1.setBounds(170, 280, 640, 80);
         
-        // Get all of the components in the panel.
+        //Get the components in the panel
         Component[] components = jPanel1.getComponents();
 
-        // Iterate over the components and remove all of the checkboxes.
-        for (Component component : components) {
-            if (component instanceof JPanel) {
-                jPanel1.remove(component);
+        //Loop through the components
+        for(Component c : components){
+
+            //Find the components you want to remove
+            if(c instanceof JPanel){
+                //Remove it
+                jPanel1.remove(c);
+                c = null;
             }
         }
-        
+
+        //IMPORTANT
+        jPanel1.revalidate();
+        jPanel1.repaint();
+
         JButton saveBtn = new JButton("OK");
         saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
 
@@ -3406,40 +3413,39 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     StigAtopik.setText(checkBoxListId);
                 }
 
-//                       if (!textField.getText().equals(""))
-//                          saveBtn.setText(textField.getText());
             }
          });
-//        BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
-//        BtnDropStig.setMnemonic('2');
-//        BtnDropStig.setToolTipText("Alt+2");
-//        BtnDropStig.setName("BtnDropStig"); // NOI18N
-//        BtnDropStig.setPreferredSize(new java.awt.Dimension(28, 23));
-//        BtnDropStig.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                BtnDropStigActionPerformed(evt);
-//            }
-//        });
-//        BtnDropStig.addKeyListener(new java.awt.event.KeyAdapter() {
-//            public void keyPressed(java.awt.event.KeyEvent evt) {
-//                BtnDropStigKeyPressed(evt);
-//            }
-//        });
-//        FormInput.add(BtnDropStig);
-//        BtnDropStig.setBounds(810, 250, 28, 23);
-        
+
         ImageIcon icon = new ImageIcon(new ImageIcon("src/picture/drowup-24.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
         ImageIcon dropdown_icon = new ImageIcon(new ImageIcon("src/picture/dropdown-24.png").getImage().getScaledInstance(28,23, Image.SCALE_DEFAULT));
         if(stigclick==0) {
             stigclick = 1;
+            System.out.println(stigclick);
 
-            // Iterate over the components and remove all of the checkboxes.
-            for (Component component : components) {
-                if (component instanceof JCheckBox) {
-                    jPanel1.remove(component);
+            //Get the components in the panel
+            Component[] componentss = jPanel1.getComponents();
+            System.out.println("tess"+componentss.length);
+            
+            //Loop through the components
+            for(Component c : componentss){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    // Get the component listeners for the checkbox
+                    ComponentListener[] listeners = c.getComponentListeners();
+                    System.out.println(listeners.toString());
+                    //Remove it
+                    jPanel1.remove(c);
+                    c = null;
+                }
+                if(c instanceof JButton) {
+                    jPanel1.remove(c);
                 }
             }
-        
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
             jPanel1.setVisible(true);
             BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
 //            BtnDropStig.setIcon(icon);
@@ -3453,60 +3459,65 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
             for(int i = 0; i < num; i++) {
 
-    //            ImageIcon editIcon = new ImageIcon(new ImageIcon("src/picture/EDIT2.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
-    //            ImageIcon deleteIcon = new ImageIcon(new ImageIcon("src/picture/cross.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT));
-
-    //            JLabel editButton = new JLabel(editIcon);
-    //            JButton deleteButton = new JButton(deleteIcon);
-    //            deleteButton.setBorderPainted( false );
-
-        //                    CheckboxGroup cbg = new CheckboxGroup();
-        //                    Checkbox checkbox1 = new Checkbox(String.valueOf(tabModeStig.getValueAt(i, 0)), cbg, false);
-        //                    checkbox1.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
-
 
                 JCheckBox checkBoxList = new JCheckBox(String.valueOf(tabModeStig.getValueAt(i, 0)));
                 checkBoxList.setActionCommand( String.valueOf(tabModeStig.getValueAt(i, 1)));
     //            checkBoxList.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
 
 
-                checkBoxList.setBackground(Color.white);
+//                checkBoxList.setBackground(Color.white);
                 checkBoxList.setFont(
                     checkBoxList.getFont().deriveFont(
                       Font.PLAIN,
                       checkBoxList.getFont().getSize()
                     ));
                 
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+//                panel.setName(String.valueOf(tabMode.getValueAt(i, 1)));
+                panel.add(checkBoxList,BorderLayout.PAGE_START);
+                jPanel1.add(panel);
                 
-                
-//                JPanel panel = new JPanel();
-//                panel.setBackground(Color.white);
-//                panel.setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
-                jPanel1.add(checkBoxList,BorderLayout.PAGE_START);
-                
-    //            panel.add(editButton);
-    //            panel.add(deleteButton);
-        //                    jPanel1.add(checkBoxList, BorderLayout.PAGE_START);
-//                jPanel1.add(panel);
-
 
             }
-            
-            
-//            jPanel1.add(saveBtn);
+            Component[] componentssss = jPanel1.getComponents();
+            System.out.println("tesss"+componentssss.length);
             
         } else {
             stigclick = 0;
+            System.out.println(stigclick);
             
-            // Iterate over the components and remove all of the checkboxes.
-            for (Component component : components) {
-                if (component instanceof JCheckBox) {
-                    jPanel1.remove(component);
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            System.out.println("tes"+componentsss.length);
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                if(c instanceof JCheckBox){
+                    //Remove it
+                    jPanel1.remove(c);
+                    System.out.println("tes");
+                    c = null;
+                    
+                }
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    System.out.println("tesss");
+                    c = null;
+                    
                 }
             }
-            jPanel1.setVisible(false);
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
             
             jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
             BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
 //            BtnDropStig.setIcon(dropdown_icon);
         }
