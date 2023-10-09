@@ -600,8 +600,15 @@ if(TNm.getText().trim().equals("")){
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try {
-//            Sequel.mengedit("dokter","kd_dokter='"+TKd.getText()+"'","status='0'");
-//            Sequel.mengedit("pegawai","nik='"+TKd.getText()+"'","stts_aktif='KELUAR'");
+            LocalDateTime now = LocalDateTime.now();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = now.format(formatter);
+
+            Sequel.hapus("tb_stigmata_atopik",
+                        "status='0',updated_at='"+formattedDateTime+
+                        "'","id='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),1).toString()+"'");
+
             tampil();
             emptTeks();
         } catch (Exception e) {
@@ -634,7 +641,7 @@ if(TNm.getText().trim().equals("")){
 //        }
 //        else 
         if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"nama dokter");
+            Valid.textKosong(TNm,"Stigmata Atopik");
         }
 //        else if(TSpesialis.getText().trim().equals("")||KdSps.getText().trim().equals("")){
 //            Valid.textKosong(KdSps,"spesialis");
@@ -642,21 +649,15 @@ if(TNm.getText().trim().equals("")){
         else{
             try { 
                 koneksi.setAutoCommit(false);
-//                Sequel.mengedit("pegawai","nik='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),0).toString()+"'",
-//                        "nik='"+TKd.getText()+"',nama='"+TNm.getText()+"',jk='"+CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN","Wanita").replaceAll("LAKI-LAKI","Pria")+"',"+
-//                        "tmp_lahir='"+TTmp.getText()+"',tgl_lahir='"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"',alamat='"+TAlmt.getText()+"'");
-//                Sequel.mengedit("dokter","kd_dokter='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),0).toString()+"'","kd_dokter='"+TKd.getText()+"',nm_dokter='"+TNm.getText()+
-//                        "',jk='"+CmbJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+
-//                        "',tmp_lahir='"+TTmp.getText()+
-//                        "',tgl_lahir='"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+
-//                        "',gol_drh='"+CMbGd.getSelectedItem()+
-//                        "',agama='"+cmbAgama.getSelectedItem()+
-//                        "',almt_tgl='"+TAlmt.getText()+
-//                        "',no_telp='"+TTlp.getText()+
-//                        "',stts_nikah='"+CmbStts.getSelectedItem()+
-//                        "',kd_sps='"+KdSps.getText()+
-//                        "',alumni='"+TAlumni.getText()+
-//                        "',no_ijn_praktek='"+TNoi.getText()+"'");
+                
+                LocalDateTime now = LocalDateTime.now();
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDateTime = now.format(formatter);
+                
+                Sequel.edit("tb_stigmata_atopik",
+                        "stigmata_atopik='"+TNm.getText()+"',updated_at='"+formattedDateTime+
+                        "'","id='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),1).toString()+"'");
                 koneksi.setAutoCommit(true);
                 if(tabMode.getRowCount()!=0){tampil();}
                 emptTeks();
@@ -956,10 +957,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void getData() {
-//        int row=tbStigAtopik.getSelectedRow();
-//        if(row!= -1){
-//            
-//            TNm.setText(tbStigAtopik.getValueAt(row,1).toString());
+        int row=tbStigAtopik.getSelectedRow();
+        if(row!= -1){
+            
+            TNm.setText(tbStigAtopik.getValueAt(row,0).toString());
 //            Sequel.cariIsi("select kd_sps from spesialis where nm_sps='"+tbStigAtopik.getValueAt(row,10).toString()+"'", TNm);
 //            
 //            switch (tbStigAtopik.getValueAt(row,2).toString()) {
@@ -971,8 +972,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //                    break;
 //            }
 //            
-////            Valid.SetTgl(DTPLahir,tbStigAtopik.getValueAt(row,4).toString());
-//        }
+//            Valid.SetTgl(DTPLahir,tbStigAtopik.getValueAt(row,4).toString());
+        }
     }
 
     
