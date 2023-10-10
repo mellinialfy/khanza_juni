@@ -40,7 +40,7 @@ import restore.DlgRestoreDokter;
  *
  * @author dosen
  */
-public class MasterStigAtopik extends javax.swing.JDialog {
+public class MasterKulit extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -52,7 +52,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
     /** Creates new form DlgDokter
      * @param parent
      * @param modal */
-    public MasterStigAtopik(java.awt.Frame parent, boolean modal) {
+    public MasterKulit(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -62,24 +62,24 @@ public class MasterStigAtopik extends javax.swing.JDialog {
        
     
     
-        Object[] row={"Stigmata Atopik", "id"};
+        Object[] row={"Syaraf", "id"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        tbStigAtopik.setModel(tabMode);
+        tbSyaraf.setModel(tabMode);
 
-        tbStigAtopik.setPreferredScrollableViewportSize(new Dimension(800,800));
-        tbStigAtopik.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbSyaraf.setPreferredScrollableViewportSize(new Dimension(800,800));
+        tbSyaraf.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         for (int i = 0; i < 2; i++) {
-            TableColumn column = tbStigAtopik.getColumnModel().getColumn(i);
+            TableColumn column = tbSyaraf.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
             } else if(i==1){
                 column.setPreferredWidth(0);
             }
         }
-        tbStigAtopik.setDefaultRenderer(Object.class, new WarnaTable());
+        tbSyaraf.setDefaultRenderer(Object.class, new WarnaTable());
 
         TNm.setDocument(new batasInput((byte)50).getKata(TNm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -125,7 +125,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         MnRestore = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
-        tbStigAtopik = new widget.Table();
+        tbSyaraf = new widget.Table();
         jPanel2 = new javax.swing.JPanel();
         panelGlass6 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -182,21 +182,21 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbStigAtopik.setAutoCreateRowSorter(true);
-        tbStigAtopik.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbStigAtopik.setComponentPopupMenu(Popup);
-        tbStigAtopik.setName("tbStigAtopik"); // NOI18N
-        tbStigAtopik.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbSyaraf.setAutoCreateRowSorter(true);
+        tbSyaraf.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbSyaraf.setComponentPopupMenu(Popup);
+        tbSyaraf.setName("tbSyaraf"); // NOI18N
+        tbSyaraf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbStigAtopikMouseClicked(evt);
+                tbSyarafMouseClicked(evt);
             }
         });
-        tbStigAtopik.addKeyListener(new java.awt.event.KeyAdapter() {
+        tbSyaraf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tbStigAtopikKeyReleased(evt);
+                tbSyarafKeyReleased(evt);
             }
         });
-        Scroll.setViewportView(tbStigAtopik);
+        Scroll.setViewportView(tbSyaraf);
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
@@ -380,7 +380,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(1331, 20));
         FormInput.setLayout(null);
 
-        jLabel4.setText("Stigmata Atopik :");
+        jLabel4.setText("Syaraf :");
         jLabel4.setToolTipText("");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
@@ -422,6 +422,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+        internalFrame1.getAccessibleContext().setAccessibleName("::[ Syaraf ]::");
         internalFrame1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -433,7 +434,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"stigmata atopik");
+            Valid.textKosong(TNm,"syaraf");
         }else{
             try { 
                 LocalDateTime now = LocalDateTime.now();
@@ -442,7 +443,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
                 String formattedDateTime = now.format(formatter);
 
                 Sequel.AutoComitFalse();
-                Sequel.simpan("tb_stigmata_atopik(stigmata_atopik, created_at)","'"+TNm.getText()+"'","'"+formattedDateTime+"'","id");
+                Sequel.simpan("tb_syaraf(syaraf, created_at)","'"+TNm.getText()+"'","'"+formattedDateTime+"'","id");
                 
                 Sequel.Commit();
                 Sequel.AutoComitTrue();
@@ -484,9 +485,9 @@ public class MasterStigAtopik extends javax.swing.JDialog {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = now.format(formatter);
 
-            Sequel.hapus("tb_stigmata_atopik",
+            Sequel.hapus("tb_syaraf",
                         "status='0',updated_at='"+formattedDateTime+
-                        "'","id='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),1).toString()+"'");
+                        "'","id='"+tbSyaraf.getValueAt(tbSyaraf.getSelectedRow(),1).toString()+"'");
 
             tampil();
             emptTeks();
@@ -517,7 +518,7 @@ public class MasterStigAtopik extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
 
         if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"Stigmata Atopik");
+            Valid.textKosong(TNm,"Syaraf");
         }else{
             try { 
                 koneksi.setAutoCommit(false);
@@ -527,9 +528,9 @@ public class MasterStigAtopik extends javax.swing.JDialog {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = now.format(formatter);
                 
-                Sequel.edit("tb_stigmata_atopik",
-                        "stigmata_atopik='"+TNm.getText()+"',updated_at='"+formattedDateTime+
-                        "'","id='"+tbStigAtopik.getValueAt(tbStigAtopik.getSelectedRow(),1).toString()+"'");
+                Sequel.edit("tb_syaraf",
+                        "syaraf='"+TNm.getText()+"',updated_at='"+formattedDateTime+
+                        "'","id='"+tbSyaraf.getValueAt(tbSyaraf.getSelectedRow(),1).toString()+"'");
                 koneksi.setAutoCommit(true);
                 if(tabMode.getRowCount()!=0){tampil();}
                 emptTeks();
@@ -580,14 +581,14 @@ public class MasterStigAtopik extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TCariKeyTyped
 
-    private void tbStigAtopikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbStigAtopikMouseClicked
+    private void tbSyarafMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSyarafMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbStigAtopikMouseClicked
+}//GEN-LAST:event_tbSyarafMouseClicked
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
   isForm();                
@@ -604,7 +605,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         restore.setVisible(true);
     }//GEN-LAST:event_MnRestoreActionPerformed
 
-    private void tbStigAtopikKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbStigAtopikKeyReleased
+    private void tbSyarafKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSyarafKeyReleased
         if(tabMode.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
@@ -613,7 +614,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             }
         }
-    }//GEN-LAST:event_tbStigAtopikKeyReleased
+    }//GEN-LAST:event_tbSyarafKeyReleased
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -637,7 +638,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(() -> {
-            MasterStigAtopik dialog = new MasterStigAtopik(new javax.swing.JFrame(), true);
+            MasterKulit dialog = new MasterKulit(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -675,14 +676,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JPanel jPanel2;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass8;
-    private widget.Table tbStigAtopik;
+    private widget.Table tbSyaraf;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
             stat=koneksi.prepareStatement(
-                   "select stigmata_atopik, id from tb_stigmata_atopik where status=1");
+                   "select syaraf, id from tb_syaraf where status=1");
             try{
                 
                 rs=stat.executeQuery();
@@ -719,10 +720,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void getData() {
-        int row=tbStigAtopik.getSelectedRow();
+        int row=tbSyaraf.getSelectedRow();
         if(row!= -1){
             
-            TNm.setText(tbStigAtopik.getValueAt(row,0).toString());
+            TNm.setText(tbSyaraf.getValueAt(row,0).toString());
         }
     }
 
