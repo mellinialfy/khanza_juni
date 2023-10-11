@@ -40,7 +40,7 @@ import restore.DlgRestoreDokter;
  *
  * @author dosen
  */
-public class MasterKulit extends javax.swing.JDialog {
+public class MasterAbdomen extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -52,7 +52,7 @@ public class MasterKulit extends javax.swing.JDialog {
     /** Creates new form DlgDokter
      * @param parent
      * @param modal */
-    public MasterKulit(java.awt.Frame parent, boolean modal) {
+    public MasterAbdomen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -62,24 +62,24 @@ public class MasterKulit extends javax.swing.JDialog {
        
     
     
-        Object[] row={"Kulit", "id"};
+        Object[] row={"Abdomen", "id"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        tbKulit.setModel(tabMode);
+        tbAbdomen.setModel(tabMode);
 
-        tbKulit.setPreferredScrollableViewportSize(new Dimension(800,800));
-        tbKulit.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbAbdomen.setPreferredScrollableViewportSize(new Dimension(800,800));
+        tbAbdomen.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         for (int i = 0; i < 2; i++) {
-            TableColumn column = tbKulit.getColumnModel().getColumn(i);
+            TableColumn column = tbAbdomen.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
             } else if(i==1){
                 column.setPreferredWidth(0);
             }
         }
-        tbKulit.setDefaultRenderer(Object.class, new WarnaTable());
+        tbAbdomen.setDefaultRenderer(Object.class, new WarnaTable());
 
         TNm.setDocument(new batasInput((byte)50).getKata(TNm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -125,7 +125,7 @@ public class MasterKulit extends javax.swing.JDialog {
         MnRestore = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
-        tbKulit = new widget.Table();
+        tbAbdomen = new widget.Table();
         jPanel2 = new javax.swing.JPanel();
         panelGlass6 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -174,7 +174,7 @@ public class MasterKulit extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Kulit ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Abdomen ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -182,21 +182,21 @@ public class MasterKulit extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKulit.setAutoCreateRowSorter(true);
-        tbKulit.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbKulit.setComponentPopupMenu(Popup);
-        tbKulit.setName("tbKulit"); // NOI18N
-        tbKulit.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbAbdomen.setAutoCreateRowSorter(true);
+        tbAbdomen.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbAbdomen.setComponentPopupMenu(Popup);
+        tbAbdomen.setName("tbAbdomen"); // NOI18N
+        tbAbdomen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbKulitMouseClicked(evt);
+                tbAbdomenMouseClicked(evt);
             }
         });
-        tbKulit.addKeyListener(new java.awt.event.KeyAdapter() {
+        tbAbdomen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tbKulitKeyReleased(evt);
+                tbAbdomenKeyReleased(evt);
             }
         });
-        Scroll.setViewportView(tbKulit);
+        Scroll.setViewportView(tbAbdomen);
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
@@ -380,7 +380,7 @@ public class MasterKulit extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(1331, 20));
         FormInput.setLayout(null);
 
-        jLabel4.setText("Kulit :");
+        jLabel4.setText("Abdomen :");
         jLabel4.setToolTipText("");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
@@ -422,7 +422,6 @@ public class MasterKulit extends javax.swing.JDialog {
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
-        internalFrame1.getAccessibleContext().setAccessibleName("::[ Kulit ]::");
         internalFrame1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -434,7 +433,7 @@ public class MasterKulit extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"kulit");
+            Valid.textKosong(TNm,"Abdomen");
         }else{
             try { 
                 LocalDateTime now = LocalDateTime.now();
@@ -443,7 +442,7 @@ public class MasterKulit extends javax.swing.JDialog {
                 String formattedDateTime = now.format(formatter);
 
                 Sequel.AutoComitFalse();
-                Sequel.simpan("tb_kulit(kulit, created_at)","'"+TNm.getText()+"'","'"+formattedDateTime+"'","id");
+                Sequel.simpan("tb_abdomen(abdomen, created_at)","'"+TNm.getText()+"'","'"+formattedDateTime+"'","id");
                 
                 Sequel.Commit();
                 Sequel.AutoComitTrue();
@@ -485,9 +484,9 @@ public class MasterKulit extends javax.swing.JDialog {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = now.format(formatter);
 
-            Sequel.hapus("tb_kulit",
+            Sequel.hapus("tb_abdomen",
                         "status='0',updated_at='"+formattedDateTime+
-                        "'","id='"+tbKulit.getValueAt(tbKulit.getSelectedRow(),1).toString()+"'");
+                        "'","id='"+tbAbdomen.getValueAt(tbAbdomen.getSelectedRow(),1).toString()+"'");
 
             tampil();
             emptTeks();
@@ -518,7 +517,7 @@ public class MasterKulit extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
 
         if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"kulit");
+            Valid.textKosong(TNm,"Abdomen");
         }else{
             try { 
                 koneksi.setAutoCommit(false);
@@ -528,9 +527,9 @@ public class MasterKulit extends javax.swing.JDialog {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = now.format(formatter);
                 
-                Sequel.edit("tb_kulit",
-                        "kulit='"+TNm.getText()+"',updated_at='"+formattedDateTime+
-                        "'","id='"+tbKulit.getValueAt(tbKulit.getSelectedRow(),1).toString()+"'");
+                Sequel.edit("tb_abdomen",
+                        "abdomen='"+TNm.getText()+"',updated_at='"+formattedDateTime+
+                        "'","id='"+tbAbdomen.getValueAt(tbAbdomen.getSelectedRow(),1).toString()+"'");
                 koneksi.setAutoCommit(true);
                 if(tabMode.getRowCount()!=0){tampil();}
                 emptTeks();
@@ -581,14 +580,14 @@ public class MasterKulit extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TCariKeyTyped
 
-    private void tbKulitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKulitMouseClicked
+    private void tbAbdomenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAbdomenMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbKulitMouseClicked
+}//GEN-LAST:event_tbAbdomenMouseClicked
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
   isForm();                
@@ -605,7 +604,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         restore.setVisible(true);
     }//GEN-LAST:event_MnRestoreActionPerformed
 
-    private void tbKulitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKulitKeyReleased
+    private void tbAbdomenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAbdomenKeyReleased
         if(tabMode.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
@@ -614,7 +613,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             }
         }
-    }//GEN-LAST:event_tbKulitKeyReleased
+    }//GEN-LAST:event_tbAbdomenKeyReleased
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -638,7 +637,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(() -> {
-            MasterKulit dialog = new MasterKulit(new javax.swing.JFrame(), true);
+            MasterAbdomen dialog = new MasterAbdomen(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -676,14 +675,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JPanel jPanel2;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass8;
-    private widget.Table tbKulit;
+    private widget.Table tbAbdomen;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
             stat=koneksi.prepareStatement(
-                   "select kulit, id from tb_kulit where status=1");
+                   "select abdomen, id from tb_abdomen where status=1");
             try{
                 
                 rs=stat.executeQuery();
@@ -720,10 +719,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void getData() {
-        int row=tbKulit.getSelectedRow();
+        int row=tbAbdomen.getSelectedRow();
         if(row!= -1){
             
-            TNm.setText(tbKulit.getValueAt(row,0).toString());
+            TNm.setText(tbAbdomen.getValueAt(row,0).toString());
         }
     }
 
