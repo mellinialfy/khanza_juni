@@ -41,6 +41,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -73,7 +74,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps,ps2,stat;
     private ResultSet rs,rs2;
-    private int i=0,jml=0,index=0, stigclick=0;
+    private int i=0,jml=0,index=0, stigclick=0, syarafclick=0, kepalaclick=0, uubclick=0, mataclick=0, thtclick=0, mulutclick=0;
+    private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, genetaliaclick=0, ekstremclick=0, kulitclick=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
     private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
     private boolean[] pilih; 
@@ -90,6 +92,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     String no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,
             sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
     JPanel jPanel1;
+    List<Integer> idstiglist = new ArrayList<>();
+    List<String> stiglist = new ArrayList<>();
     
     
     /** Creates new form DlgRujuk
@@ -382,7 +386,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnStigAtopik = new widget.Button();
         BtnDropStig = new widget.Button();
         Syaraf = new widget.TextBox();
-        BtnDropStig1 = new widget.Button();
+        BtnDropSyaraf = new widget.Button();
         BtnStigAtopik1 = new widget.Button();
         Uub = new widget.TextBox();
         BtnDropUub = new widget.Button();
@@ -773,7 +777,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2023 14:25:19" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2023 11:35:21" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -1718,23 +1722,23 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(Syaraf);
         Syaraf.setBounds(170, 370, 640, 23);
 
-        BtnDropStig1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
-        BtnDropStig1.setMnemonic('2');
-        BtnDropStig1.setToolTipText("Alt+2");
-        BtnDropStig1.setName("BtnDropStig1"); // NOI18N
-        BtnDropStig1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnDropStig1.addActionListener(new java.awt.event.ActionListener() {
+        BtnDropSyaraf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
+        BtnDropSyaraf.setMnemonic('2');
+        BtnDropSyaraf.setToolTipText("Alt+2");
+        BtnDropSyaraf.setName("BtnDropSyaraf"); // NOI18N
+        BtnDropSyaraf.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDropSyaraf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDropStig1ActionPerformed(evt);
+                BtnDropSyarafActionPerformed(evt);
             }
         });
-        BtnDropStig1.addKeyListener(new java.awt.event.KeyAdapter() {
+        BtnDropSyaraf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnDropStig1KeyPressed(evt);
+                BtnDropSyarafKeyPressed(evt);
             }
         });
-        FormInput.add(BtnDropStig1);
-        BtnDropStig1.setBounds(810, 370, 28, 23);
+        FormInput.add(BtnDropSyaraf);
+        BtnDropSyaraf.setBounds(810, 370, 28, 23);
 
         BtnStigAtopik1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnStigAtopik1.setMnemonic('2');
@@ -2361,7 +2365,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2375,7 +2379,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3027,6 +3031,179 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
             
             tampilStigAtopik();
+            
+            int num = tabModeStig.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeStig.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeStig.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idstiglist.clear();
+                    stiglist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idStig = Integer.parseInt(cb[i].getName());
+                            String stigAtopik = cb[i].getText();
+                            idstiglist.add(idStig);
+                            stiglist.add(stigAtopik);
+                            System.out.println(idStig);
+                            
+                        }
+                    }
+                    
+                    StringBuilder listStringBuilder = new StringBuilder();
+                    for (String item : stiglist) {
+                        listStringBuilder.append(item).append(", ");
+                    }
+
+                    // Remove the trailing comma and space
+                    listStringBuilder.setLength(listStringBuilder.length() - 2);
+
+                    StigAtopik.setText(stiglist.toString());
+                    
+                    stigclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn);
+            
+        } else {
+            stigclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
+        
+        
+
+        
+    }//GEN-LAST:event_BtnDropStigActionPerformed
+
+    private void BtnDropStigKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropStigKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDropStigKeyPressed
+
+    private void SyarafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SyarafActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SyarafActionPerformed
+
+    private void BtnDropSyarafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropSyarafActionPerformed
+        // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        
+
+        if(syarafclick==0) {
+            syarafclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 280, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilStigAtopik();
         
             
 
@@ -3086,7 +3263,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.add(saveBtn);
             
         } else {
-            stigclick = 0;
+            syarafclick = 0;
             
             //Get the components in the panel
             Component[] componentsss = jPanel1.getComponents();
@@ -3114,27 +3291,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             BtnDropStig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
 
         }
-        
-        
+    }//GEN-LAST:event_BtnDropSyarafActionPerformed
 
-        
-    }//GEN-LAST:event_BtnDropStigActionPerformed
-
-    private void BtnDropStigKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropStigKeyPressed
+    private void BtnDropSyarafKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropSyarafKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropStigKeyPressed
-
-    private void SyarafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SyarafActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SyarafActionPerformed
-
-    private void BtnDropStig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropStig1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropStig1ActionPerformed
-
-    private void BtnDropStig1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropStig1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropStig1KeyPressed
+    }//GEN-LAST:event_BtnDropSyarafKeyPressed
 
     private void BtnStigAtopik1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStigAtopik1ActionPerformed
         // TODO add your handling code here:
@@ -3495,7 +3656,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnDropMulut;
     private widget.Button BtnDropPunggung;
     private widget.Button BtnDropStig;
-    private widget.Button BtnDropStig1;
+    private widget.Button BtnDropSyaraf;
     private widget.Button BtnDropTaliPusat;
     private widget.Button BtnDropThorax;
     private widget.Button BtnDropTht;
