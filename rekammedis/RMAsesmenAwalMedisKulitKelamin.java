@@ -769,7 +769,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2023 08:24:05" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023 13:40:32" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2357,7 +2357,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2371,7 +2371,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2989,12 +2989,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         if(stigclick==0) {
             stigclick = 1;
             
-//            cbHiperhidrosis.setEnabled(false);
-//            cbAnshidrosis.setEnabled(false);
-//            Mukosa.setVisible(false);
-//            Rambut.setVisible(false);
-//            Kuku.setVisible(false);
-            
             jPanel1 = new JPanel(new GridLayout(0, 5));
         
             jPanel1.setBackground(Color.WHITE);
@@ -3339,6 +3333,155 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropUubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropUubActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        
+
+        if(uubclick==0) {
+            uubclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 700, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropUub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilUub();
+            
+            int num = tabModeUub.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeUub.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeUub.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    iduublist.clear();
+                    uublist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idUub = Integer.parseInt(cb[i].getName());
+                            String uub = cb[i].getText();
+                            iduublist.add(idUub);
+                            uublist.add(uub);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", uublist);
+
+                    Uub.setText(listString);
+                    
+                    uubclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropUub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            uubclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropUub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropUubActionPerformed
 
     private void BtnDropUubKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropUubKeyPressed
@@ -3365,6 +3508,155 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropKepalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropKepalaActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        
+
+        if(kepalaclick==0) {
+            kepalaclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 670, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropKepala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilKepala();
+            
+            int num = tabModeKepala.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeKepala.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeKepala.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idkepalalist.clear();
+                    kepalalist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idKepala = Integer.parseInt(cb[i].getName());
+                            String kepala = cb[i].getText();
+                            idkepalalist.add(idKepala);
+                            kepalalist.add(kepala);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", kepalalist);
+
+                    Kepala.setText(listString);
+                    
+                    kepalaclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropKepala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            kepalaclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropKepala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropKepalaActionPerformed
 
     private void BtnDropKepalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropKepalaKeyPressed
@@ -3391,6 +3683,156 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropMataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropMataActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        
+
+        if(mataclick==0) {
+            mataclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 730, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilMata();
+            
+            int num = tabModeMata.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeMata.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeMata.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idmatalist.clear();
+                    matalist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idStig = Integer.parseInt(cb[i].getName());
+                            String stigAtopik = cb[i].getText();
+                            idmatalist.add(idStig);
+                            matalist.add(stigAtopik);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", matalist);
+
+                    Mata.setText(listString);
+                    
+                    mataclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            mataclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
+        
     }//GEN-LAST:event_BtnDropMataActionPerformed
 
     private void BtnDropMataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropMataKeyPressed
@@ -3417,6 +3859,157 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropThtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropThtActionPerformed
         // TODO add your handling code here:
+        
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        
+
+        if(thtclick==0) {
+            thtclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 760, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropTht.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilTht();
+            
+            int num = tabModeTht.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeTht.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeTht.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idthtlist.clear();
+                    thtlist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idStig = Integer.parseInt(cb[i].getName());
+                            String stigAtopik = cb[i].getText();
+                            idthtlist.add(idStig);
+                            thtlist.add(stigAtopik);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", thtlist);
+
+                    Tht.setText(listString);
+                    
+                    thtclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropTht.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            thtclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropTht.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
+        
     }//GEN-LAST:event_BtnDropThtActionPerformed
 
     private void BtnDropThtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropThtKeyPressed
@@ -3443,6 +4036,154 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropMulutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropMulutActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(mulutclick==0) {
+            mulutclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 730, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropMulut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilMulut();
+            
+            int num = tabModeMulut.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeMulut.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeMulut.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idmulutlist.clear();
+                    mulutlist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idMata = Integer.parseInt(cb[i].getName());
+                            String mata = cb[i].getText();
+                            idmulutlist.add(idMata);
+                            mulutlist.add(mata);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", matalist);
+
+                    Mata.setText(listString);
+                    
+                    mataclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            mataclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropMulutActionPerformed
 
     private void BtnDropMulutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropMulutKeyPressed
@@ -3469,6 +4210,154 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropThoraxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropThoraxActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(thoraxclick==0) {
+            thoraxclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 760, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropThorax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilThorax();
+            
+            int num = tabModeThorax.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeThorax.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeThorax.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idthoraxlist.clear();
+                    thoraxlist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idThorax = Integer.parseInt(cb[i].getName());
+                            String thorax = cb[i].getText();
+                            idthoraxlist.add(idThorax);
+                            thoraxlist.add(thorax);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", thoraxlist);
+
+                    Thorax.setText(listString);
+                    
+                    thoraxclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropThorax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            thoraxclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropThorax.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropThoraxActionPerformed
 
     private void BtnDropThoraxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropThoraxKeyPressed
@@ -3495,6 +4384,154 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropAbdomenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropAbdomenActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(abdomenclick==0) {
+            abdomenclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 760, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropAbdomen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilAbdomen();
+            
+            int num = tabModeAbdomen.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeAbdomen.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeAbdomen.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idabdomenlist.clear();
+                    abdomenlist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idAbdomen = Integer.parseInt(cb[i].getName());
+                            String abdomen = cb[i].getText();
+                            idabdomenlist.add(idAbdomen);
+                            abdomenlist.add(abdomen);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", abdomenlist);
+
+                    Abdomen.setText(listString);
+                    
+                    abdomenclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropAbdomen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            abdomenclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropAbdomen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropAbdomenActionPerformed
 
     private void BtnDropAbdomenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropAbdomenKeyPressed
@@ -3521,6 +4558,154 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropTaliPusatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropTaliPusatActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(tpusatclick==0) {
+           tpusatclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 790, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropTaliPusat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilTaliPusat();
+            
+            int num = tabModeTaliPusat.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeTaliPusat.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeTaliPusat.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idtalipusatlist.clear();
+                    talipusatlist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idTaliPusat = Integer.parseInt(cb[i].getName());
+                            String talipusat = cb[i].getText();
+                            idtalipusatlist.add(idTaliPusat);
+                            talipusatlist.add(talipusat);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", talipusatlist);
+
+                    TaliPusat.setText(listString);
+                    
+                    tpusatclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropTaliPusat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            tpusatclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropTaliPusat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropTaliPusatActionPerformed
 
     private void BtnDropTaliPusatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropTaliPusatKeyPressed
@@ -3547,6 +4732,154 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropPunggungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropPunggungActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(punggungclick==0) {
+           punggungclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 820, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropPunggung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilPunggung();
+            
+            int num = tabModePunggung.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModePunggung.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeTaliPunggung.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idpunggunglist.clear();
+                    punggunglist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idPunggung = Integer.parseInt(cb[i].getName());
+                            String punggung = cb[i].getText();
+                            idpunggunglist.add(idPunggung);
+                            punggunglist.add(punggung);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", punggunglist);
+
+                    Punggung.setText(listString);
+                    
+                    punggungclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropPunggung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            punggungclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropPunggung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropPunggungActionPerformed
 
     private void BtnDropPunggungKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropPunggungKeyPressed
@@ -3599,6 +4932,156 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropEkstremnitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropEkstremnitasActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(ekstremclick==0) {
+           ekstremclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 910, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropEkstremnitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilEkstremnitas();
+            
+            int num = tabModeEkstremnitas.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeEkstremnitas.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeTaliEkstremnitas.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idekstremnitaslist.clear();
+                    ekstremnitaslist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idEkstremnitas = Integer.parseInt(cb[i].getName());
+                            String ekstremnitas = cb[i].getText();
+                            idekstremnitaslist.add(idEkstremnitas);
+                            ekstremnitaslist.add(ekstremnitas);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", ekstremnitaslist);
+
+                    
+                    Ekstremnitas.setText(listString);
+                    
+                    ekstremclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropEkstremnitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                    
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            ekstremclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropEkstremnitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
     }//GEN-LAST:event_BtnDropEkstremnitasActionPerformed
 
     private void BtnDropEkstremnitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropEkstremnitasKeyPressed
@@ -3625,6 +5108,157 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnDropKulitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropKulitActionPerformed
         // TODO add your handling code here:
+        JButton saveBtn = new JButton("SIMPAN");
+        saveBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+
+        if(kulitclick==0) {
+           kulitclick = 1;
+            
+            jPanel1 = new JPanel(new GridLayout(0, 5));
+        
+            jPanel1.setBackground(Color.WHITE);
+            jPanel1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.LIGHT_GRAY));
+            jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            jPanel1.setName("jPanel1"); // NOI18N
+            jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
+            jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            FormInput.add(jPanel1);
+            jPanel1.setBounds(170, 940, 640, 80);
+
+            //Get the components in the panel
+            Component[] components = jPanel1.getComponents();
+
+            //Loop through the components
+            for(Component c : components){
+
+                //Find the components you want to remove
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            //IMPORTANT
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            jPanel1.setVisible(true);
+            BtnDropKulit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+
+            
+            tampilKulit();
+            
+            int num = tabModeKulit.getRowCount();
+            JCheckBox cb[]=new JCheckBox[num];
+            
+            
+            
+            for(int i = 0; i < num; i++) {
+                
+                cb[i]=new JCheckBox(String.valueOf(tabModeKulit.getValueAt(i, 0)));
+                cb[i].setName(String.valueOf(tabModeKulit.getValueAt(i, 1)));
+                cb[i].setBackground(Color.white);
+                
+                cb[i].setFont(
+                    cb[i].getFont().deriveFont(
+                      Font.PLAIN,
+                      cb[i].getFont().getSize()
+                    ));
+                
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.white);
+
+                panel.add(cb[i],BorderLayout.PAGE_START);
+                jPanel1.add(panel);
+                
+                
+                
+
+            }
+            
+            
+            saveBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    idkulitlist.clear();
+                    kulitlist.clear();
+                    
+                    for(int i=0;i<num;i++) {
+                        if(cb[i].isSelected()) {
+                            int idKulit = Integer.parseInt(cb[i].getName());
+                            String kulit = cb[i].getText();
+                            idKulitlist.add(idKulit);
+                            Kulitlist.add(kulit);
+                            
+                        }
+                    }
+                    String listString = String.join(", ", kulitlist);
+
+                    
+                    Kulit.setText(listString);
+                    
+                    kulitclick = 0;
+
+                    //Get the components in the panel
+                    Component[] componentsss = jPanel1.getComponents();
+
+                    //Loop through the components
+                    for(Component c : componentsss){
+
+                        //Find the components you want to remove
+
+                        if(c instanceof JPanel){
+                            //Remove it
+                            jPanel1.remove(c);
+
+                        }
+                    }
+
+
+                    //IMPORTANT 
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+
+                    jPanel1.setVisible(false);
+                    FormInput.remove(jPanel1);
+
+                    BtnDropKulit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                    
+                }
+            });
+            jPanel1.add(saveBtn, BorderLayout.PAGE_END);
+            
+        } else {
+            kulitclick = 0;
+            
+            //Get the components in the panel
+            Component[] componentsss = jPanel1.getComponents();
+            
+            //Loop through the components
+            for(Component c : componentsss){
+
+                //Find the components you want to remove
+                
+                if(c instanceof JPanel){
+                    //Remove it
+                    jPanel1.remove(c);
+                    
+                }
+            }
+
+            
+            //IMPORTANT 
+            jPanel1.revalidate();
+            jPanel1.repaint();
+            
+            jPanel1.setVisible(false);
+            FormInput.remove(jPanel1);
+            
+            BtnDropKulit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+
+        }
+        
     }//GEN-LAST:event_BtnDropKulitActionPerformed
 
     private void BtnDropKulitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropKulitKeyPressed
@@ -4033,6 +5667,78 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             e.printStackTrace();
         }
         LCount.setText("" + tabModeSyaraf.getRowCount());
+    }
+    
+    private void tampilKepala() {
+        Valid.tabelKosong(tabModeKepala);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select kepala, id from tb_kepala where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeKepala.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeKepala.getRowCount());
+    }
+    
+    private void tampilUub() {
+        Valid.tabelKosong(tabModeUub);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select uub, id from tb_uub where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeUub.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeUub.getRowCount());
     }
     
     public void emptTeks() {
