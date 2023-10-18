@@ -62,7 +62,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private PreparedStatement ps,ps2,stat;
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0, stigclick=0, syarafclick=0, kepalaclick=0, uubclick=0, mataclick=0, thtclick=0, mulutclick=0;
-    private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, genetaliaclick=0, ekstremclick=0, kulitclick=0;
+    private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, ekstremclick=0, kulitclick=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
     private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
     private boolean[] pilih; 
