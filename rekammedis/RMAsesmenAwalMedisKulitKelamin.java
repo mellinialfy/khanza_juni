@@ -56,6 +56,8 @@ import kepegawaian.DlgCariDokter;
  */
 public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabModeMasalah,tabModeDetailMasalah, tabModeStig, tabModeSyaraf;
+    private final DefaultTableModel tabModeKepala, tabModeUub, tabModeMata, tabModeTht, tabModeMulut, tabModeThorax;
+    private final DefaultTableModel tabModeAbdomen, tabModeTaliPusat, tabModePunggung, tabModeEkstremnitas, tabModeKulit;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -65,17 +67,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, ekstremclick=0, kulitclick=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
     private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
-    private boolean[] pilih; 
-    private String[] kode,masalah;
-    private String masalahkeperawatanigd=""; 
-    private StringBuilder htmlContent;
-    private File file;
-    private FileWriter fileWriter;
-    private String iyem;
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode response;
-    private FileReader myObj;
     String no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,
             sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
     JPanel jPanel1;
@@ -83,6 +74,28 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     List<String> stiglist = new ArrayList<>();
     List<Integer> idsyaraflist = new ArrayList<>();
     List<String> syaraflist = new ArrayList<>();
+    List<Integer> idkepalalist = new ArrayList<>();
+    List<String> kepalalist = new ArrayList<>();
+    List<Integer> iduublist = new ArrayList<>();
+    List<String> uublist = new ArrayList<>();
+    List<Integer> idmatalist = new ArrayList<>();
+    List<String> matalist = new ArrayList<>();
+    List<Integer> idthtlist = new ArrayList<>();
+    List<String> thtlist = new ArrayList<>();
+    List<Integer> idmulutlist = new ArrayList<>();
+    List<String> mulutlist = new ArrayList<>();
+    List<Integer> idthoraxlist = new ArrayList<>();
+    List<String> thoraxlist = new ArrayList<>();
+    List<Integer> idabdomenlist = new ArrayList<>();
+    List<String> abdomenlist = new ArrayList<>();
+    List<Integer> idtalipusatlist = new ArrayList<>();
+    List<String> talipusatlist = new ArrayList<>();
+    List<Integer> idpunggunglist = new ArrayList<>();
+    List<String> punggunglist = new ArrayList<>();
+    List<Integer> idekstremnitaslist = new ArrayList<>();
+    List<String> ekstremnitaslist = new ArrayList<>();
+    List<Integer> idkulitlist = new ArrayList<>();
+    List<String> kulitlist = new ArrayList<>();
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -115,6 +128,61 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         
         Object[] syarafrow={"Syaraf", "id"};
         tabModeSyaraf=new DefaultTableModel(null,syarafrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] kepalarow={"Kepala", "id"};
+        tabModeKepala=new DefaultTableModel(null,kepalarow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] uubrow={"UUB", "id"};
+        tabModeUub=new DefaultTableModel(null,uubrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] matarow={"Mata", "id"};
+        tabModeMata=new DefaultTableModel(null,matarow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] thtrow={"THT", "id"};
+        tabModeTht=new DefaultTableModel(null,thtrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] mulutrow={"Mulut", "id"};
+        tabModeMulut=new DefaultTableModel(null,mulutrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] thoraxrow={"Thorax", "id"};
+        tabModeThorax=new DefaultTableModel(null,thoraxrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] abdomenrow={"Abdomen", "id"};
+        tabModeAbdomen=new DefaultTableModel(null,abdomenrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] talipusatrow={"Tali Pusat", "id"};
+        tabModeTaliPusat=new DefaultTableModel(null,talipusatrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] punggungrow={"Punggung", "id"};
+        tabModePunggung=new DefaultTableModel(null,punggungrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] ekstremnitasrow={"Ekstremnitas", "id"};
+        tabModeEkstremnitas=new DefaultTableModel(null,ekstremnitasrow){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        
+        Object[] kulitrow={"Kulit", "id"};
+        tabModeKulit=new DefaultTableModel(null,kulitrow){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
 
@@ -4052,7 +4120,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 730, 640, 80);
+            jPanel1.setBounds(170, 790, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -4114,18 +4182,18 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     
                     for(int i=0;i<num;i++) {
                         if(cb[i].isSelected()) {
-                            int idMata = Integer.parseInt(cb[i].getName());
-                            String mata = cb[i].getText();
-                            idmulutlist.add(idMata);
-                            mulutlist.add(mata);
+                            int idMulut = Integer.parseInt(cb[i].getName());
+                            String mulut = cb[i].getText();
+                            idmulutlist.add(idMulut);
+                            mulutlist.add(mulut);
                             
                         }
                     }
-                    String listString = String.join(", ", matalist);
+                    String listString = String.join(", ", mulutlist);
 
-                    Mata.setText(listString);
+                    Mulut.setText(listString);
                     
-                    mataclick = 0;
+                    mulutclick = 0;
 
                     //Get the components in the panel
                     Component[] componentsss = jPanel1.getComponents();
@@ -4150,13 +4218,13 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     jPanel1.setVisible(false);
                     FormInput.remove(jPanel1);
 
-                    BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+                    BtnDropMulut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
                 }
             });
             jPanel1.add(saveBtn, BorderLayout.PAGE_END);
             
         } else {
-            mataclick = 0;
+            mulutclick = 0;
             
             //Get the components in the panel
             Component[] componentsss = jPanel1.getComponents();
@@ -4181,7 +4249,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setVisible(false);
             FormInput.remove(jPanel1);
             
-            BtnDropMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+            BtnDropMulut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
 
         }
     }//GEN-LAST:event_BtnDropMulutActionPerformed
@@ -4226,7 +4294,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 760, 640, 80);
+            jPanel1.setBounds(170, 850, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -4400,7 +4468,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 760, 640, 80);
+            jPanel1.setBounds(170, 880, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -4574,7 +4642,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 790, 640, 80);
+            jPanel1.setBounds(170, 910, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -4748,7 +4816,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 820, 640, 80);
+            jPanel1.setBounds(170, 940, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -4782,7 +4850,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             for(int i = 0; i < num; i++) {
                 
                 cb[i]=new JCheckBox(String.valueOf(tabModePunggung.getValueAt(i, 0)));
-                cb[i].setName(String.valueOf(tabModeTaliPunggung.getValueAt(i, 1)));
+                cb[i].setName(String.valueOf(tabModePunggung.getValueAt(i, 1)));
                 cb[i].setBackground(Color.white);
                 
                 cb[i].setFont(
@@ -4948,7 +5016,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 910, 640, 80);
+            jPanel1.setBounds(170, 1030, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -4982,7 +5050,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             for(int i = 0; i < num; i++) {
                 
                 cb[i]=new JCheckBox(String.valueOf(tabModeEkstremnitas.getValueAt(i, 0)));
-                cb[i].setName(String.valueOf(tabModeTaliEkstremnitas.getValueAt(i, 1)));
+                cb[i].setName(String.valueOf(tabModeEkstremnitas.getValueAt(i, 1)));
                 cb[i].setBackground(Color.white);
                 
                 cb[i].setFont(
@@ -5124,7 +5192,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             jPanel1.setPreferredSize(new java.awt.Dimension(452, 402));
             jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
             FormInput.add(jPanel1);
-            jPanel1.setBounds(170, 940, 640, 80);
+            jPanel1.setBounds(170, 1060, 640, 80);
 
             //Get the components in the panel
             Component[] components = jPanel1.getComponents();
@@ -5188,8 +5256,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                         if(cb[i].isSelected()) {
                             int idKulit = Integer.parseInt(cb[i].getName());
                             String kulit = cb[i].getText();
-                            idKulitlist.add(idKulit);
-                            Kulitlist.add(kulit);
+                            idkulitlist.add(idKulit);
+                            kulitlist.add(kulit);
                             
                         }
                     }
@@ -5741,6 +5809,329 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         LCount.setText(""+tabModeUub.getRowCount());
     }
     
+    private void tampilMata() {
+        Valid.tabelKosong(tabModeMata);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select mata, id from tb_mata where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeMata.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeMata.getRowCount());
+    }
+    
+    private void tampilTht() {
+        Valid.tabelKosong(tabModeTht);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select tht, id from tb_tht where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeTht.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeTht.getRowCount());
+    }
+    
+    private void tampilMulut() {
+        Valid.tabelKosong(tabModeMulut);
+        try {
+            stat = koneksi.prepareStatement(
+                    "select mulut, id from tb_mulut where status=1");
+            try {
+
+                rs = stat.executeQuery();
+
+                while (rs.next()) {
+                    tabModeMulut.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                    });
+                }
+
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+                e.printStackTrace();
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+            e.printStackTrace();
+        }
+        LCount.setText("" + tabModeMulut.getRowCount());
+    }
+    
+    private void tampilThorax() {
+        Valid.tabelKosong(tabModeThorax);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select thorax, id from tb_thorax where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeThorax.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeThorax.getRowCount());
+    }
+    
+    private void tampilAbdomen() {
+        Valid.tabelKosong(tabModeAbdomen);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select abdomen, id from tb_abdomen where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeAbdomen.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeAbdomen.getRowCount());
+    }
+    
+    private void tampilTaliPusat() {
+        Valid.tabelKosong(tabModeTaliPusat);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select tali_pusat, id from tb_tali_pusat where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeTaliPusat.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeTaliPusat.getRowCount());
+    }
+    
+    private void tampilPunggung() {
+        Valid.tabelKosong(tabModePunggung);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select punggung, id from tb_punggung where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModePunggung.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModePunggung.getRowCount());
+    }
+    
+    private void tampilEkstremnitas() {
+        Valid.tabelKosong(tabModeEkstremnitas);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select ekstremnitas, id from tb_ekstremnitas where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeEkstremnitas.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeEkstremnitas.getRowCount());
+    }
+    
+    private void tampilKulit() {
+        Valid.tabelKosong(tabModeKulit);
+        try {
+            stat=koneksi.prepareStatement(
+                   "select kulit, id from tb_kulit where status=1");
+            try{
+                
+                rs=stat.executeQuery();
+        
+                while(rs.next()){
+                    tabModeKulit.addRow(new Object[]{
+                        rs.getString(1),
+                        rs.getString(2)
+                                   }); 
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                e.printStackTrace();
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(stat != null){
+                    stat.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+            e.printStackTrace();
+        }
+        LCount.setText(""+tabModeKulit.getRowCount());
+    }
+   
     public void emptTeks() {
         TglAsuhan.setDate(new Date());
         Eflorisensi.setText("");
