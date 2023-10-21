@@ -295,6 +295,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private void initComponents() {
 
         LoadHTML = new widget.editorpane();
+        timePicker1 = new com.raven.swing.TimePicker();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -485,6 +486,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropKulit = new widget.Button();
         BtnKulit = new widget.Button();
         jLabel77 = new widget.Label();
+        BtnDropSyaraf1 = new widget.Button();
+        BtnDropJamDisposisi = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -510,6 +513,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
+
+        timePicker1.setDisplayText(JamKeluarDerma);
+        timePicker1.setName("timePicker1"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -837,10 +843,15 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023 13:40:32" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-10-2023 14:02:47" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
+        TglAsuhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TglAsuhanActionPerformed(evt);
+            }
+        });
         TglAsuhan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TglAsuhanKeyPressed(evt);
@@ -1723,18 +1734,18 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel75.setToolTipText("");
         jLabel75.setName("jLabel75"); // NOI18N
         FormInput.add(jLabel75);
-        jLabel75.setBounds(440, 520, 40, 23);
+        jLabel75.setBounds(470, 520, 40, 23);
 
         jLabel76.setText("Tempat:");
         jLabel76.setToolTipText("");
         jLabel76.setName("jLabel76"); // NOI18N
         FormInput.add(jLabel76);
-        jLabel76.setBounds(440, 550, 40, 23);
+        jLabel76.setBounds(470, 550, 40, 23);
 
         TempatDerma.setHighlighter(null);
         TempatDerma.setName("TempatDerma"); // NOI18N
         FormInput.add(TempatDerma);
-        TempatDerma.setBounds(490, 550, 64, 23);
+        TempatDerma.setBounds(520, 550, 64, 23);
 
         BtnStigAtopik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnStigAtopik.setMnemonic('2');
@@ -2376,6 +2387,42 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel77);
         jLabel77.setBounds(170, 790, 80, 23);
 
+        BtnDropSyaraf1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
+        BtnDropSyaraf1.setMnemonic('2');
+        BtnDropSyaraf1.setToolTipText("Alt+2");
+        BtnDropSyaraf1.setName("BtnDropSyaraf1"); // NOI18N
+        BtnDropSyaraf1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDropSyaraf1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDropSyaraf1ActionPerformed(evt);
+            }
+        });
+        BtnDropSyaraf1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnDropSyaraf1KeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnDropSyaraf1);
+        BtnDropSyaraf1.setBounds(430, 550, 28, 23);
+
+        BtnDropJamDisposisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
+        BtnDropJamDisposisi.setMnemonic('2');
+        BtnDropJamDisposisi.setToolTipText("Alt+2");
+        BtnDropJamDisposisi.setName("BtnDropJamDisposisi"); // NOI18N
+        BtnDropJamDisposisi.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDropJamDisposisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDropJamDisposisiActionPerformed(evt);
+            }
+        });
+        BtnDropJamDisposisi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnDropJamDisposisiKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnDropJamDisposisi);
+        BtnDropJamDisposisi.setBounds(430, 520, 28, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -2425,7 +2472,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2439,7 +2486,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3302,15 +3349,13 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     
                     for(int i=0;i<num;i++) {
                         if(cb[i].isSelected()) {
-                            int idStig = Integer.parseInt(cb[i].getName());
-                            String stigAtopik = cb[i].getText();
-                            idsyaraflist.add(idStig);
-                            syaraflist.add(stigAtopik);
-                            System.out.println(idStig);
-                            
+                            int idSyaraf = Integer.parseInt(cb[i].getName());
+                            String syaraf = cb[i].getText();
+                            idsyaraflist.add(idSyaraf);
+                            syaraflist.add(syaraf);
                         }
                     }
-                    String listString = String.join(", ", stiglist);
+                    String listString = String.join(", ", syaraflist);
 
                     Syaraf.setText(listString);
                   
@@ -5347,6 +5392,27 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnKulitKeyPressed
 
+    private void TglAsuhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglAsuhanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglAsuhanActionPerformed
+
+    private void BtnDropSyaraf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropSyaraf1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDropSyaraf1ActionPerformed
+
+    private void BtnDropSyaraf1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropSyaraf1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDropSyaraf1KeyPressed
+
+    private void BtnDropJamDisposisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropJamDisposisiActionPerformed
+        // TODO add your handling code here:
+        timePicker1.showPopup(this, 100, 100);
+    }//GEN-LAST:event_BtnDropJamDisposisiActionPerformed
+
+    private void BtnDropJamDisposisiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropJamDisposisiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDropJamDisposisiKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -5374,6 +5440,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnDropAbdomen;
     private widget.Button BtnDropEkstremnitas;
     private widget.Button BtnDropGenetalia;
+    private widget.Button BtnDropJamDisposisi;
     private widget.Button BtnDropKepala;
     private widget.Button BtnDropKulit;
     private widget.Button BtnDropMata;
@@ -5381,6 +5448,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnDropPunggung;
     private widget.Button BtnDropStig;
     private widget.Button BtnDropSyaraf;
+    private widget.Button BtnDropSyaraf1;
     private widget.Button BtnDropTaliPusat;
     private widget.Button BtnDropThorax;
     private widget.Button BtnDropTht;
@@ -5578,6 +5646,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.ScrollPane scrollPane8;
     private widget.ScrollPane scrollPane9;
     private widget.Table tbObat;
+    private com.raven.swing.TimePicker timePicker1;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
@@ -5962,7 +6031,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 rs=stat.executeQuery();
         
                 while(rs.next()){
-                    tabModeAbdomen.addRow(new Object[]{
+                    tabModeAbdomen .addRow(new Object[]{
                         rs.getString(1),
                         rs.getString(2)
                                    }); 
