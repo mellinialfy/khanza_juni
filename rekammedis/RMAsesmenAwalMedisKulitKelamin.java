@@ -48,6 +48,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
+import keuangan.DlgKamar;
 
 
 /**
@@ -67,6 +68,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, ekstremclick=0, kulitclick=0;
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
     private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
+    private DlgKamar dlgkamar=new DlgKamar(null,false);
     String no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,
             sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
     JPanel jPanel1;
@@ -261,6 +263,51 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
+        dlgkamar.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(dlgkamar.getTable().getSelectedRow()!= -1){ 
+                    NoBed.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),0).toString());
+                    KdKamar.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),1).toString());   
+                    NmKamar.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),2).toString());   
+                }              
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        dlgkamar.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(dlgkamar.getTable().getSelectedRow()!= -1){ 
+                    NoBed1.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),0).toString());
+                    KdKamar1.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),1).toString());   
+                    NmKamar1.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),2).toString());   
+                }              
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
@@ -327,7 +374,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         scrollPane2 = new widget.ScrollPane();
         HasilPenunjangNeonatologi = new widget.TextArea();
         jLabel31 = new widget.Label();
-        TglAsuhan = new widget.Tanggal();
+        TglDerma = new widget.Tanggal();
         jLabel98 = new widget.Label();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
@@ -372,11 +419,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel47 = new widget.Label();
         jLabel48 = new widget.Label();
         jLabel49 = new widget.Label();
-        RuangNeonatologi = new widget.TextBox();
         TempatNeonatologi = new widget.TextBox();
         jLabel50 = new widget.Label();
         jLabel51 = new widget.Label();
-        TglNeonatologi = new widget.TextBox();
         jSeparator13 = new javax.swing.JSeparator();
         jLabel100 = new widget.Label();
         jSeparator14 = new javax.swing.JSeparator();
@@ -439,8 +484,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel73 = new widget.Label();
         jLabel74 = new widget.Label();
         JamKeluarDerma = new widget.TextBox();
-        TglDerma = new widget.TextBox();
-        RuangDerma = new widget.TextBox();
+        NmKamar = new widget.TextBox();
         jLabel75 = new widget.Label();
         jLabel76 = new widget.Label();
         TempatDerma = new widget.TextBox();
@@ -448,7 +492,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropStig = new widget.Button();
         Syaraf = new widget.TextBox();
         BtnDropSyaraf = new widget.Button();
-        BtnStigAtopik1 = new widget.Button();
+        BtnSyaraf = new widget.Button();
         Uub = new widget.TextBox();
         BtnDropUub = new widget.Button();
         BtnUub = new widget.Button();
@@ -486,8 +530,17 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropKulit = new widget.Button();
         BtnKulit = new widget.Button();
         jLabel77 = new widget.Label();
-        BtnDropSyaraf1 = new widget.Button();
         BtnDropJamDisposisi = new widget.Button();
+        TglAsuhan = new widget.Tanggal();
+        BtnKamar = new widget.Button();
+        BtnShowJamNeo = new widget.Button();
+        TglDerma1 = new widget.Tanggal();
+        NoBed = new widget.TextBox();
+        KdKamar = new widget.TextBox();
+        NoBed1 = new widget.TextBox();
+        KdKamar1 = new widget.TextBox();
+        NmKamar1 = new widget.TextBox();
+        BtnKamar1 = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -732,6 +785,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         KdPetugas.setEditable(false);
         KdPetugas.setName("KdPetugas"); // NOI18N
         KdPetugas.setPreferredSize(new java.awt.Dimension(80, 23));
+        KdPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KdPetugasActionPerformed(evt);
+            }
+        });
         KdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KdPetugasKeyPressed(evt);
@@ -743,6 +801,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         NmPetugas.setEditable(false);
         NmPetugas.setName("NmPetugas"); // NOI18N
         NmPetugas.setPreferredSize(new java.awt.Dimension(207, 23));
+        NmPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NmPetugasActionPerformed(evt);
+            }
+        });
         FormInput.add(NmPetugas);
         NmPetugas.setBounds(176, 40, 180, 23);
 
@@ -842,23 +905,23 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel31);
         jLabel31.setBounds(0, 370, 150, 23);
 
-        TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-10-2023 14:02:47" }));
-        TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
-        TglAsuhan.setName("TglAsuhan"); // NOI18N
-        TglAsuhan.setOpaque(false);
-        TglAsuhan.addActionListener(new java.awt.event.ActionListener() {
+        TglDerma.setForeground(new java.awt.Color(50, 70, 50));
+        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        TglDerma.setDisplayFormat("dd-MM-yyyy");
+        TglDerma.setName("TglDerma"); // NOI18N
+        TglDerma.setOpaque(false);
+        TglDerma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TglAsuhanActionPerformed(evt);
+                TglDermaActionPerformed(evt);
             }
         });
-        TglAsuhan.addKeyListener(new java.awt.event.KeyAdapter() {
+        TglDerma.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TglAsuhanKeyPressed(evt);
+                TglDermaKeyPressed(evt);
             }
         });
-        FormInput.add(TglAsuhan);
-        TglAsuhan.setBounds(456, 40, 130, 23);
+        FormInput.add(TglDerma);
+        TglDerma.setBounds(370, 550, 80, 23);
 
         jLabel98.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel98.setText("I. ANAMNESA");
@@ -1043,7 +1106,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         JamNeonatologi.setHighlighter(null);
         JamNeonatologi.setName("JamNeonatologi"); // NOI18N
         FormInput.add(JamNeonatologi);
-        JamNeonatologi.setBounds(370, 1300, 64, 23);
+        JamNeonatologi.setBounds(370, 1300, 80, 23);
 
         jLabel42.setText("Lokalisasi:");
         jLabel42.setToolTipText("");
@@ -1187,23 +1250,18 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel48.setToolTipText("");
         jLabel48.setName("jLabel48"); // NOI18N
         FormInput.add(jLabel48);
-        jLabel48.setBounds(440, 1300, 40, 23);
+        jLabel48.setBounds(470, 1300, 40, 23);
 
         jLabel49.setText("Tempat:");
         jLabel49.setToolTipText("");
         jLabel49.setName("jLabel49"); // NOI18N
         FormInput.add(jLabel49);
-        jLabel49.setBounds(440, 1330, 40, 23);
-
-        RuangNeonatologi.setHighlighter(null);
-        RuangNeonatologi.setName("RuangNeonatologi"); // NOI18N
-        FormInput.add(RuangNeonatologi);
-        RuangNeonatologi.setBounds(370, 1360, 64, 23);
+        jLabel49.setBounds(470, 1330, 40, 23);
 
         TempatNeonatologi.setHighlighter(null);
         TempatNeonatologi.setName("TempatNeonatologi"); // NOI18N
         FormInput.add(TempatNeonatologi);
-        TempatNeonatologi.setBounds(490, 1330, 64, 23);
+        TempatNeonatologi.setBounds(520, 1330, 64, 23);
 
         jLabel50.setText("Jam keluar:");
         jLabel50.setToolTipText("");
@@ -1216,11 +1274,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel51.setName("jLabel51"); // NOI18N
         FormInput.add(jLabel51);
         jLabel51.setBounds(260, 1330, 100, 23);
-
-        TglNeonatologi.setHighlighter(null);
-        TglNeonatologi.setName("TglNeonatologi"); // NOI18N
-        FormInput.add(TglNeonatologi);
-        TglNeonatologi.setBounds(370, 1330, 64, 23);
 
         jSeparator13.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator13.setForeground(new java.awt.Color(239, 244, 234));
@@ -1718,17 +1771,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         JamKeluarDerma.setHighlighter(null);
         JamKeluarDerma.setName("JamKeluarDerma"); // NOI18N
         FormInput.add(JamKeluarDerma);
-        JamKeluarDerma.setBounds(370, 520, 64, 23);
+        JamKeluarDerma.setBounds(370, 520, 80, 23);
 
-        TglDerma.setHighlighter(null);
-        TglDerma.setName("TglDerma"); // NOI18N
-        FormInput.add(TglDerma);
-        TglDerma.setBounds(370, 550, 64, 23);
-
-        RuangDerma.setHighlighter(null);
-        RuangDerma.setName("RuangDerma"); // NOI18N
-        FormInput.add(RuangDerma);
-        RuangDerma.setBounds(370, 580, 64, 23);
+        NmKamar.setHighlighter(null);
+        NmKamar.setName("NmKamar"); // NOI18N
+        FormInput.add(NmKamar);
+        NmKamar.setBounds(520, 580, 220, 23);
 
         jLabel75.setText("WITA");
         jLabel75.setToolTipText("");
@@ -1811,23 +1859,23 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(BtnDropSyaraf);
         BtnDropSyaraf.setBounds(810, 370, 28, 23);
 
-        BtnStigAtopik1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnStigAtopik1.setMnemonic('2');
-        BtnStigAtopik1.setToolTipText("Alt+2");
-        BtnStigAtopik1.setName("BtnStigAtopik1"); // NOI18N
-        BtnStigAtopik1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnStigAtopik1.addActionListener(new java.awt.event.ActionListener() {
+        BtnSyaraf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSyaraf.setMnemonic('2');
+        BtnSyaraf.setToolTipText("Alt+2");
+        BtnSyaraf.setName("BtnSyaraf"); // NOI18N
+        BtnSyaraf.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSyaraf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnStigAtopik1ActionPerformed(evt);
+                BtnSyarafActionPerformed(evt);
             }
         });
-        BtnStigAtopik1.addKeyListener(new java.awt.event.KeyAdapter() {
+        BtnSyaraf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnStigAtopik1KeyPressed(evt);
+                BtnSyarafKeyPressed(evt);
             }
         });
-        FormInput.add(BtnStigAtopik1);
-        BtnStigAtopik1.setBounds(840, 370, 28, 23);
+        FormInput.add(BtnSyaraf);
+        BtnSyaraf.setBounds(840, 370, 28, 23);
 
         Uub.setHighlighter(null);
         Uub.setName("Uub"); // NOI18N
@@ -2387,24 +2435,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel77);
         jLabel77.setBounds(170, 790, 80, 23);
 
-        BtnDropSyaraf1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
-        BtnDropSyaraf1.setMnemonic('2');
-        BtnDropSyaraf1.setToolTipText("Alt+2");
-        BtnDropSyaraf1.setName("BtnDropSyaraf1"); // NOI18N
-        BtnDropSyaraf1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnDropSyaraf1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDropSyaraf1ActionPerformed(evt);
-            }
-        });
-        BtnDropSyaraf1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnDropSyaraf1KeyPressed(evt);
-            }
-        });
-        FormInput.add(BtnDropSyaraf1);
-        BtnDropSyaraf1.setBounds(430, 550, 28, 23);
-
         BtnDropJamDisposisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
         BtnDropJamDisposisi.setMnemonic('2');
         BtnDropJamDisposisi.setToolTipText("Alt+2");
@@ -2421,7 +2451,122 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnDropJamDisposisi);
-        BtnDropJamDisposisi.setBounds(430, 520, 28, 23);
+        BtnDropJamDisposisi.setBounds(450, 520, 28, 23);
+
+        TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023 18:30:14" }));
+        TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        TglAsuhan.setName("TglAsuhan"); // NOI18N
+        TglAsuhan.setOpaque(false);
+        TglAsuhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TglAsuhanActionPerformed(evt);
+            }
+        });
+        TglAsuhan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TglAsuhanKeyPressed(evt);
+            }
+        });
+        FormInput.add(TglAsuhan);
+        TglAsuhan.setBounds(456, 40, 130, 23);
+
+        BtnKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKamar.setMnemonic('2');
+        BtnKamar.setToolTipText("Alt+2");
+        BtnKamar.setName("BtnKamar"); // NOI18N
+        BtnKamar.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnKamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKamarActionPerformed(evt);
+            }
+        });
+        BtnKamar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKamarKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnKamar);
+        BtnKamar.setBounds(740, 580, 28, 23);
+
+        BtnShowJamNeo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
+        BtnShowJamNeo.setMnemonic('2');
+        BtnShowJamNeo.setToolTipText("Alt+2");
+        BtnShowJamNeo.setName("BtnShowJamNeo"); // NOI18N
+        BtnShowJamNeo.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnShowJamNeo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnShowJamNeoActionPerformed(evt);
+            }
+        });
+        BtnShowJamNeo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnShowJamNeoKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnShowJamNeo);
+        BtnShowJamNeo.setBounds(450, 1300, 28, 23);
+
+        TglDerma1.setForeground(new java.awt.Color(50, 70, 50));
+        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        TglDerma1.setDisplayFormat("dd-MM-yyyy");
+        TglDerma1.setName("TglDerma1"); // NOI18N
+        TglDerma1.setOpaque(false);
+        TglDerma1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TglDerma1ActionPerformed(evt);
+            }
+        });
+        TglDerma1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TglDerma1KeyPressed(evt);
+            }
+        });
+        FormInput.add(TglDerma1);
+        TglDerma1.setBounds(370, 1330, 80, 23);
+
+        NoBed.setHighlighter(null);
+        NoBed.setName("NoBed"); // NOI18N
+        FormInput.add(NoBed);
+        NoBed.setBounds(370, 580, 80, 23);
+
+        KdKamar.setHighlighter(null);
+        KdKamar.setName("KdKamar"); // NOI18N
+        FormInput.add(KdKamar);
+        KdKamar.setBounds(450, 580, 70, 23);
+
+        NoBed1.setHighlighter(null);
+        NoBed1.setName("NoBed1"); // NOI18N
+        FormInput.add(NoBed1);
+        NoBed1.setBounds(370, 1360, 80, 23);
+
+        KdKamar1.setHighlighter(null);
+        KdKamar1.setName("KdKamar1"); // NOI18N
+        FormInput.add(KdKamar1);
+        KdKamar1.setBounds(450, 1360, 70, 23);
+
+        NmKamar1.setHighlighter(null);
+        NmKamar1.setName("NmKamar1"); // NOI18N
+        FormInput.add(NmKamar1);
+        NmKamar1.setBounds(520, 1360, 220, 23);
+
+        BtnKamar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKamar1.setMnemonic('2');
+        BtnKamar1.setToolTipText("Alt+2");
+        BtnKamar1.setName("BtnKamar1"); // NOI18N
+        BtnKamar1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnKamar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKamar1ActionPerformed(evt);
+            }
+        });
+        BtnKamar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKamar1KeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnKamar1);
+        BtnKamar1.setBounds(740, 1360, 28, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -2472,7 +2617,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2486,7 +2631,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2637,7 +2782,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             if(Sequel.menyimpantf("tb_asesmen_awal_medis_kulit_kelamin","?,?,?,?,?,?"
                     + "","No.Rawat",6,new String[]{
                     TNoRw.getText(),
-                        Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
+                        Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19),
                         Eflorisensi.getText(),
                 HasilPenunjangNeonatologi.getText(),
                     KdPetugas.getText()
@@ -2708,7 +2853,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             if(tbObat.getSelectedRow()>-1){
                 if(Sequel.mengedittf("penilaian_usg_urologi","no_rawat=?","no_rawat=?,tanggal=?,ginjal_kanan=?,ginjal_kiri=?,buli=?,"+
                     "kd_dokter=?",7,new String[]{
-                    TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
+                    TNoRw.getText(),Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19),
                         Eflorisensi.getText(),HasilPenunjangNeonatologi.getText(),KdPetugas.getText(),TNoRw.getText()
                      })==true){
                     
@@ -2748,7 +2893,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
             getData();
-            tgl_asuhan = Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19);
+            tgl_asuhan = Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19);
             String[] tgl = tgl_asuhan.split(" ");
             
             umur = Sequel.cariIsi("select umur from pasien where no_rkm_medis=?",no_rm);
@@ -2844,9 +2989,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         
     }//GEN-LAST:event_formWindowOpened
 
-    private void TglAsuhanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglAsuhanKeyPressed
+    private void TglDermaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglDermaKeyPressed
 //        Valid.pindah2(evt,Rencana,RPD);
-    }//GEN-LAST:event_TglAsuhanKeyPressed
+    }//GEN-LAST:event_TglDermaKeyPressed
 
     private void HasilPenunjangNeonatologiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HasilPenunjangNeonatologiKeyPressed
 //        Valid.pindah2(evt,KeluhanUtama,RPO);
@@ -3426,7 +3571,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnDropSyarafKeyPressed
 
-    private void BtnStigAtopik1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStigAtopik1ActionPerformed
+    private void BtnSyarafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSyarafActionPerformed
         // TODO add your handling code here:
         MasterSyaraf syaraf=new MasterSyaraf(null,false);
         syaraf.isCek();
@@ -3434,11 +3579,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         syaraf.setLocationRelativeTo(internalFrame1);
         syaraf.setAlwaysOnTop(false);
         syaraf.setVisible(true);
-    }//GEN-LAST:event_BtnStigAtopik1ActionPerformed
+    }//GEN-LAST:event_BtnSyarafActionPerformed
 
-    private void BtnStigAtopik1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnStigAtopik1KeyPressed
+    private void BtnSyarafKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSyarafKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnStigAtopik1KeyPressed
+    }//GEN-LAST:event_BtnSyarafKeyPressed
 
     private void UubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UubActionPerformed
         // TODO add your handling code here:
@@ -5392,17 +5537,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnKulitKeyPressed
 
-    private void TglAsuhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglAsuhanActionPerformed
+    private void TglDermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglDermaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TglAsuhanActionPerformed
-
-    private void BtnDropSyaraf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropSyaraf1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropSyaraf1ActionPerformed
-
-    private void BtnDropSyaraf1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropSyaraf1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropSyaraf1KeyPressed
+    }//GEN-LAST:event_TglDermaActionPerformed
 
     private void BtnDropJamDisposisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropJamDisposisiActionPerformed
         // TODO add your handling code here:
@@ -5412,6 +5549,60 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private void BtnDropJamDisposisiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropJamDisposisiKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnDropJamDisposisiKeyPressed
+
+    private void TglAsuhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglAsuhanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglAsuhanActionPerformed
+
+    private void TglAsuhanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglAsuhanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglAsuhanKeyPressed
+
+    private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKamarActionPerformed
+        // TODO add your handling code here:
+        
+        dlgkamar.isCek();
+        dlgkamar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dlgkamar.setLocationRelativeTo(internalFrame1);
+        dlgkamar.setAlwaysOnTop(false);
+        dlgkamar.setVisible(true);
+    }//GEN-LAST:event_BtnKamarActionPerformed
+
+    private void BtnKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKamarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKamarKeyPressed
+
+    private void BtnShowJamNeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnShowJamNeoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnShowJamNeoActionPerformed
+
+    private void BtnShowJamNeoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnShowJamNeoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnShowJamNeoKeyPressed
+
+    private void TglDerma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglDerma1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglDerma1ActionPerformed
+
+    private void TglDerma1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglDerma1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglDerma1KeyPressed
+
+    private void NmPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NmPetugasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NmPetugasActionPerformed
+
+    private void KdPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KdPetugasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KdPetugasActionPerformed
+
+    private void BtnKamar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKamar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKamar1ActionPerformed
+
+    private void BtnKamar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKamar1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKamar1KeyPressed
 
     /**
     * @param args the command line arguments
@@ -5448,7 +5639,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnDropPunggung;
     private widget.Button BtnDropStig;
     private widget.Button BtnDropSyaraf;
-    private widget.Button BtnDropSyaraf1;
     private widget.Button BtnDropTaliPusat;
     private widget.Button BtnDropThorax;
     private widget.Button BtnDropTht;
@@ -5457,6 +5647,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnEkstremnitas;
     private widget.Button BtnGenetalia;
     private widget.Button BtnHapus;
+    private widget.Button BtnKamar;
+    private widget.Button BtnKamar1;
     private widget.Button BtnKeluar;
     private widget.Button BtnKepala;
     private widget.Button BtnKulit;
@@ -5464,9 +5656,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnMulut;
     private widget.Button BtnPrint;
     private widget.Button BtnPunggung;
+    private widget.Button BtnShowJamNeo;
     private widget.Button BtnSimpan;
     private widget.Button BtnStigAtopik;
-    private widget.Button BtnStigAtopik1;
+    private widget.Button BtnSyaraf;
     private widget.Button BtnTaliPusat;
     private widget.Button BtnThorax;
     private widget.Button BtnTht;
@@ -5498,6 +5691,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextBox Jk31;
     private widget.TextBox Jk32;
     private widget.TextBox Jk33;
+    private widget.TextBox KdKamar;
+    private widget.TextBox KdKamar1;
     private widget.TextBox KdPetugas;
     private widget.TextBox KelenjarLimfe;
     private widget.TextArea KeluhanUtama;
@@ -5510,15 +5705,17 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextBox Mata;
     private widget.TextBox Mukosa;
     private widget.TextBox Mulut;
+    private widget.TextBox NmKamar;
+    private widget.TextBox NmKamar1;
     private widget.TextBox NmPetugas;
+    private widget.TextBox NoBed;
+    private widget.TextBox NoBed1;
     private widget.PanelBiasa PanelAccor;
     private widget.TextBox Punggung;
     private widget.TextBox Rambut;
     private widget.TextArea RencanaKerjaDerma;
     private widget.TextArea RencanaKerjaNeonatologi;
     private widget.TextArea RiwPenyakitSkrg;
-    private widget.TextBox RuangDerma;
-    private widget.TextBox RuangNeonatologi;
     private widget.ScrollPane Scroll;
     private widget.TextBox StigAtopik;
     private widget.TextBox Syaraf;
@@ -5535,9 +5732,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextArea TerapiDerma;
     private widget.TextArea TerapiNeonatologi;
     private widget.Tanggal TglAsuhan;
-    private widget.TextBox TglDerma;
+    private widget.Tanggal TglDerma;
+    private widget.Tanggal TglDerma1;
     private widget.TextBox TglLahir;
-    private widget.TextBox TglNeonatologi;
     private widget.TextBox Thorax;
     private widget.TextBox Tht;
     private widget.TextBox Uub;
@@ -6202,7 +6399,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     }
    
     public void emptTeks() {
-        TglAsuhan.setDate(new Date());
+        TglDerma.setDate(new Date());
         Eflorisensi.setText("");
         HasilPenunjangNeonatologi.setText("");
         
@@ -6236,7 +6433,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Valid.SetTgl2(TglAsuhan,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            Valid.SetTgl2(TglDerma,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             
             DetailRencana.setText("Ginjal Kanan: \n"+ginjal_kanan + "\n\nGinjal Kiri: \n"+ginjal_kiri+"\n\nBuli: \n" +sbuli);
         }
