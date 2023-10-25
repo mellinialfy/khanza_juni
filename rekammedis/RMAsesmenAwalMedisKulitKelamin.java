@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -69,6 +70,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private DlgCariDokter petugas=new DlgCariDokter(null,false);
     private MasterStigAtopik stigatopik=new MasterStigAtopik(null,false);
     private DlgKamar dlgkamar=new DlgKamar(null,false);
+    private DlgKamar dlgkamar1=new DlgKamar(null,false);
     String no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,
             sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
     JPanel jPanel1;
@@ -271,9 +273,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(dlgkamar.getTable().getSelectedRow()!= -1){ 
-                    NoBed.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),0).toString());
-                    KdKamar.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),1).toString());   
-                    NmKamar.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),2).toString());   
+                    NoBed.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),1).toString());
+                    KdKamar.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),2).toString());   
+                    NmKamar.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),3).toString());   
                 }              
             }
             @Override
@@ -286,17 +288,17 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
-        dlgkamar.addWindowListener(new WindowListener() {
+        dlgkamar1.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
             @Override
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dlgkamar.getTable().getSelectedRow()!= -1){ 
-                    NoBed1.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),0).toString());
-                    KdKamar1.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),1).toString());   
-                    NmKamar1.setText(dlgkamar.getTable().getValueAt(dlgkamar.getTable().getSelectedRow(),2).toString());   
+                if(dlgkamar1.getTable().getSelectedRow()!= -1){ 
+                    NoBed1.setText(dlgkamar1.getTable().getValueAt(dlgkamar1.getTable().getSelectedRow(),1).toString());
+                    KdKamar1.setText(dlgkamar1.getTable().getValueAt(dlgkamar1.getTable().getSelectedRow(),2).toString());   
+                    NmKamar1.setText(dlgkamar1.getTable().getValueAt(dlgkamar1.getTable().getSelectedRow(),3).toString());   
                 }              
             }
             @Override
@@ -343,6 +345,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
         LoadHTML = new widget.editorpane();
         timePicker1 = new com.raven.swing.TimePicker();
+        timePicker2 = new com.raven.swing.TimePicker();
+        BtnGrpFungsiKelenjarKeringat = new javax.swing.ButtonGroup();
+        BtnGrpDisposisiDerma = new javax.swing.ButtonGroup();
+        BtnGrpAnus = new javax.swing.ButtonGroup();
+        BtnGrpReflek = new javax.swing.ButtonGroup();
+        BtnGrpDisposisiNeona = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -395,8 +403,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel38 = new widget.Label();
         Rambut = new widget.TextBox();
         jLabel39 = new widget.Label();
-        cbHiperhidrosis = new javax.swing.JCheckBox();
-        cbAnshidrosis = new javax.swing.JCheckBox();
         jLabel40 = new widget.Label();
         Mukosa = new widget.TextBox();
         jLabel41 = new widget.Label();
@@ -414,8 +420,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         scrollPane9 = new widget.ScrollPane();
         TerapiNeonatologi = new widget.TextArea();
         jLabel46 = new widget.Label();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
         jLabel47 = new widget.Label();
         jLabel48 = new widget.Label();
         jLabel49 = new widget.Label();
@@ -426,7 +430,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel100 = new widget.Label();
         jSeparator14 = new javax.swing.JSeparator();
         jLabel52 = new widget.Label();
-        jCheckBox16 = new javax.swing.JCheckBox();
         jLabel53 = new widget.Label();
         KelenjarLimfe = new widget.TextBox();
         jLabel54 = new widget.Label();
@@ -440,8 +443,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel61 = new widget.Label();
         jLabel62 = new widget.Label();
         jLabel63 = new widget.Label();
-        jCheckBox58 = new javax.swing.JCheckBox();
-        jCheckBox59 = new javax.swing.JCheckBox();
         jLabel64 = new widget.Label();
         jLabel65 = new widget.Label();
         Jk23 = new widget.TextBox();
@@ -450,7 +451,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jCheckBox67 = new javax.swing.JCheckBox();
         jCheckBox68 = new javax.swing.JCheckBox();
         jCheckBox69 = new javax.swing.JCheckBox();
-        Jk25 = new widget.TextBox();
+        Turgor = new widget.TextBox();
         Jk26 = new widget.TextBox();
         Jk27 = new widget.TextBox();
         Jk28 = new widget.TextBox();
@@ -477,9 +478,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         RencanaKerjaDerma = new widget.TextArea();
         jLabel70 = new widget.Label();
         jLabel71 = new widget.Label();
-        jCheckBox75 = new javax.swing.JCheckBox();
-        jCheckBox76 = new javax.swing.JCheckBox();
-        jCheckBox77 = new javax.swing.JCheckBox();
         jLabel72 = new widget.Label();
         jLabel73 = new widget.Label();
         jLabel74 = new widget.Label();
@@ -541,6 +539,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         KdKamar1 = new widget.TextBox();
         NmKamar1 = new widget.TextBox();
         BtnKamar1 = new widget.Button();
+        rbHiperhidrosis = new javax.swing.JRadioButton();
+        rbAnshidrosis = new javax.swing.JRadioButton();
+        rbBolehPulangDisposisi = new javax.swing.JRadioButton();
+        rbKontrolDisposisi = new javax.swing.JRadioButton();
+        rbDirawatDisposisi = new javax.swing.JRadioButton();
+        rbAda = new javax.swing.JRadioButton();
+        rbTidakAda = new javax.swing.JRadioButton();
+        rbBolehPulangNeona = new javax.swing.JRadioButton();
+        rbKontrolNeona = new javax.swing.JRadioButton();
+        rbDirawatNeona = new javax.swing.JRadioButton();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -567,8 +575,13 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
 
+        timePicker1.set24hourMode(true);
         timePicker1.setDisplayText(JamKeluarDerma);
         timePicker1.setName("timePicker1"); // NOI18N
+
+        timePicker2.set24hourMode(true);
+        timePicker2.setDisplayText(JamNeonatologi);
+        timePicker2.setName("timePicker2"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -906,7 +919,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglDerma.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         TglDerma.setDisplayFormat("dd-MM-yyyy");
         TglDerma.setName("TglDerma"); // NOI18N
         TglDerma.setOpaque(false);
@@ -1060,32 +1073,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel39);
         jLabel39.setBounds(0, 340, 150, 23);
 
-        cbHiperhidrosis.setBackground(new java.awt.Color(255, 255, 255));
-        cbHiperhidrosis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        cbHiperhidrosis.setForeground(new java.awt.Color(50, 50, 50));
-        cbHiperhidrosis.setText("Hiperhidrosis");
-        cbHiperhidrosis.setName("cbHiperhidrosis"); // NOI18N
-        cbHiperhidrosis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbHiperhidrosisActionPerformed(evt);
-            }
-        });
-        FormInput.add(cbHiperhidrosis);
-        cbHiperhidrosis.setBounds(170, 310, 100, 19);
-
-        cbAnshidrosis.setBackground(new java.awt.Color(255, 255, 255));
-        cbAnshidrosis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        cbAnshidrosis.setForeground(new java.awt.Color(50, 50, 50));
-        cbAnshidrosis.setText("Anshidrosis");
-        cbAnshidrosis.setName("cbAnshidrosis"); // NOI18N
-        cbAnshidrosis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAnshidrosisActionPerformed(evt);
-            }
-        });
-        FormInput.add(cbAnshidrosis);
-        cbAnshidrosis.setBounds(330, 310, 90, 19);
-
         jLabel40.setText("Mukosa:");
         jLabel40.setToolTipText("");
         jLabel40.setName("jLabel40"); // NOI18N
@@ -1214,32 +1201,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel46);
         jLabel46.setBounds(260, 1360, 100, 23);
 
-        jCheckBox14.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox14.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox14.setText("Boleh pulang");
-        jCheckBox14.setName("jCheckBox14"); // NOI18N
-        jCheckBox14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox14ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox14);
-        jCheckBox14.setBounds(170, 1300, 130, 19);
-
-        jCheckBox15.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox15.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox15.setText("Kontrol");
-        jCheckBox15.setName("jCheckBox15"); // NOI18N
-        jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox15ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox15);
-        jCheckBox15.setBounds(170, 1330, 130, 19);
-
         jLabel47.setText("Kepala:");
         jLabel47.setToolTipText("");
         jLabel47.setName("jLabel47"); // NOI18N
@@ -1301,19 +1262,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel52.setName("jLabel52"); // NOI18N
         FormInput.add(jLabel52);
         jLabel52.setBounds(0, 1300, 150, 23);
-
-        jCheckBox16.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox16.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox16.setText("Dirawat");
-        jCheckBox16.setName("jCheckBox16"); // NOI18N
-        jCheckBox16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox16ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox16);
-        jCheckBox16.setBounds(170, 1360, 130, 19);
 
         jLabel53.setText("UUB:");
         jLabel53.setToolTipText("");
@@ -1391,32 +1339,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jLabel63);
         jLabel63.setBounds(0, 970, 150, 23);
 
-        jCheckBox58.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox58.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox58.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox58.setText("Ada");
-        jCheckBox58.setName("jCheckBox58"); // NOI18N
-        jCheckBox58.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox58ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox58);
-        jCheckBox58.setBounds(170, 970, 60, 19);
-
-        jCheckBox59.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox59.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox59.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox59.setText("Tidak ada");
-        jCheckBox59.setName("jCheckBox59"); // NOI18N
-        jCheckBox59.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox59ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox59);
-        jCheckBox59.setBounds(330, 970, 80, 19);
-
         jLabel64.setText("Ekstremnitas:");
         jLabel64.setToolTipText("");
         jLabel64.setName("jLabel64"); // NOI18N
@@ -1441,6 +1363,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel66.setBounds(0, 1090, 150, 23);
 
         jCheckBox17.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox17);
         jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox17.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox17.setText("Moro");
@@ -1455,6 +1378,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jCheckBox17.setBounds(170, 1090, 80, 19);
 
         jCheckBox67.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox67);
         jCheckBox67.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox67.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox67.setText("Grasping/genggam");
@@ -1468,6 +1392,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jCheckBox67.setBounds(330, 1090, 120, 19);
 
         jCheckBox68.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox68);
         jCheckBox68.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox68.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox68.setText("Sucking/isap");
@@ -1481,6 +1406,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jCheckBox68.setBounds(540, 1090, 90, 19);
 
         jCheckBox69.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox69);
         jCheckBox69.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox69.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox69.setText("Rooting");
@@ -1493,10 +1419,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(jCheckBox69);
         jCheckBox69.setBounds(740, 1090, 70, 19);
 
-        Jk25.setHighlighter(null);
-        Jk25.setName("Jk25"); // NOI18N
-        FormInput.add(Jk25);
-        Jk25.setBounds(260, 1060, 64, 23);
+        Turgor.setHighlighter(null);
+        Turgor.setName("Turgor"); // NOI18N
+        FormInput.add(Turgor);
+        Turgor.setBounds(260, 1060, 64, 23);
 
         Jk26.setHighlighter(null);
         Jk26.setName("Jk26"); // NOI18N
@@ -1514,6 +1440,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         Jk28.setBounds(630, 1090, 64, 23);
 
         jCheckBox70.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox70);
         jCheckBox70.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox70.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox70.setText("Tonick neck");
@@ -1533,6 +1460,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         Jk29.setBounds(260, 1120, 64, 23);
 
         jCheckBox71.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox71);
         jCheckBox71.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox71.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox71.setText("Swallowing/menelan");
@@ -1551,6 +1479,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         Jk30.setBounds(460, 1120, 64, 23);
 
         jCheckBox72.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox72);
         jCheckBox72.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox72.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox72.setText("Stepping");
@@ -1569,6 +1498,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         Jk31.setBounds(630, 1120, 64, 23);
 
         jCheckBox73.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox73);
         jCheckBox73.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox73.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox73.setText("Babinski");
@@ -1587,6 +1517,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         Jk32.setBounds(810, 1120, 64, 23);
 
         jCheckBox74.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpReflek.add(jCheckBox74);
         jCheckBox74.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jCheckBox74.setForeground(new java.awt.Color(50, 50, 50));
         jCheckBox74.setText("Lainnya");
@@ -1710,45 +1641,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel71.setName("jLabel71"); // NOI18N
         FormInput.add(jLabel71);
         jLabel71.setBounds(0, 520, 150, 23);
-
-        jCheckBox75.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox75.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox75.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox75.setText("Boleh pulang");
-        jCheckBox75.setName("jCheckBox75"); // NOI18N
-        jCheckBox75.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox75ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox75);
-        jCheckBox75.setBounds(170, 520, 130, 19);
-
-        jCheckBox76.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox76.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox76.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox76.setText("Kontrol");
-        jCheckBox76.setName("jCheckBox76"); // NOI18N
-        jCheckBox76.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox76ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox76);
-        jCheckBox76.setBounds(170, 550, 130, 19);
-
-        jCheckBox77.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox77.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jCheckBox77.setForeground(new java.awt.Color(50, 50, 50));
-        jCheckBox77.setText("Dirawat");
-        jCheckBox77.setName("jCheckBox77"); // NOI18N
-        jCheckBox77.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox77ActionPerformed(evt);
-            }
-        });
-        FormInput.add(jCheckBox77);
-        jCheckBox77.setBounds(170, 580, 130, 19);
 
         jLabel72.setText("Jam keluar:");
         jLabel72.setToolTipText("");
@@ -2454,7 +2346,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropJamDisposisi.setBounds(450, 520, 28, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023 18:30:14" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023 12:41:37" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2508,7 +2400,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnShowJamNeo.setBounds(450, 1300, 28, 23);
 
         TglDerma1.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         TglDerma1.setDisplayFormat("dd-MM-yyyy");
         TglDerma1.setName("TglDerma1"); // NOI18N
         TglDerma1.setOpaque(false);
@@ -2568,6 +2460,116 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(BtnKamar1);
         BtnKamar1.setBounds(740, 1360, 28, 23);
 
+        rbHiperhidrosis.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpFungsiKelenjarKeringat.add(rbHiperhidrosis);
+        rbHiperhidrosis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbHiperhidrosis.setForeground(new java.awt.Color(50, 50, 50));
+        rbHiperhidrosis.setText("Hiperhidrosis");
+        rbHiperhidrosis.setActionCommand("Hiperhidrosis");
+        rbHiperhidrosis.setName("rbHiperhidrosis"); // NOI18N
+        rbHiperhidrosis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbHiperhidrosisActionPerformed(evt);
+            }
+        });
+        FormInput.add(rbHiperhidrosis);
+        rbHiperhidrosis.setBounds(170, 310, 98, 20);
+
+        rbAnshidrosis.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpFungsiKelenjarKeringat.add(rbAnshidrosis);
+        rbAnshidrosis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbAnshidrosis.setForeground(new java.awt.Color(50, 50, 50));
+        rbAnshidrosis.setText("Anshidrosis");
+        rbAnshidrosis.setName("rbAnshidrosis"); // NOI18N
+        rbAnshidrosis.setActionCommand("Anshidrosis");
+        rbAnshidrosis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbAnshidrosisActionPerformed(evt);
+            }
+        });
+        FormInput.add(rbAnshidrosis);
+        rbAnshidrosis.setBounds(320, 310, 110, 20);
+
+        rbBolehPulangDisposisi.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpDisposisiDerma.add(rbBolehPulangDisposisi);
+        rbBolehPulangDisposisi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbBolehPulangDisposisi.setForeground(new java.awt.Color(50, 50, 50));
+        rbBolehPulangDisposisi.setText("Boleh pulang");
+        rbBolehPulangDisposisi.setActionCommand("Boleh Pulang");
+        rbBolehPulangDisposisi.setName("rbBolehPulangDisposisi"); // NOI18N
+        rbBolehPulangDisposisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbBolehPulangDisposisiActionPerformed(evt);
+            }
+        });
+        FormInput.add(rbBolehPulangDisposisi);
+        rbBolehPulangDisposisi.setBounds(170, 520, 98, 21);
+
+        rbKontrolDisposisi.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpDisposisiDerma.add(rbKontrolDisposisi);
+        rbKontrolDisposisi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbKontrolDisposisi.setForeground(new java.awt.Color(50, 50, 50));
+        rbKontrolDisposisi.setText("Kontrol");
+        rbKontrolDisposisi.setActionCommand("Kontrol");
+        rbKontrolDisposisi.setName("rbKontrolDisposisi"); // NOI18N
+        FormInput.add(rbKontrolDisposisi);
+        rbKontrolDisposisi.setBounds(170, 550, 57, 20);
+
+        rbDirawatDisposisi.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpDisposisiDerma.add(rbDirawatDisposisi);
+        rbDirawatDisposisi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbDirawatDisposisi.setForeground(new java.awt.Color(50, 50, 50));
+        rbDirawatDisposisi.setText("Dirawat");
+        rbDirawatDisposisi.setActionCommand("Dirawat");
+        rbDirawatDisposisi.setName("rbDirawatDisposisi"); // NOI18N
+        FormInput.add(rbDirawatDisposisi);
+        rbDirawatDisposisi.setBounds(170, 580, 98, 21);
+
+        rbAda.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpAnus.add(rbAda);
+        rbAda.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbAda.setForeground(new java.awt.Color(50, 50, 50));
+        rbAda.setText("Ada");
+        rbAda.setName("rbAda"); // NOI18N
+        FormInput.add(rbAda);
+        rbAda.setBounds(170, 970, 98, 21);
+
+        rbTidakAda.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpAnus.add(rbTidakAda);
+        rbTidakAda.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbTidakAda.setForeground(new java.awt.Color(50, 50, 50));
+        rbTidakAda.setText("Tidak ada");
+        rbTidakAda.setName("rbTidakAda"); // NOI18N
+        FormInput.add(rbTidakAda);
+        rbTidakAda.setBounds(330, 970, 80, 20);
+
+        rbBolehPulangNeona.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpDisposisiNeona.add(rbBolehPulangNeona);
+        rbBolehPulangNeona.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbBolehPulangNeona.setForeground(new java.awt.Color(50, 50, 50));
+        rbBolehPulangNeona.setText("Boleh pulang");
+        rbBolehPulangNeona.setName("rbBolehPulangNeona"); // NOI18N
+        FormInput.add(rbBolehPulangNeona);
+        rbBolehPulangNeona.setBounds(170, 1300, 98, 21);
+
+        rbKontrolNeona.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpDisposisiNeona.add(rbKontrolNeona);
+        rbKontrolNeona.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbKontrolNeona.setForeground(new java.awt.Color(50, 50, 50));
+        rbKontrolNeona.setText("Kontrol");
+        rbKontrolNeona.setName("rbKontrolNeona"); // NOI18N
+        FormInput.add(rbKontrolNeona);
+        rbKontrolNeona.setBounds(170, 1330, 57, 20);
+
+        rbDirawatNeona.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpDisposisiNeona.add(rbDirawatNeona);
+        rbDirawatNeona.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbDirawatNeona.setForeground(new java.awt.Color(50, 50, 50));
+        rbDirawatNeona.setText("Dirawat");
+        rbDirawatNeona.setName("rbDirawatNeona"); // NOI18N
+        FormInput.add(rbDirawatNeona);
+        rbDirawatNeona.setBounds(170, 1360, 98, 21);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -2617,7 +2619,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2631,7 +2633,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2770,20 +2772,54 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        String fkelenjarkeringat = BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand();
+        String disposisiderma = BtnGrpDisposisiDerma.getSelection().getActionCommand();
+        String anus = BtnGrpAnus.getSelection().getActionCommand();
+        String reflek = BtnGrpReflek.getSelection().getActionCommand();
+        String disposisineona = BtnGrpDisposisiNeona.getSelection().getActionCommand();
+        
+        
+        System.out.println(BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand());
+        
+        
+        rbHiperhidrosis.isSelected();
+        
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
-        }else if(RiwPenyakitSkrg.getText().trim().equals("")){
-            Valid.textKosong(RiwPenyakitSkrg,"Riwayat Penyakit Sekarang");
-        }else if(Eflorisensi.getText().trim().equals("")){
-            Valid.textKosong(Eflorisensi,"Eflorisensi");
-        }else if(Lokalisasi.getText().trim().equals("")){
-            Valid.textKosong(Lokalisasi,"Lokalisasi");
+//        }else if(RiwPenyakitSkrg.getText().trim().equals("")){
+//            Valid.textKosong(RiwPenyakitSkrg,"Riwayat Penyakit Sekarang");
+//        }else if(Eflorisensi.getText().trim().equals("")){
+//            Valid.textKosong(Eflorisensi,"Eflorisensi");
+//        }else if(Lokalisasi.getText().trim().equals("")){
+//            Valid.textKosong(Lokalisasi,"Lokalisasi");
         }else{
-            if(Sequel.menyimpantf("tb_asesmen_awal_medis_kulit_kelamin","?,?,?,?,?,?"
-                    + "","No.Rawat",6,new String[]{
-                    TNoRw.getText(),
-                        Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19),
+            if(Sequel.menyimpantf("tb_asesmen_awal_medis_kulit_kelamin",
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
+                    + "","No.Rawat",32,new String[]{
+                    TNoRw.getText(), KdPetugas.getText(),
+                        Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
+                        KeluhanUtama.getText(), RiwPenyakitSkrg.getText(),
+                        Lokalisasi.getText(),
                         Eflorisensi.getText(),
+                        Mukosa.getText(),Rambut.getText(),Kuku.getText(),
+                        fkelenjarkeringat, KelenjarLimfe.getText(),
+                        idsyaraflist, 
+                        HasilPenunjangDerma.getText(),DiagnosaKerjaDerma.getText(),
+                        RencanaKerjaDerma.getText(), TerapiDerma.getText(),
+                        disposisiderma,
+                        JamKeluarDerma.getText(),
+                        Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19),
+                        TempatDerma.getText(),
+                        NoBed.getText(),
+                        WarnaMukosa.getText(),anus, 
+                        Turgor.getText(),
+                        HasilPenunjangNeonatologi.getText(), DiagnosaKerjaNeonatologi.getText(),
+                        RencanaKerjaNeonatologi.getText(), TerapiNeonatologi.getText(),
+                        disposisineona, 
+                        JamNeonatologi.getText(), 
+                        Valid.SetTgl(TglDerma1.getSelectedItem()+"")+" "+TglDerma1.getSelectedItem().toString().substring(11,19),
+                        TempatNeonatologi.getText(), 
+                        NoBed1.getText(),
                 HasilPenunjangNeonatologi.getText(),
                     KdPetugas.getText()
                 })==true){
@@ -3111,14 +3147,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_RiwPenyakitSkrgKeyPressed
 
-    private void cbHiperhidrosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHiperhidrosisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbHiperhidrosisActionPerformed
-
-    private void cbAnshidrosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnshidrosisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAnshidrosisActionPerformed
-
     private void LokalisasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LokalisasiKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_LokalisasiKeyPressed
@@ -3134,26 +3162,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private void TerapiNeonatologiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TerapiNeonatologiKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_TerapiNeonatologiKeyPressed
-
-    private void jCheckBox14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox14ActionPerformed
-
-    private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox15ActionPerformed
-
-    private void jCheckBox16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox16ActionPerformed
-
-    private void jCheckBox58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox58ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox58ActionPerformed
-
-    private void jCheckBox59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox59ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox59ActionPerformed
 
     private void jCheckBox17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox17ActionPerformed
         // TODO add your handling code here:
@@ -3206,18 +3214,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private void RencanaKerjaDermaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RencanaKerjaDermaKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_RencanaKerjaDermaKeyPressed
-
-    private void jCheckBox75ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox75ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox75ActionPerformed
-
-    private void jCheckBox76ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox76ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox76ActionPerformed
-
-    private void jCheckBox77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox77ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox77ActionPerformed
 
     private void StigAtopikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StigAtopikActionPerformed
         // TODO add your handling code here:
@@ -3365,11 +3361,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         } else {
             stigclick = 0;
             
-            cbHiperhidrosis.setEnabled(true);
-            cbAnshidrosis.setEnabled(true);
-            Mukosa.setVisible(true);
-            Rambut.setVisible(true);
-            Kuku.setVisible(true);
             
             //Get the components in the panel
             Component[] componentsss = jPanel1.getComponents();
@@ -5574,6 +5565,15 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnShowJamNeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnShowJamNeoActionPerformed
         // TODO add your handling code here:
+        if(timePicker2.isShowing()) {
+            BtnShowJamNeo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+        } else{
+            BtnShowJamNeo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); 
+        }
+//        BtnShowJamNeo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/drowup-24.png"))); 
+        timePicker2.showPopup(this, 100, 100);
+        
+        
     }//GEN-LAST:event_BtnShowJamNeoActionPerformed
 
     private void BtnShowJamNeoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnShowJamNeoKeyPressed
@@ -5598,11 +5598,28 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void BtnKamar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKamar1ActionPerformed
         // TODO add your handling code here:
+        dlgkamar1.isCek();
+        dlgkamar1.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dlgkamar1.setLocationRelativeTo(internalFrame1);
+        dlgkamar1.setAlwaysOnTop(false);
+        dlgkamar1.setVisible(true);
     }//GEN-LAST:event_BtnKamar1ActionPerformed
 
     private void BtnKamar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKamar1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnKamar1KeyPressed
+
+    private void rbHiperhidrosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHiperhidrosisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbHiperhidrosisActionPerformed
+
+    private void rbAnshidrosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAnshidrosisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbAnshidrosisActionPerformed
+
+    private void rbBolehPulangDisposisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbBolehPulangDisposisiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbBolehPulangDisposisiActionPerformed
 
     /**
     * @param args the command line arguments
@@ -5646,6 +5663,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnEdit;
     private widget.Button BtnEkstremnitas;
     private widget.Button BtnGenetalia;
+    private javax.swing.ButtonGroup BtnGrpAnus;
+    private javax.swing.ButtonGroup BtnGrpDisposisiDerma;
+    private javax.swing.ButtonGroup BtnGrpDisposisiNeona;
+    private javax.swing.ButtonGroup BtnGrpFungsiKelenjarKeringat;
+    private javax.swing.ButtonGroup BtnGrpReflek;
     private widget.Button BtnHapus;
     private widget.Button BtnKamar;
     private widget.Button BtnKamar1;
@@ -5682,7 +5704,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextBox JamNeonatologi;
     private widget.TextBox Jk;
     private widget.TextBox Jk23;
-    private widget.TextBox Jk25;
     private widget.TextBox Jk26;
     private widget.TextBox Jk27;
     private widget.TextBox Jk28;
@@ -5737,19 +5758,13 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.TextBox TglLahir;
     private widget.TextBox Thorax;
     private widget.TextBox Tht;
+    private widget.TextBox Turgor;
     private widget.TextBox Uub;
     private widget.TextBox WarnaMukosa;
-    private javax.swing.JCheckBox cbAnshidrosis;
-    private javax.swing.JCheckBox cbHiperhidrosis;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox58;
-    private javax.swing.JCheckBox jCheckBox59;
     private javax.swing.JCheckBox jCheckBox67;
     private javax.swing.JCheckBox jCheckBox68;
     private javax.swing.JCheckBox jCheckBox69;
@@ -5758,9 +5773,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox72;
     private javax.swing.JCheckBox jCheckBox73;
     private javax.swing.JCheckBox jCheckBox74;
-    private javax.swing.JCheckBox jCheckBox75;
-    private javax.swing.JCheckBox jCheckBox76;
-    private javax.swing.JCheckBox jCheckBox77;
     private widget.Label jLabel10;
     private widget.Label jLabel100;
     private widget.Label jLabel11;
@@ -5828,6 +5840,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Label label14;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
+    private javax.swing.JRadioButton rbAda;
+    private javax.swing.JRadioButton rbAnshidrosis;
+    private javax.swing.JRadioButton rbBolehPulangDisposisi;
+    private javax.swing.JRadioButton rbBolehPulangNeona;
+    private javax.swing.JRadioButton rbDirawatDisposisi;
+    private javax.swing.JRadioButton rbDirawatNeona;
+    private javax.swing.JRadioButton rbHiperhidrosis;
+    private javax.swing.JRadioButton rbKontrolDisposisi;
+    private javax.swing.JRadioButton rbKontrolNeona;
+    private javax.swing.JRadioButton rbTidakAda;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane10;
@@ -5844,6 +5866,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.ScrollPane scrollPane9;
     private widget.Table tbObat;
     private com.raven.swing.TimePicker timePicker1;
+    private com.raven.swing.TimePicker timePicker2;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
