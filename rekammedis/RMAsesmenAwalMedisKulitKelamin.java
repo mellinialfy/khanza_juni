@@ -31,11 +31,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -63,7 +66,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps,ps2,stat;
+    private PreparedStatement ps,ps2,stat, stig;
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0, stigclick=0, syarafclick=0, kepalaclick=0, uubclick=0, mataclick=0, thtclick=0, mulutclick=0;
     private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, ekstremclick=0, kulitclick=0;
@@ -2803,12 +2806,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                         Eflorisensi.getText(),
                         Mukosa.getText(),Rambut.getText(),Kuku.getText(),
                         fkelenjarkeringat, KelenjarLimfe.getText(),
-                        idsyaraflist, 
                         HasilPenunjangDerma.getText(),DiagnosaKerjaDerma.getText(),
                         RencanaKerjaDerma.getText(), TerapiDerma.getText(),
                         disposisiderma,
                         JamKeluarDerma.getText(),
-                        Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19),
+                        Valid.SetTgl(TglDerma.getSelectedItem().toString()),
                         TempatDerma.getText(),
                         NoBed.getText(),
                         WarnaMukosa.getText(),anus, 
@@ -2819,10 +2821,32 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                         JamNeonatologi.getText(), 
                         Valid.SetTgl(TglDerma1.getSelectedItem()+"")+" "+TglDerma1.getSelectedItem().toString().substring(11,19),
                         TempatNeonatologi.getText(), 
-                        NoBed1.getText(),
-                HasilPenunjangNeonatologi.getText(),
-                    KdPetugas.getText()
+                        NoBed1.getText()
                 })==true){
+                
+                try {
+                    stig = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_stig_atopik(no_rawat, id_stigmata_atopik)"
+                            + "values(?,?)");
+                    
+                    for(int a=0; a<idstiglist.size(); a++){
+                        stig.setString(1,TNoRw.getText());
+                        stig.setString(2,idstiglist.get(a).toString());
+                        stig.executeUpdate();
+                    }
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(RMAsesmenAwalMedisKulitKelamin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                
+                
+                    
+//                if(Sequel.menyimpantf("tb_det_ases_kul_kel_stig_atopik","?,?,?,?" + "",
+//                        "id", 4, new String[]{
+//                            "", 
+//                        }
 
                     emptTeks();
             }
