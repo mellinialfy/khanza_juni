@@ -2825,16 +2825,17 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 })==true){
                 
                 try {
-                    stig = (PreparedStatement) koneksi.prepareStatement(""
+                    if(!idstiglist.isEmpty()){
+                        stig = (PreparedStatement) koneksi.prepareStatement(""
                             + "insert into tb_det_ases_kul_kel_stig_atopik(no_rawat, id_stigmata_atopik)"
                             + "values(?,?)");
                     
-                    for(int a=0; a<idstiglist.size(); a++){
-                        stig.setString(1,TNoRw.getText());
-                        stig.setString(2,idstiglist.get(a).toString());
-                        stig.executeUpdate();
+                        for(int a=0; a<idstiglist.size(); a++){
+                            stig.setString(1,TNoRw.getText());
+                            stig.setString(2,idstiglist.get(a).toString());
+                            stig.executeUpdate();
+                        }
                     }
-                    
                 } catch (SQLException ex) {
                     Logger.getLogger(RMAsesmenAwalMedisKulitKelamin.class.getName()).log(Level.SEVERE, null, ex);
                 }
