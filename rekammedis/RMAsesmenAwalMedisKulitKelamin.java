@@ -2782,7 +2782,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         String disposisineona = BtnGrpDisposisiNeona.getSelection().getActionCommand();
         
         
-        System.out.println(BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand());
+//        System.out.println(BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand());
         
         
         rbHiperhidrosis.isSelected();
@@ -2797,7 +2797,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 //            Valid.textKosong(Lokalisasi,"Lokalisasi");
         }else{
             if(Sequel.menyimpantf("tb_asesmen_awal_medis_kulit_kelamin",
-                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
                     + "","No.Rawat",32,new String[]{
                     TNoRw.getText(), KdPetugas.getText(),
                         Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
@@ -2819,7 +2819,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                         RencanaKerjaNeonatologi.getText(), TerapiNeonatologi.getText(),
                         disposisineona, 
                         JamNeonatologi.getText(), 
-                        Valid.SetTgl(TglDerma1.getSelectedItem()+"")+" "+TglDerma1.getSelectedItem().toString().substring(11,19),
+                        Valid.SetTgl(TglDerma1.getSelectedItem().toString()),
                         TempatNeonatologi.getText(), 
                         NoBed1.getText()
                 })==true){
@@ -2837,14 +2837,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                         }
                     }
                 } catch (SQLException ex) {
+                    System.out.println("Notifikasi stig : "+ex);
+                    ex.printStackTrace();
                     Logger.getLogger(RMAsesmenAwalMedisKulitKelamin.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                
-                
-                
-                    
-//                if(Sequel.menyimpantf("tb_det_ases_kul_kel_stig_atopik","?,?,?,?" + "",
+//              if(Sequel.menyimpantf("tb_det_ases_kul_kel_stig_atopik","?,?,?,?" + "",
 //                        "id", 4, new String[]{
 //                            "", 
 //                        }
