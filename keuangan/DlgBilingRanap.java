@@ -5767,8 +5767,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         psralanperawat.setString(2,rskategori.getString(1));
                         rsralanperawat=psralanperawat.executeQuery();  
 
+                        
                         psranapperawat.setString(1,norawat);
                         psranapperawat.setString(2,rskategori.getString(1));
+                        System.out.println(psranapperawat);
                         rsranapperawat=psranapperawat.executeQuery();
 
                         subttl=0;   

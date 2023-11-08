@@ -69,7 +69,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
         setSize(885,674);
 
         Object[] rowRwJlDr={"Tanggal","No.Nota","No.RM","Nama Pasien","Jenis Bayar","Perujuk",
-                            "Registrasi","Obat+Emb+Tsl","Paket Tindakan","Operasi",
+                            "Registrasi","Alkes","BHP","Obat+Emb+Tsl","Paket Tindakan","Operasi",
                             "Laborat","Radiologi","Tambahan","Potongan",
                             "Total","Ekses","Sudah Dibayar","Diskon Bayar","Tidak Terbayar","Sisa","Dokter"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
@@ -80,7 +80,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 21; i++) {
+        for (i = 0; i < 23; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(65);
@@ -906,20 +906,29 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 status="and piutang_pasien.status='Belum Lunas'";
             }
             ps= koneksi.prepareStatement("select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,reg_periksa.tgl_registrasi,dokter.nm_dokter,penjab.png_jawab, "+
-                        "piutang_pasien.uangmuka,piutang_pasien.totalpiutang "+
+                        "piutang_pasien.uangmuka,piutang_pasien.totalpiutang, "+
+                        "(COALESCE(SUM(rawat_jl_dr.material), 0)+COALESCE(SUM(rawat_jl_drpr.material), 0)+COALESCE(SUM(rawat_jl_pr.material), 0)) AS material, " +
+                        "(COALESCE(SUM(rawat_jl_dr.bhp), 0)+COALESCE(SUM(rawat_jl_drpr.bhp), 0)+COALESCE(SUM(rawat_jl_pr.bhp), 0)) AS bhp "+
                         "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                         "inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
                         "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                         "inner join piutang_pasien on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                        "where reg_periksa.status_lanjut='Ralan' "+status+" and reg_periksa.tgl_registrasi between ? and ? "+
-                        "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and concat(reg_periksa.kd_poli,poliklinik.nm_poli) like ? "+
+                        "LEFT JOIN rawat_jl_dr ON reg_periksa.no_rawat=rawat_jl_dr.no_rawat " +
+                        "LEFT JOIN rawat_jl_drpr ON reg_periksa.no_rawat=rawat_jl_drpr.no_rawat " +
+                        "LEFT JOIN rawat_jl_pr ON reg_periksa.no_rawat=rawat_jl_pr.no_rawat "+
+                        "where reg_periksa.status_lanjut='Ralan' "+status+" and reg_periksa.tgl_registrasi between ? and ? "
+                                + "AND reg_periksa.`no_rawat` =  rawat_jl_dr.`no_rawat`"+
+                        "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and concat(reg_periksa.kd_poli,poliklinik.nm_poli) like ? "
+                                + "GROUP BY rawat_jl_dr.no_rawat, rawat_jl_drpr.`no_rawat`, rawat_jl_pr.`no_rawat`"+
                         "order by reg_periksa.tgl_registrasi");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 ps.setString(3,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
                 ps.setString(4,"%"+KdPoli.getText()+NmPoli.getText()+"%");
+                
+                System.out.println(ps);
                 rs=ps.executeQuery();
                 all=0;
                 ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;ttlRalan_Dokter=0;ttlRalan_Paramedis=0;ttlTambahan=0;ttlPotongan=0;ttlRegistrasi=0;ttlekses=0;ttldibayar=0;ttlsisa=0;ttldiskon=0;ttltidakdibayar=0;
@@ -1001,7 +1010,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         Sequel.cariIsi("select nota_jalan.no_nota from nota_jalan where nota_jalan.no_rawat=?",rs.getString("no_rawat")),
                         rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("png_jawab"),
                         Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?",rs.getString("no_rawat")),
-                        Valid.SetAngka(Registrasi),Valid.SetAngka(Obat),Valid.SetAngka(Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis),
+                        Valid.SetAngka(Registrasi),Valid.SetAngka(rs.getDouble("material")),Valid.SetAngka(rs.getDouble("bhp")),Valid.SetAngka(Obat),Valid.SetAngka(Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis),
                         Valid.SetAngka(Operasi),Valid.SetAngka(Laborat),Valid.SetAngka(Radiologi),Valid.SetAngka(Tambahan),Valid.SetAngka(Potongan),
                         Valid.SetAngka(Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi),
                         Valid.SetAngka(ekses),Valid.SetAngka(dibayar),Valid.SetAngka(diskon),Valid.SetAngka(tidakdibayar),Valid.SetAngka(sisa),rs.getString("nm_dokter")
@@ -1011,7 +1020,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 LCount2.setText(""+tabMode.getRowCount());
                 if(tabMode.getRowCount()>0){
                     tabMode.addRow(new Object[] {
-                            ">> Total",":","","","","",Valid.SetAngka(ttlRegistrasi),Valid.SetAngka(ttlObat),Valid.SetAngka(ttlRalan_Dokter+ttlRalan_Paramedis),
+                            ">> Total",":","","","","",Valid.SetAngka(ttlRegistrasi),"","",Valid.SetAngka(ttlObat),Valid.SetAngka(ttlRalan_Dokter+ttlRalan_Paramedis),
                             Valid.SetAngka(ttlOperasi),Valid.SetAngka(ttlLaborat),Valid.SetAngka(ttlRadiologi),Valid.SetAngka(ttlTambahan),Valid.SetAngka(ttlPotongan),
                             Valid.SetAngka(ttlLaborat+ttlRadiologi+ttlObat+ttlRalan_Dokter+ttlRalan_Paramedis+ttlTambahan+ttlPotongan+ttlRegistrasi+ttlOperasi),
                             Valid.SetAngka(ttlekses),Valid.SetAngka(ttldibayar),Valid.SetAngka(ttldiskon),Valid.SetAngka(ttltidakdibayar),Valid.SetAngka(ttlsisa),""
