@@ -68,7 +68,9 @@ public final class DlgPiutangRanap extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] rowRwJlDr={"Tgl.Pulang","No.Nota","No.RM","Nama Pasien","Jenis Bayar","Perujuk","Registrasi","Tindakan","Obt+Emb+Tsl","Retur Obat","Resep Pulang",
+        Object[] rowRwJlDr={"Tgl.Masuk","Tgl.Pulang","No.Nota","No.RM","Nama Pasien","Jenis Bayar","Perujuk",
+                            "Admin", "Alkes", "BHP",
+                            "Registrasi","Tindakan","Obt+Emb+Tsl","Retur Obat","Resep Pulang",
                             "Laborat","Radiologi","Potongan","Tambahan","Kamar+Service","Operasi","Harian","Total","Ekses","Sudah Dibayar","Diskon Bayar",
                             "Tidak Terbayar","Sisa","Nama Kamar"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
@@ -79,7 +81,7 @@ public final class DlgPiutangRanap extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 29; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(70);
@@ -845,20 +847,40 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 status="and piutang_pasien.status='Belum Lunas'";
             }
             ps= koneksi.prepareStatement(
-                "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,kamar_inap.tgl_keluar, "+
-                "penjab.png_jawab,kamar_inap.stts_pulang,kamar.kd_kamar, bangsal.nm_bangsal,piutang_pasien.uangmuka,piutang_pasien.totalpiutang "+
+                "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,kamar_inap.tgl_masuk,kamar_inap.tgl_keluar, "+
+                "penjab.png_jawab,kamar_inap.stts_pulang,kamar.kd_kamar, bangsal.nm_bangsal,piutang_pasien.uangmuka,piutang_pasien.totalpiutang, "
+                    + "(COALESCE(SUM(rawat_inap_dr.material), 0)+COALESCE(SUM(rawat_inap_drpr.material), 0)+COALESCE(SUM(rawat_inap_pr.material), 0)) AS material, " +
+                    "(COALESCE(SUM(rawat_inap_dr.bhp), 0)+COALESCE(SUM(rawat_inap_drpr.bhp), 0)+COALESCE(SUM(rawat_inap_pr.bhp), 0)) AS bhp, "
+                  + "(IFNULL((SELECT COALESCE(SUM(rawat_inap_pr.menejemen), 0) " +
+                    "FROM rawat_inap_pr " +
+                    "INNER JOIN jns_perawatan_inap ON jns_perawatan_inap.`kd_jenis_prw`=rawat_inap_pr.`kd_jenis_prw` " +
+                    "WHERE kamar_inap.tgl_keluar BETWEEN ? AND ? " +
+                    "AND reg_periksa.`no_rawat` =  rawat_inap_pr.`no_rawat` " +
+                    "AND CONCAT(reg_periksa.kd_pj,penjab.png_jawab) LIKE '%%' " +
+                    "AND jns_perawatan_inap.`nm_perawatan` = 'ADMINISTRASI RAWAT INAP' " +
+                    "GROUP BY rawat_inap_pr.`no_rawat` " +
+                    "ORDER BY kamar_inap.tgl_keluar,kamar_inap.jam_keluar " +
+                    "),0)) AS menejemen "+
                 "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                 "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                 "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                "inner join piutang_pasien on piutang_pasien.no_rawat=reg_periksa.no_rawat where "+
+                "inner join piutang_pasien on piutang_pasien.no_rawat=reg_periksa.no_rawat "
+                    + "LEFT JOIN rawat_inap_dr ON reg_periksa.no_rawat=rawat_inap_dr.no_rawat " +
+                    "LEFT JOIN rawat_inap_drpr ON reg_periksa.no_rawat=rawat_inap_drpr.no_rawat " +
+                    "LEFT JOIN rawat_inap_pr ON reg_periksa.no_rawat=rawat_inap_pr.no_rawat "
+                        + "where "+
                 "kamar_inap.tgl_keluar between ? and ? "+status+" and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? "+
-                "order by kamar_inap.tgl_keluar,kamar_inap.jam_keluar");
+                    "AND reg_periksa.`no_rawat` =  rawat_inap_pr.`no_rawat` " +
+                    "GROUP BY rawat_inap_dr.no_rawat, rawat_inap_drpr.`no_rawat`, rawat_inap_pr.`no_rawat` "
+                + "order by kamar_inap.tgl_keluar,kamar_inap.jam_keluar");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(3,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
+                ps.setString(3,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                ps.setString(4,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                ps.setString(5,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
                 System.out.println(ps);
                 rs=ps.executeQuery();
                 all=0;ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;
@@ -1261,9 +1283,11 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             ttlsisa=ttlsisa+sisa;
 
                             tabMode.addRow(new Object[]{
-                                rs.getString("tgl_keluar"),Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_rawat")),
+                                rs.getString("tgl_masuk"),rs.getString("tgl_keluar"),Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_rawat")),
                                 rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("png_jawab"),
-                                Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?",rs.getString("no_rawat")),Valid.SetAngka(Registrasi),
+                                Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?",rs.getString("no_rawat")),
+                                Valid.SetAngka(rs.getDouble("menejemen")),Valid.SetAngka(rs.getDouble("material")),Valid.SetAngka(rs.getDouble("bhp")),
+                                Valid.SetAngka(Registrasi),
                                 Valid.SetAngka(Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis),
                                 Valid.SetAngka(Obat),Valid.SetAngka(Retur_Obat),Valid.SetAngka(Resep_Pulang),Valid.SetAngka(Laborat),Valid.SetAngka(Radiologi),Valid.SetAngka(Potongan),
                                 Valid.SetAngka(Tambahan),Valid.SetAngka(Kamar+Service),Valid.SetAngka(Operasi),Valid.SetAngka(Harian),Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
@@ -1278,7 +1302,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 LCount2.setText(""+tabMode.getRowCount());
                 if(tabMode.getRowCount()>0){
                     tabMode.addRow(new Object[]{
-                            ">> Total ",":","","","","",Valid.SetAngka(ttlRegistrasi),Valid.SetAngka(ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis),
+                            ">> Total ",":","","","","","","","","",Valid.SetAngka(ttlRegistrasi),Valid.SetAngka(ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis),
                             Valid.SetAngka(ttlObat),Valid.SetAngka(ttlRetur_Obat),Valid.SetAngka(ttlResep_Pulang),Valid.SetAngka(ttlLaborat),Valid.SetAngka(ttlRadiologi),Valid.SetAngka(ttlPotongan),
                             Valid.SetAngka(ttlTambahan),Valid.SetAngka(ttlKamar+ttlService),Valid.SetAngka(ttlOperasi),Valid.SetAngka(ttlHarian),Valid.SetAngka(all),
                             Valid.SetAngka(ttlekses),Valid.SetAngka(ttldibayar),Valid.SetAngka(ttldiskon),Valid.SetAngka(ttltidakdibayar),Valid.SetAngka(ttlsisa),""
