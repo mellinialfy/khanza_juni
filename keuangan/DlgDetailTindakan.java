@@ -3718,8 +3718,6 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     ps.setString(48,"%"+TCari.getText().trim()+"%");
                 }
                 
-                
-                System.out.println(ps);
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;kso=0;menejemen=0;total=0;
@@ -5084,7 +5082,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     ps.setString(35,"%"+TCari.getText().trim()+"%");
                 }
                     
-                System.out.println(ps);
+                
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;kso=0;menejemen=0;total=0;
@@ -5320,7 +5318,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 }
                     
                 rs=ps.executeQuery();
-                System.out.println(ps);
+                
                 i=1;
                 material=0;bhp=0;jmpetugas=0;kso=0;menejemen=0;total=0;
                 while(rs.next()){

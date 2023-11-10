@@ -512,6 +512,8 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jenis Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Perujuk</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Registrasi</td>"+
+                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Alkes</td>"+
+                                         "<td valign='middle' bgcolor='#FFFAFA' align='center'>BHP</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Obat+Emb+Tsl</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Paket Tindakan</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operasi</td>"+
@@ -551,7 +553,9 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,17)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,18)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,19)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,21)+"</td>"+
+                                        "<td valign='top'>"+tabMode.getValueAt(i,22)+"</td>"+
                                     "</tr>"
                                 ); 
                             }            
@@ -592,6 +596,8 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jenis Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Perujuk</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Registrasi</td>"+
+                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Alkes</td>"+
+                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>BHP</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Obat+Emb+Tsl</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Paket Tindakan</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operasi</td>"+
@@ -631,7 +637,9 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,17)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,18)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,19)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,21)+"</td>"+
+                                        "<td valign='top'>"+tabMode.getValueAt(i,22)+"</td>"+
                                     "</tr>"
                                 ); 
                             }           
@@ -664,11 +672,11 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
                             htmlContent.append(                             
-                                "\"Tanggal\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Jenis Bayar\";\"Perujuk\";\"Registrasi\";\"Obat+Emb+Tsl\";\"Paket Tindakan\";\"Operasi\";\"Laborat\";\"Radiologi\";\"Tambahan\";\"Potongan\";\"Total\";\"Ekses\";\"Sudah Dibayar\";\"Diskon Bayar\";\"Tidak Terbayar\";\"Sisa\";\"Dokter\"\n"
+                                "\"Tanggal\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Jenis Bayar\";\"Perujuk\";\"Registrasi\";\"Alkes\";\"BHP\";\"Obat+Emb+Tsl\";\"Paket Tindakan\";\"Operasi\";\"Laborat\";\"Radiologi\";\"Tambahan\";\"Potongan\";\"Total\";\"Ekses\";\"Sudah Dibayar\";\"Diskon Bayar\";\"Tidak Terbayar\";\"Sisa\";\"Dokter\"\n"
                             ); 
                             for(i=0;i<tabMode.getRowCount();i++){  
                                 htmlContent.append(                             
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\"\n"
+                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\";\""+tabMode.getValueAt(i,21)+"\";\""+tabMode.getValueAt(i,22)+"\"\n"
                                 ); 
                             }            
 
@@ -928,7 +936,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 ps.setString(3,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
                 ps.setString(4,"%"+KdPoli.getText()+NmPoli.getText()+"%");
                 
-                System.out.println(ps);
+                
                 rs=ps.executeQuery();
                 all=0;
                 ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;ttlRalan_Dokter=0;ttlRalan_Paramedis=0;ttlTambahan=0;ttlPotongan=0;ttlRegistrasi=0;ttlekses=0;ttldibayar=0;ttlsisa=0;ttldiskon=0;ttltidakdibayar=0;
