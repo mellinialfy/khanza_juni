@@ -103,6 +103,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     List<String> ekstremnitaslist = new ArrayList<>();
     List<Integer> idkulitlist = new ArrayList<>();
     List<String> kulitlist = new ArrayList<>();
+    String fkelenjarkeringat;
+    String disposisiderma;
+    String anus;
+    String reflek;
+    String disposisineona;
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -922,7 +927,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglDerma.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
+        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
         TglDerma.setDisplayFormat("dd-MM-yyyy");
         TglDerma.setName("TglDerma"); // NOI18N
         TglDerma.setOpaque(false);
@@ -1665,6 +1670,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
         JamKeluarDerma.setHighlighter(null);
         JamKeluarDerma.setName("JamKeluarDerma"); // NOI18N
+        JamKeluarDerma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JamKeluarDermaActionPerformed(evt);
+            }
+        });
         FormInput.add(JamKeluarDerma);
         JamKeluarDerma.setBounds(370, 520, 80, 23);
 
@@ -2349,7 +2359,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropJamDisposisi.setBounds(450, 520, 28, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023 12:41:37" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023 08:58:04" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2403,7 +2413,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnShowJamNeo.setBounds(450, 1300, 28, 23);
 
         TglDerma1.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
+        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
         TglDerma1.setDisplayFormat("dd-MM-yyyy");
         TglDerma1.setName("TglDerma1"); // NOI18N
         TglDerma1.setOpaque(false);
@@ -2516,7 +2526,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbKontrolDisposisi.setActionCommand("Kontrol");
         rbKontrolDisposisi.setName("rbKontrolDisposisi"); // NOI18N
         FormInput.add(rbKontrolDisposisi);
-        rbKontrolDisposisi.setBounds(170, 550, 57, 20);
+        rbKontrolDisposisi.setBounds(170, 550, 90, 20);
 
         rbDirawatDisposisi.setBackground(new java.awt.Color(255, 255, 255));
         BtnGrpDisposisiDerma.add(rbDirawatDisposisi);
@@ -2561,8 +2571,13 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbKontrolNeona.setForeground(new java.awt.Color(50, 50, 50));
         rbKontrolNeona.setText("Kontrol");
         rbKontrolNeona.setName("rbKontrolNeona"); // NOI18N
+        rbKontrolNeona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbKontrolNeonaActionPerformed(evt);
+            }
+        });
         FormInput.add(rbKontrolNeona);
-        rbKontrolNeona.setBounds(170, 1330, 57, 20);
+        rbKontrolNeona.setBounds(170, 1330, 80, 20);
 
         rbDirawatNeona.setBackground(new java.awt.Color(255, 255, 255));
         BtnGrpDisposisiNeona.add(rbDirawatNeona);
@@ -2622,7 +2637,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2636,7 +2651,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2740,7 +2755,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormMasalahRencana.setName("FormPenilaian"); // NOI18N
         FormMasalahRencana.setLayout(new java.awt.GridLayout(1, 0, 1, 1));
 
-        scrollPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 254)), "Hasil USG Urologi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        scrollPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 254)), "Asesmen Awal Medis Kulit Kelamin", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         scrollPane6.setName("scrollPane6"); // NOI18N
 
         DetailRencana.setEditable(false);
@@ -2758,7 +2773,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         scrollPane6.setViewportView(DetailRencana);
 
         FormMasalahRencana.add(scrollPane6);
-        scrollPane6.getAccessibleContext().setAccessibleName("Buli :");
+        scrollPane6.getAccessibleContext().setAccessibleName("Asesmen Awal Medis Kulit Kelamin");
         scrollPane6.getAccessibleContext().setAccessibleDescription("");
 
         PanelAccor.add(FormMasalahRencana, java.awt.BorderLayout.CENTER);
@@ -2775,11 +2790,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        String fkelenjarkeringat = BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand();
-        String disposisiderma = BtnGrpDisposisiDerma.getSelection().getActionCommand();
-        String anus = BtnGrpAnus.getSelection().getActionCommand();
-        String reflek = BtnGrpReflek.getSelection().getActionCommand();
-        String disposisineona = BtnGrpDisposisiNeona.getSelection().getActionCommand();
+        fkelenjarkeringat = BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand();
+        disposisiderma = BtnGrpDisposisiDerma.getSelection().getActionCommand();
+        anus = BtnGrpAnus.getSelection().getActionCommand();
+        reflek = BtnGrpReflek.getSelection().getActionCommand();
+        disposisineona = BtnGrpDisposisiNeona.getSelection().getActionCommand();
         
         
 //        System.out.println(BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand());
@@ -2797,8 +2812,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 //            Valid.textKosong(Lokalisasi,"Lokalisasi");
         }else{
             if(Sequel.menyimpantf("tb_asesmen_awal_medis_kulit_kelamin",
-                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
-                    + "","No.Rawat",32,new String[]{
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
+                    + "","No.Rawat",33,new String[]{
                     TNoRw.getText(), KdPetugas.getText(),
                         Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
                         KeluhanUtama.getText(), RiwPenyakitSkrg.getText(),
@@ -5644,6 +5659,14 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbBolehPulangDisposisiActionPerformed
 
+    private void rbKontrolNeonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKontrolNeonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbKontrolNeonaActionPerformed
+
+    private void JamKeluarDermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JamKeluarDermaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JamKeluarDermaActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -6445,13 +6468,48 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     }
    
     public void emptTeks() {
+        TglAsuhan.setDate(new Date());
         TglDerma.setDate(new Date());
-        Eflorisensi.setText("");
+        TglDerma1.setDate(new Date());
+        KeluhanUtama.setText("");
+        RiwPenyakitSkrg.setText("");
+        Lokalisasi.setText("");
+        Mukosa.setText("");
+        Rambut.setText("");
+        Kuku.setText("");
+        KelenjarLimfe.setText("");
+        HasilPenunjangDerma.setText("");
+        DiagnosaKerjaDerma.setText("");
+        RencanaKerjaDerma.setText("");
+        TerapiDerma.setText("");
+        TempatDerma.setText("");
+        NoBed.setText("");
+        WarnaMukosa.setText("");
+        Turgor.setText("");
         HasilPenunjangNeonatologi.setText("");
+        DiagnosaKerjaNeonatologi.setText("");
+        RencanaKerjaNeonatologi.setText("");
+        TerapiNeonatologi.setText("");
+        TempatNeonatologi.setText("");
+        NoBed1.setText("");
+        Eflorisensi.setText("");
+        
+        fkelenjarkeringat = "";
+        disposisiderma = "";
+        anus = "";
+        reflek = "";
+        disposisineona = "";
+        
+        BtnGrpFungsiKelenjarKeringat.clearSelection();
+        BtnGrpDisposisiDerma.clearSelection();
+        BtnGrpAnus.clearSelection();
+        BtnGrpReflek.clearSelection();
+        BtnGrpDisposisiNeona.clearSelection();
         
         for (i = 0; i < tabModeMasalah.getRowCount(); i++) {
             tabModeMasalah.setValueAt(false,i,0);
         }
+        
         TabRawat.setSelectedIndex(0);
     }
 

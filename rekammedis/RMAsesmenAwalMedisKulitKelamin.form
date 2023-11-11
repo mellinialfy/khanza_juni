@@ -613,7 +613,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="31-10-2023"/>
+                                <StringItem index="0" value="11-11-2023"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -2141,6 +2141,9 @@
                             </Property>
                             <Property name="name" type="java.lang.String" value="JamKeluarDerma" noResource="true"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JamKeluarDermaActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="370" y="520" width="80" height="23"/>
@@ -3062,7 +3065,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="31-10-2023 14:51:04"/>
+                                <StringItem index="0" value="11-11-2023 08:58:04"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -3130,7 +3133,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="31-10-2023"/>
+                                <StringItem index="0" value="11-11-2023"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -3334,7 +3337,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="170" y="550" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="170" y="550" width="90" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -3447,9 +3450,12 @@
                             <Property name="text" type="java.lang.String" value="Kontrol"/>
                             <Property name="name" type="java.lang.String" value="rbKontrolNeona" noResource="true"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbKontrolNeonaActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="170" y="1330" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="170" y="1330" width="80" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -3576,7 +3582,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="31-10-2023"/>
+                            <StringItem index="0" value="11-11-2023"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -3604,7 +3610,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="31-10-2023"/>
+                            <StringItem index="0" value="11-11-2023"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -3820,7 +3826,7 @@
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder justification="1" position="2" title="Hasil USG Urologi">
+                                <TitledBorder justification="1" position="2" title="Asesmen Awal Medis Kulit Kelamin">
                                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                                     <LineBorder>
                                       <Color PropertyName="color" blue="fe" green="ff" red="ff" type="rgb"/>
@@ -3834,7 +3840,7 @@
                             <Property name="name" type="java.lang.String" value="scrollPane6" noResource="true"/>
                           </Properties>
                           <AccessibilityProperties>
-                            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Buli :"/>
+                            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Asesmen Awal Medis Kulit Kelamin"/>
                             <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
                           </AccessibilityProperties>
 
