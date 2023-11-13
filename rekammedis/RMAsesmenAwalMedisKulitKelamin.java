@@ -66,7 +66,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps,ps2,stat, stig;
+    private PreparedStatement ps,ps2,stat, stig,syaraf,kepala,uub,mata,tht,mulut,thorax,abdomen,tpusat,punggung,ekstrem,kulit,genet;
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0, stigclick=0, syarafclick=0, kepalaclick=0, uubclick=0, mataclick=0, thtclick=0, mulutclick=0;
     private int thoraxclick=0, abdomenclick=0, tpusatclick=0, punggungclick=0, ekstremclick=0, kulitclick=0;
@@ -119,9 +119,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","J.K.",
-            "Tgl.Lahir","Tgl Periksa",
-            "Ginjal Kanan","Ginjal Kiri","Buli",
-            "Kode Dokter","Nama Petugas"
+            "Tgl.Lahir","Tgl Periksa", 
+            "Kode Dokter","Nama Dokter"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -359,6 +358,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnGrpAnus = new javax.swing.ButtonGroup();
         BtnGrpReflek = new javax.swing.ButtonGroup();
         BtnGrpDisposisiNeona = new javax.swing.ButtonGroup();
+        BtnGrpGenetalia = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -449,7 +449,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel59 = new widget.Label();
         jLabel60 = new widget.Label();
         jLabel61 = new widget.Label();
-        jLabel62 = new widget.Label();
         jLabel63 = new widget.Label();
         jLabel64 = new widget.Label();
         jLabel65 = new widget.Label();
@@ -527,8 +526,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropPunggung = new widget.Button();
         BtnPunggung = new widget.Button();
         Genetalia = new widget.TextBox();
-        BtnDropGenetalia = new widget.Button();
-        BtnGenetalia = new widget.Button();
         Ekstremnitas = new widget.TextBox();
         BtnDropEkstremnitas = new widget.Button();
         BtnEkstremnitas = new widget.Button();
@@ -557,6 +554,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbBolehPulangNeona = new javax.swing.JRadioButton();
         rbKontrolNeona = new javax.swing.JRadioButton();
         rbDirawatNeona = new javax.swing.JRadioButton();
+        jLabel78 = new widget.Label();
+        rbKelainan = new javax.swing.JRadioButton();
+        rbNormal = new javax.swing.JRadioButton();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -927,7 +927,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglDerma.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
+        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2023" }));
         TglDerma.setDisplayFormat("dd-MM-yyyy");
         TglDerma.setName("TglDerma"); // NOI18N
         TglDerma.setOpaque(false);
@@ -1334,12 +1334,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel61.setName("jLabel61"); // NOI18N
         FormInput.add(jLabel61);
         jLabel61.setBounds(0, 910, 150, 23);
-
-        jLabel62.setText("Genetalia");
-        jLabel62.setToolTipText("");
-        jLabel62.setName("jLabel62"); // NOI18N
-        FormInput.add(jLabel62);
-        jLabel62.setBounds(0, 940, 150, 23);
 
         jLabel63.setText("Anus:");
         jLabel63.setToolTipText("");
@@ -2204,43 +2198,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             }
         });
         FormInput.add(Genetalia);
-        Genetalia.setBounds(170, 940, 640, 23);
-
-        BtnDropGenetalia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/dropdown-24.png"))); // NOI18N
-        BtnDropGenetalia.setMnemonic('2');
-        BtnDropGenetalia.setToolTipText("Alt+2");
-        BtnDropGenetalia.setName("BtnDropGenetalia"); // NOI18N
-        BtnDropGenetalia.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnDropGenetalia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDropGenetaliaActionPerformed(evt);
-            }
-        });
-        BtnDropGenetalia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnDropGenetaliaKeyPressed(evt);
-            }
-        });
-        FormInput.add(BtnDropGenetalia);
-        BtnDropGenetalia.setBounds(810, 940, 28, 23);
-
-        BtnGenetalia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnGenetalia.setMnemonic('2');
-        BtnGenetalia.setToolTipText("Alt+2");
-        BtnGenetalia.setName("BtnGenetalia"); // NOI18N
-        BtnGenetalia.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnGenetalia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnGenetaliaActionPerformed(evt);
-            }
-        });
-        BtnGenetalia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnGenetaliaKeyPressed(evt);
-            }
-        });
-        FormInput.add(BtnGenetalia);
-        BtnGenetalia.setBounds(840, 940, 28, 23);
+        Genetalia.setBounds(440, 940, 370, 23);
 
         Ekstremnitas.setHighlighter(null);
         Ekstremnitas.setName("Ekstremnitas"); // NOI18N
@@ -2359,7 +2317,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropJamDisposisi.setBounds(450, 520, 28, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023 08:58:04" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2023 09:22:53" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2413,7 +2371,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnShowJamNeo.setBounds(450, 1300, 28, 23);
 
         TglDerma1.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
+        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2023" }));
         TglDerma1.setDisplayFormat("dd-MM-yyyy");
         TglDerma1.setName("TglDerma1"); // NOI18N
         TglDerma1.setOpaque(false);
@@ -2544,6 +2502,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbAda.setForeground(new java.awt.Color(50, 50, 50));
         rbAda.setText("Ada");
         rbAda.setName("rbAda"); // NOI18N
+        rbAda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbAdaActionPerformed(evt);
+            }
+        });
         FormInput.add(rbAda);
         rbAda.setBounds(170, 970, 98, 21);
 
@@ -2587,6 +2550,30 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbDirawatNeona.setName("rbDirawatNeona"); // NOI18N
         FormInput.add(rbDirawatNeona);
         rbDirawatNeona.setBounds(170, 1360, 98, 21);
+
+        jLabel78.setText("Genetalia:");
+        jLabel78.setToolTipText("");
+        jLabel78.setName("jLabel78"); // NOI18N
+        FormInput.add(jLabel78);
+        jLabel78.setBounds(0, 940, 150, 23);
+
+        rbKelainan.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpGenetalia.add(rbKelainan);
+        rbKelainan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbKelainan.setForeground(new java.awt.Color(50, 50, 50));
+        rbKelainan.setText("Kelainan:");
+        rbKelainan.setName("rbKelainan"); // NOI18N
+        FormInput.add(rbKelainan);
+        rbKelainan.setBounds(330, 940, 98, 21);
+
+        rbNormal.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGrpGenetalia.add(rbNormal);
+        rbNormal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        rbNormal.setForeground(new java.awt.Color(50, 50, 50));
+        rbNormal.setText("Normal");
+        rbNormal.setName("rbNormal"); // NOI18N
+        FormInput.add(rbNormal);
+        rbNormal.setBounds(170, 940, 56, 20);
 
         scrollInput.setViewportView(FormInput);
 
@@ -2637,7 +2624,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2651,7 +2638,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2773,7 +2760,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         scrollPane6.setViewportView(DetailRencana);
 
         FormMasalahRencana.add(scrollPane6);
-        scrollPane6.getAccessibleContext().setAccessibleName("Asesmen Awal Medis Kulit Kelamin");
         scrollPane6.getAccessibleContext().setAccessibleDescription("");
 
         PanelAccor.add(FormMasalahRencana, java.awt.BorderLayout.CENTER);
@@ -2800,7 +2786,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 //        System.out.println(BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand());
         
         
-        rbHiperhidrosis.isSelected();
+        
         
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
@@ -2851,6 +2837,172 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                             stig.executeUpdate();
                         }
                     }
+                    
+                    if(!idsyaraflist.isEmpty()){
+                        syaraf = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_syaraf(no_rawat, id_syaraf)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idsyaraflist.size(); a++){
+                            syaraf.setString(1,TNoRw.getText());
+                            syaraf.setString(2,idsyaraflist.get(a).toString());
+                            syaraf.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idkepalalist.isEmpty()){
+                        kepala = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_kepala(no_rawat, id_kepala)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idkepalalist.size(); a++){
+                            kepala.setString(1,TNoRw.getText());
+                            kepala.setString(2,idkepalalist.get(a).toString());
+                            kepala.executeUpdate();
+                        }
+                    }
+                    
+                    if(!iduublist.isEmpty()){
+                        uub = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_uub(no_rawat, id_uub)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<iduublist.size(); a++){
+                            uub.setString(1,TNoRw.getText());
+                            uub.setString(2,iduublist.get(a).toString());
+                            uub.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idmatalist.isEmpty()){
+                        mata = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_mata(no_rawat, id_mata)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idmatalist.size(); a++){
+                            mata.setString(1,TNoRw.getText());
+                            mata.setString(2,idmatalist.get(a).toString());
+                            mata.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idthtlist.isEmpty()){
+                        tht = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_tht(no_rawat, id_tht)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idthtlist.size(); a++){
+                            tht.setString(1,TNoRw.getText());
+                            tht.setString(2,idthtlist.get(a).toString());
+                            tht.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idmulutlist.isEmpty()){
+                        mulut = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_mulut(no_rawat, id_mulut)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idmulutlist.size(); a++){
+                            mulut.setString(1,TNoRw.getText());
+                            mulut.setString(2,idmulutlist.get(a).toString());
+                            mulut.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idthoraxlist.isEmpty()){
+                        thorax = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_thorax(no_rawat, id_thorax)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idthoraxlist.size(); a++){
+                            thorax.setString(1,TNoRw.getText());
+                            thorax.setString(2,idthoraxlist.get(a).toString());
+                            thorax.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idabdomenlist.isEmpty()){
+                        abdomen = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_abdomen(no_rawat, id_abdomen)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idabdomenlist.size(); a++){
+                            abdomen.setString(1,TNoRw.getText());
+                            abdomen.setString(2,idabdomenlist.get(a).toString());
+                            abdomen.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idtalipusatlist.isEmpty()){
+                        tpusat = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_tpusat(no_rawat, id_tali_pusat)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idtalipusatlist.size(); a++){
+                            tpusat.setString(1,TNoRw.getText());
+                            tpusat.setString(2,idtalipusatlist.get(a).toString());
+                            tpusat.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idpunggunglist.isEmpty()){
+                        punggung = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_punggung(no_rawat, id_punggung)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idpunggunglist.size(); a++){
+                            punggung.setString(1,TNoRw.getText());
+                            punggung.setString(2,idpunggunglist.get(a).toString());
+                            punggung.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idekstremnitaslist.isEmpty()){
+                        ekstrem = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_ekstremnitas(no_rawat, id_ekstrem)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idekstremnitaslist.size(); a++){
+                            ekstrem.setString(1,TNoRw.getText());
+                            ekstrem.setString(2,idekstremnitaslist.get(a).toString());
+                            ekstrem.executeUpdate();
+                        }
+                    }
+                    
+                    if(!idkulitlist.isEmpty()){
+                        kulit = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_ases_kul_kel_kulit(no_rawat, id_kulit)"
+                            + "values(?,?)");
+                    
+                        for(int a=0; a<idkulitlist.size(); a++){
+                            kulit.setString(1,TNoRw.getText());
+                            kulit.setString(2,idkulitlist.get(a).toString());
+                            kulit.executeUpdate();
+                        }
+                    }
+                    
+                    if(BtnGrpGenetalia.getSelection().getActionCommand()=="Kelainan:"){
+                        genet = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_kelainan_genetalia(no_rawat, kelainan_genetalia)"
+                            + "values(?,?)");
+                    
+//                        for(int a=0; a<idkulitlist.size(); a++){
+                            genet.setString(1,TNoRw.getText());
+                            genet.setString(2,Genetalia.getText());
+                            genet.executeUpdate();
+//                        }
+                    } else {
+                        genet = (PreparedStatement) koneksi.prepareStatement(""
+                            + "insert into tb_det_kelainan_genetalia(no_rawat, kelainan_genetalia)"
+                            + "values(?,?)");
+                        
+                        genet.setString(1,TNoRw.getText());
+                            genet.setString(2,"Normal");
+                            genet.executeUpdate();
+                    }
+                    
+                    
                 } catch (SQLException ex) {
                     System.out.println("Notifikasi stig : "+ex);
                     ex.printStackTrace();
@@ -2916,19 +3068,58 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        fkelenjarkeringat = BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand();
+        disposisiderma = BtnGrpDisposisiDerma.getSelection().getActionCommand();
+        anus = BtnGrpAnus.getSelection().getActionCommand();
+        reflek = BtnGrpReflek.getSelection().getActionCommand();
+        disposisineona = BtnGrpDisposisiNeona.getSelection().getActionCommand();
+        rbHiperhidrosis.isSelected();
+        
+        
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
-        }else 
-            if(Eflorisensi.getText().trim().equals("")){
-            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
-        }else if(HasilPenunjangNeonatologi.getText().trim().equals("")){
-            Valid.textKosong(HasilPenunjangNeonatologi,"Ginjal Kiri");
+//        }else 
+//            if(Eflorisensi.getText().trim().equals("")){
+//            Valid.textKosong(Eflorisensi,"Ginjal Kanan");
+//        }else if(HasilPenunjangNeonatologi.getText().trim().equals("")){
+//            Valid.textKosong(HasilPenunjangNeonatologi,"Ginjal Kiri");
         }else{
             if(tbObat.getSelectedRow()>-1){
-                if(Sequel.mengedittf("penilaian_usg_urologi","no_rawat=?","no_rawat=?,tanggal=?,ginjal_kanan=?,ginjal_kiri=?,buli=?,"+
-                    "kd_dokter=?",7,new String[]{
-                    TNoRw.getText(),Valid.SetTgl(TglDerma.getSelectedItem()+"")+" "+TglDerma.getSelectedItem().toString().substring(11,19),
-                        Eflorisensi.getText(),HasilPenunjangNeonatologi.getText(),KdPetugas.getText(),TNoRw.getText()
+                if(Sequel.mengedittf("tb_asesmen_awal_medis_kulit_kelamin",
+                        "no_rawat=?","no_rawat=?,kd_dokter=?,tanggal=?,keluhan_utama=?,"
+                                + "riwayat_penyakit_sekarang=?,lokalisasi=?,eflorisensi=?,"
+                                + "mukosa=?,rambut=?,kuku=?,fungsi_kelenjar_keringat=?,"
+                                + "kelenjar_limfe=?,hasil_penunjang_derma=?,diag_kerja_derma=?,"
+                                + "rencana_kerja_derma=?,terapo_derma=?,jam_disposisi_derma=?,"
+                                + "tgl_disposisi_derma=?,tempat_disposisi_derma=?,ruang_disposisi_derma=?,"
+                                + "warna_mukosa=?,anus=?,turgor=?,hasil_penunjang_neonatologi=?,"
+                                + "diag_kerja_neonatologi=?,rencana_kerja_neonatologi=?,"
+                                + "terapi_neonatologi=?,disposisi_neonatologi=?,jam_disposisi_neonatologi=?,"
+                                + "tgl_disposisi_neonatologi=?,tempat_disposisi_neonatologi=?,ruang_disposisi_neonatologi=?",
+                        33,new String[]{
+                    TNoRw.getText(), KdPetugas.getText(),
+                        Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
+                        KeluhanUtama.getText(), RiwPenyakitSkrg.getText(),
+                        Lokalisasi.getText(),
+                        Eflorisensi.getText(),
+                        Mukosa.getText(),Rambut.getText(),Kuku.getText(),
+                        fkelenjarkeringat, KelenjarLimfe.getText(),
+                        HasilPenunjangDerma.getText(),DiagnosaKerjaDerma.getText(),
+                        RencanaKerjaDerma.getText(), TerapiDerma.getText(),
+                        disposisiderma,
+                        JamKeluarDerma.getText(),
+                        Valid.SetTgl(TglDerma.getSelectedItem().toString()),
+                        TempatDerma.getText(),
+                        NoBed.getText(),
+                        WarnaMukosa.getText(),anus, 
+                        Turgor.getText(),
+                        HasilPenunjangNeonatologi.getText(), DiagnosaKerjaNeonatologi.getText(),
+                        RencanaKerjaNeonatologi.getText(), TerapiNeonatologi.getText(),
+                        disposisineona, 
+                        JamNeonatologi.getText(), 
+                        Valid.SetTgl(TglDerma1.getSelectedItem().toString()),
+                        TempatNeonatologi.getText(), 
+                        NoBed1.getText(),TNoRw.getText()
                      })==true){
                     
                         tampil();
@@ -5191,28 +5382,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_GenetaliaActionPerformed
 
-    private void BtnDropGenetaliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDropGenetaliaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropGenetaliaActionPerformed
-
-    private void BtnDropGenetaliaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDropGenetaliaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDropGenetaliaKeyPressed
-
-    private void BtnGenetaliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenetaliaActionPerformed
-        // TODO add your handling code here:
-        MasterGenetalia genetalia=new MasterGenetalia(null,false);
-        genetalia.isCek();
-        genetalia.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        genetalia.setLocationRelativeTo(internalFrame1);
-        genetalia.setAlwaysOnTop(false);
-        genetalia.setVisible(true);
-    }//GEN-LAST:event_BtnGenetaliaActionPerformed
-
-    private void BtnGenetaliaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnGenetaliaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnGenetaliaKeyPressed
-
     private void EkstremnitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EkstremnitasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EkstremnitasActionPerformed
@@ -5667,6 +5836,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_JamKeluarDermaActionPerformed
 
+    private void rbAdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAdaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbAdaActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -5693,7 +5866,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnDokter;
     private widget.Button BtnDropAbdomen;
     private widget.Button BtnDropEkstremnitas;
-    private widget.Button BtnDropGenetalia;
     private widget.Button BtnDropJamDisposisi;
     private widget.Button BtnDropKepala;
     private widget.Button BtnDropKulit;
@@ -5708,11 +5880,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Button BtnDropUub;
     private widget.Button BtnEdit;
     private widget.Button BtnEkstremnitas;
-    private widget.Button BtnGenetalia;
     private javax.swing.ButtonGroup BtnGrpAnus;
     private javax.swing.ButtonGroup BtnGrpDisposisiDerma;
     private javax.swing.ButtonGroup BtnGrpDisposisiNeona;
     private javax.swing.ButtonGroup BtnGrpFungsiKelenjarKeringat;
+    private javax.swing.ButtonGroup BtnGrpGenetalia;
     private javax.swing.ButtonGroup BtnGrpReflek;
     private widget.Button BtnHapus;
     private widget.Button BtnKamar;
@@ -5857,7 +6029,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Label jLabel6;
     private widget.Label jLabel60;
     private widget.Label jLabel61;
-    private widget.Label jLabel62;
     private widget.Label jLabel63;
     private widget.Label jLabel64;
     private widget.Label jLabel65;
@@ -5874,6 +6045,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Label jLabel75;
     private widget.Label jLabel76;
     private widget.Label jLabel77;
+    private widget.Label jLabel78;
     private widget.Label jLabel8;
     private widget.Label jLabel98;
     private widget.Label jLabel99;
@@ -5893,8 +6065,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbDirawatDisposisi;
     private javax.swing.JRadioButton rbDirawatNeona;
     private javax.swing.JRadioButton rbHiperhidrosis;
+    private javax.swing.JRadioButton rbKelainan;
     private javax.swing.JRadioButton rbKontrolDisposisi;
     private javax.swing.JRadioButton rbKontrolNeona;
+    private javax.swing.JRadioButton rbNormal;
     private javax.swing.JRadioButton rbTidakAda;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane1;
@@ -5920,20 +6094,33 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         try{
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_usg_urologi.tanggal,"+
-                        "penilaian_usg_urologi.ginjal_kanan as ginjalkanan,penilaian_usg_urologi.ginjal_kiri as ginjalkiri,penilaian_usg_urologi.buli as sbuli,"+
-                        "pasien.stts_nikah,"+ 
-                        "pasien.pekerjaan,penjab.png_jawab,pasien.pnd,"+  
-                        "penilaian_usg_urologi.kd_dokter,dokter.nm_dokter "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join penilaian_usg_urologi on reg_periksa.no_rawat=penilaian_usg_urologi.no_rawat "+
-                        "inner join dokter on penilaian_usg_urologi.kd_dokter=dokter.kd_dokter "+
-                        "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
-                        "inner join penjab on penjab.kd_pj=reg_periksa.kd_pj "+
-                        "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
-                        "penilaian_usg_urologi.tanggal between ? and ? "
-                                + "and pasien.no_rkm_medis=?"
-                                + "order by penilaian_usg_urologi.tanggal");
+                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.tanggal, tb_asesmen_awal_medis_kulit_kelamin.`keluhan_utama`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`riwayat_penyakit_sekarang`,tb_asesmen_awal_medis_kulit_kelamin.`lokalisasi`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`eflorisensi`,tb_asesmen_awal_medis_kulit_kelamin.`mukosa`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`rambut`,tb_asesmen_awal_medis_kulit_kelamin.`kuku`," +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`fungsi_kelenjar_keringat`,tb_asesmen_awal_medis_kulit_kelamin.`kelenjar_limfe`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`hasil_penunjang_derma`,tb_asesmen_awal_medis_kulit_kelamin.`diag_kerja_derma`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`rencana_kerja_derma`,tb_asesmen_awal_medis_kulit_kelamin.`terapi_derma`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`disposisi_derma`,tb_asesmen_awal_medis_kulit_kelamin.`jam_disposisi_derma`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`tgl_disposisi_derma`,tb_asesmen_awal_medis_kulit_kelamin.`tempat_disposisi_derma`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`ruang_disposisi_derma`,tb_asesmen_awal_medis_kulit_kelamin.`warna_mukosa`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`anus`,tb_asesmen_awal_medis_kulit_kelamin.`turgor`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`hasil_penunjang_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`diag_kerja_neonatologi`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`rencana_kerja_derma`,tb_asesmen_awal_medis_kulit_kelamin.`terapi_neonatologi`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`disposisi_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`jam_disposisi_neona`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`tgl_disposisi_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`tempat_disposisi_neonatologi`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`ruang_disposisi_neonatologi`, " +
+                    "penilaian_usg_urologi.kd_dokter,dokter.nm_dokter " +
+                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                    "inner join tb_asesmen_awal_medis_kulit_kelamin on reg_periksa.no_rawat=tb_asesmen_awal_medis_kulit_kelamin.no_rawat " +
+                    "inner join dokter on tb_asesmen_awal_medis_kulit_kelamin.kd_dokter=dokter.kd_dokter " +
+                    "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien " +
+                    "inner join penjab on penjab.kd_pj=reg_periksa.kd_pj " +
+                    "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.tanggal between ? and ? " +
+                    "and pasien.no_rkm_medis=? " +
+                    "order by tb_asesmen_awal_medis_kulit_kelamin.tanggal ");
             }else{
                 ps=koneksi.prepareStatement(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_usg_urologi.tanggal,"+
