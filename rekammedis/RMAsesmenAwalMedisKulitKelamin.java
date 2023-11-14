@@ -6150,7 +6150,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat, " +
                     "tb_asesmen_awal_medis_kulit_kelamin.tanggal, " +
-                            "tb_asesmen_awal_medis_kulit_kelamin.kd_dokter,dokter.nm_dokter " +
+                            "tb_asesmen_awal_medis_kulit_kelamin.kd_dokter,dokter.nm_dokter, " +
                             "tb_asesmen_awal_medis_kulit_kelamin.`keluhan_utama`, " +
                     "tb_asesmen_awal_medis_kulit_kelamin.`riwayat_penyakit_sekarang`,tb_asesmen_awal_medis_kulit_kelamin.`lokalisasi`, " +
                     "tb_asesmen_awal_medis_kulit_kelamin.`eflorisensi`,tb_asesmen_awal_medis_kulit_kelamin.`mukosa`, " +
@@ -6179,7 +6179,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                         "SELECT reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,IF(pasien.jk='L','Laki-Laki','Perempuan') AS jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat, " +
                         "tb_asesmen_awal_medis_kulit_kelamin.tanggal, " +
-                                "tb_asesmen_awal_medis_kulit_kelamin.kd_dokter,dokter.nm_dokter " +
+                                "tb_asesmen_awal_medis_kulit_kelamin.kd_dokter,dokter.nm_dokter, " +
                                 "tb_asesmen_awal_medis_kulit_kelamin.`keluhan_utama`, " +
                         "tb_asesmen_awal_medis_kulit_kelamin.`riwayat_penyakit_sekarang`,tb_asesmen_awal_medis_kulit_kelamin.`lokalisasi`, " +
                         "tb_asesmen_awal_medis_kulit_kelamin.`eflorisensi`,tb_asesmen_awal_medis_kulit_kelamin.`mukosa`, " +
