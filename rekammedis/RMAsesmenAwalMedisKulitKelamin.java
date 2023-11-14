@@ -6166,7 +6166,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     "tb_asesmen_awal_medis_kulit_kelamin.`rencana_kerja_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`terapi_neonatologi`, " +
                     "tb_asesmen_awal_medis_kulit_kelamin.`disposisi_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`jam_disposisi_neona`, " +
                     "tb_asesmen_awal_medis_kulit_kelamin.`tgl_disposisi_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`tempat_disposisi_neonatologi`, " +
-                    "tb_asesmen_awal_medis_kulit_kelamin.`ruang_disposisi_neonatologi`, " +
+                    "tb_asesmen_awal_medis_kulit_kelamin.`ruang_disposisi_neonatologi` " +
                     "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
                     "inner join tb_asesmen_awal_medis_kulit_kelamin on reg_periksa.no_rawat=tb_asesmen_awal_medis_kulit_kelamin.no_rawat " +
                     "inner join dokter on tb_asesmen_awal_medis_kulit_kelamin.kd_dokter=dokter.kd_dokter " +
@@ -6195,7 +6195,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                         "tb_asesmen_awal_medis_kulit_kelamin.`rencana_kerja_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`terapi_neonatologi`, " +
                         "tb_asesmen_awal_medis_kulit_kelamin.`disposisi_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`jam_disposisi_neona`, " +
                         "tb_asesmen_awal_medis_kulit_kelamin.`tgl_disposisi_neonatologi`,tb_asesmen_awal_medis_kulit_kelamin.`tempat_disposisi_neonatologi`, " +
-                        "tb_asesmen_awal_medis_kulit_kelamin.`ruang_disposisi_neonatologi`, " +
+                        "tb_asesmen_awal_medis_kulit_kelamin.`ruang_disposisi_neonatologi` " +
                         "FROM reg_periksa INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
                         "INNER JOIN tb_asesmen_awal_medis_kulit_kelamin ON reg_periksa.no_rawat=tb_asesmen_awal_medis_kulit_kelamin.no_rawat " +
                         "INNER JOIN dokter ON tb_asesmen_awal_medis_kulit_kelamin.kd_dokter=dokter.kd_dokter " +
