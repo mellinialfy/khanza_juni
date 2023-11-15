@@ -134,7 +134,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             "Lokalisasi", "Eflorisensi",
             "Mukosa", "Rambut","Kuku",
             "Fungsi Kelenjar Keringat","Kelenjar Limfe","Hasil Penunjang Derma",
-            "Diag_kerja_derma", "", "", "", "", "","","","","","","","","","","","","","","",
+            "Diagnosa Kerja Derma", "", "", "", "", "","","","","","","","","","","","","","","",
             "Kode Dokter","Nama Dokter"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -3140,11 +3140,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                                 + "riwayat_penyakit_sekarang=?,lokalisasi=?,eflorisensi=?,"
                                 + "mukosa=?,rambut=?,kuku=?,fungsi_kelenjar_keringat=?,"
                                 + "kelenjar_limfe=?,hasil_penunjang_derma=?,diag_kerja_derma=?,"
-                                + "rencana_kerja_derma=?,terapo_derma=?,jam_disposisi_derma=?,"
+                                + "rencana_kerja_derma=?,terapi_derma=?,jam_disposisi_derma=?,"
                                 + "tgl_disposisi_derma=?,tempat_disposisi_derma=?,ruang_disposisi_derma=?,"
                                 + "warna_mukosa=?,anus=?,turgor=?,hasil_penunjang_neonatologi=?,"
                                 + "diag_kerja_neonatologi=?,rencana_kerja_neonatologi=?,"
-                                + "terapi_neonatologi=?,disposisi_neonatologi=?,jam_disposisi_neonatologi=?,"
+                                + "terapi_neonatologi=?,disposisi_neonatologi=?,jam_disposisi_neona=?,"
                                 + "tgl_disposisi_neonatologi=?,tempat_disposisi_neonatologi=?,ruang_disposisi_neonatologi=?",
                         33,new String[]{
                     TNoRw.getText(), KdPetugas.getText(),
@@ -6148,7 +6148,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         try{
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat, " +
+                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                     "tb_asesmen_awal_medis_kulit_kelamin.tanggal, " +
                             "tb_asesmen_awal_medis_kulit_kelamin.kd_dokter,dokter.nm_dokter, " +
                             "tb_asesmen_awal_medis_kulit_kelamin.`keluhan_utama`, " +
@@ -6177,7 +6177,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     "order by tb_asesmen_awal_medis_kulit_kelamin.tanggal ");
             }else{
                 ps=koneksi.prepareStatement(
-                        "SELECT reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,IF(pasien.jk='L','Laki-Laki','Perempuan') AS jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat, " +
+                        "SELECT reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,IF(pasien.jk='L','Laki-Laki','Perempuan') AS jk,pasien.tgl_lahir, " +
                         "tb_asesmen_awal_medis_kulit_kelamin.tanggal, " +
                                 "tb_asesmen_awal_medis_kulit_kelamin.kd_dokter,dokter.nm_dokter, " +
                                 "tb_asesmen_awal_medis_kulit_kelamin.`keluhan_utama`, " +
@@ -6251,70 +6251,72 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     });
                 }
             
-            
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
-            Valid.SetTgl2(TglAsuhan,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()); 
-            RiwPenyakitSkrg.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
-            Lokalisasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Eflorisensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Mukosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Rambut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Kuku.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()== "Hiperhidrosis") {
-                rbHiperhidrosis.isSelected();
-            } else {
-                rbAnshidrosis.isSelected();
+            if(tabMode.getColumnCount() != 0) {
+                TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+                TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
+                Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
+                TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
+                Valid.SetTgl2(TglAsuhan,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+                KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()); 
+                RiwPenyakitSkrg.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
+                Lokalisasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+                Eflorisensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+                Mukosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+                Rambut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+                Kuku.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+
+                if(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()== "Hiperhidrosis") {
+                    rbHiperhidrosis.isSelected();
+                } else {
+                    rbAnshidrosis.isSelected();
+                }
+
+                KelenjarLimfe.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+                HasilPenunjangDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+                DiagnosaKerjaDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+                RencanaKerjaDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+                TerapiDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+                if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Boleh Pulang") {
+                    rbBolehPulangDisposisi.isSelected();
+                } else if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Kontrol"){
+                    rbKontrolDisposisi.isSelected();
+                } else {
+                    rbDirawatDisposisi.isSelected();
+                }
+                JamKeluarDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+                Valid.SetTgl2(TglDerma,tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
+
+                TempatDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
+                NoBed.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
+                WarnaMukosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
+                if(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString()== "Ada") {
+                    rbAda.isSelected();
+                } else {
+                    rbTidakAda.isSelected();
+                }
+
+                Turgor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
+                HasilPenunjangNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
+                DiagnosaKerjaNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
+                RencanaKerjaNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
+                TerapiNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
+                if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Boleh Pulang") {
+                    rbBolehPulangNeona.isSelected();
+                } else if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Kontrol"){
+                    rbKontrolNeona.isSelected();
+                } else {
+                    rbDirawatNeona.isSelected();
+                }
+                JamKeluarDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
+                Valid.SetTgl2(TglDerma1,tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
+
+                TempatNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
+                NoBed1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
+                KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
+                NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString());
             }
             
-            KelenjarLimfe.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            HasilPenunjangDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            DiagnosaKerjaDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            RencanaKerjaDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            TerapiDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Boleh Pulang") {
-                rbBolehPulangDisposisi.isSelected();
-            } else if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Kontrol"){
-                rbKontrolDisposisi.isSelected();
-            } else {
-                rbDirawatDisposisi.isSelected();
-            }
-            JamKeluarDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            Valid.SetTgl2(TglDerma,tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            
-            TempatDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            NoBed.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            WarnaMukosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString()== "Ada") {
-                rbAda.isSelected();
-            } else {
-                rbTidakAda.isSelected();
-            }
-            
-            Turgor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            HasilPenunjangNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            DiagnosaKerjaNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            RencanaKerjaNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            TerapiNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Boleh Pulang") {
-                rbBolehPulangNeona.isSelected();
-            } else if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Kontrol"){
-                rbKontrolNeona.isSelected();
-            } else {
-                rbDirawatNeona.isSelected();
-            }
-            JamKeluarDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            Valid.SetTgl2(TglDerma1,tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
-            
-            TempatNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
-            NoBed1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString());
             
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
