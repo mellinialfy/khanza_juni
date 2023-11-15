@@ -865,9 +865,11 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ps= koneksi.prepareStatement(
                 "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,kamar_inap.tgl_masuk,kamar_inap.tgl_keluar, "+
                 "penjab.png_jawab,kamar_inap.stts_pulang,kamar.kd_kamar, bangsal.nm_bangsal,piutang_pasien.uangmuka,piutang_pasien.totalpiutang, "
-                    + "(COALESCE(SUM(rawat_inap_dr.material), 0)+COALESCE(SUM(rawat_inap_drpr.material), 0)+COALESCE(SUM(rawat_inap_pr.material), 0)) AS material, " +
-                    "(COALESCE(SUM(rawat_inap_dr.bhp), 0)+COALESCE(SUM(rawat_inap_drpr.bhp), 0)+COALESCE(SUM(rawat_inap_pr.bhp), 0)) AS bhp, "
-                  + "(IFNULL((SELECT COALESCE(SUM(rawat_inap_pr.menejemen), 0) " +
+                    + "(COALESCE(SUM(rawat_inap_dr.material), 0)+COALESCE(SUM(rawat_inap_drpr.material), 0)+COALESCE(SUM(rawat_inap_pr.material), 0)+ " +
+                    "COALESCE(SUM(rawat_jl_dr.material), 0)+COALESCE(SUM(rawat_jl_drpr.material), 0)+COALESCE(SUM(rawat_jl_pr.material), 0)) AS material, " +
+                    "(COALESCE(SUM(rawat_inap_dr.bhp), 0)+COALESCE(SUM(rawat_inap_drpr.bhp), 0)+COALESCE(SUM(rawat_inap_pr.bhp), 0)+ " +
+                    "COALESCE(SUM(rawat_jl_dr.bhp), 0)+COALESCE(SUM(rawat_jl_drpr.bhp), 0)+COALESCE(SUM(rawat_jl_pr.bhp), 0)) AS bhp, "
+                + "(IFNULL((SELECT COALESCE(SUM(rawat_inap_pr.menejemen), 0) " +
                     "FROM rawat_inap_pr " +
                     "INNER JOIN jns_perawatan_inap ON jns_perawatan_inap.`kd_jenis_prw`=rawat_inap_pr.`kd_jenis_prw` " +
                     "WHERE kamar_inap.tgl_keluar BETWEEN ? AND ? " +
@@ -886,6 +888,9 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     + "LEFT JOIN rawat_inap_dr ON reg_periksa.no_rawat=rawat_inap_dr.no_rawat " +
                     "LEFT JOIN rawat_inap_drpr ON reg_periksa.no_rawat=rawat_inap_drpr.no_rawat " +
                     "LEFT JOIN rawat_inap_pr ON reg_periksa.no_rawat=rawat_inap_pr.no_rawat "
+                    + "LEFT JOIN rawat_jl_dr ON reg_periksa.no_rawat=rawat_jl_dr.no_rawat " +
+                    "LEFT JOIN rawat_jl_drpr ON reg_periksa.no_rawat=rawat_jl_drpr.no_rawat " +
+                    "LEFT JOIN rawat_jl_pr ON reg_periksa.no_rawat=rawat_jl_pr.no_rawat "
                         + "where "+
                 "kamar_inap.tgl_keluar between ? and ? "+status+" and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? "+
                     "AND reg_periksa.`no_rawat` =  rawat_inap_pr.`no_rawat` " +
