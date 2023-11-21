@@ -55,6 +55,9 @@ public final class DlgPiutangRanap extends javax.swing.JDialog {
              Service=0,ttlLaborat=0,ttlRadiologi=0,ttlOperasi=0,ttlObat=0,ttlRanap_Dokter=0,ttlRanap_Paramedis=0,ttlRalan_Dokter=0,
              ttlRalan_Paramedis=0,ttlTambahan=0,ttlPotongan=0,ttlKamar=0,ttlRegistrasi=0,ttlHarian=0,ttlRetur_Obat=0,ttlResep_Pulang=0,ttlService=0,
              ekses=0,ttlekses=0,dibayar=0,ttldibayar=0,sisa=0,ttlsisa=0,diskon=0,ttldiskon=0,tidakdibayar=0,ttltidakdibayar=0;
+    private double AlkesRalanDrPr=0, BhpRalanDrPr=0, AlkesRanapDrPr=0, BhpRanapDrPr=0, AlkesRalanDr=0, BhpRalanDr=0,
+            AlkesRalanPr=0, BhpRalanPr=0, AlkesRanapDr=0, BhpRanapDr=0, AlkesRanapPr=0, BhpRanapPr=0, Admin=0,
+            ttlAlkes=0, ttlBhp=0, ttlAdmin=0;
     private String sqlps2="select sum(billing.totalbiaya) from billing where billing.no_rawat=? and billing.status=? ",pilihan="",status="";
     private StringBuilder htmlContent;
     private int i=0;
@@ -863,45 +866,23 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 status="and piutang_pasien.status='Belum Lunas'";
             }
             ps= koneksi.prepareStatement(
-                "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,kamar_inap.tgl_masuk,kamar_inap.tgl_keluar, "+
-                "penjab.png_jawab,kamar_inap.stts_pulang,kamar.kd_kamar, bangsal.nm_bangsal,piutang_pasien.uangmuka,piutang_pasien.totalpiutang, "
-                    + "(COALESCE(SUM(rawat_inap_dr.material), 0)+COALESCE(SUM(rawat_inap_drpr.material), 0)+COALESCE(SUM(rawat_inap_pr.material), 0)+ " +
-                    "COALESCE(SUM(rawat_jl_dr.material), 0)+COALESCE(SUM(rawat_jl_drpr.material), 0)+COALESCE(SUM(rawat_jl_pr.material), 0)) AS material, " +
-                    "(COALESCE(SUM(rawat_inap_dr.bhp), 0)+COALESCE(SUM(rawat_inap_drpr.bhp), 0)+COALESCE(SUM(rawat_inap_pr.bhp), 0)+ " +
-                    "COALESCE(SUM(rawat_jl_dr.bhp), 0)+COALESCE(SUM(rawat_jl_drpr.bhp), 0)+COALESCE(SUM(rawat_jl_pr.bhp), 0)) AS bhp, "
-                + "(IFNULL((SELECT COALESCE(SUM(rawat_inap_pr.menejemen), 0) " +
-                    "FROM rawat_inap_pr " +
-                    "INNER JOIN jns_perawatan_inap ON jns_perawatan_inap.`kd_jenis_prw`=rawat_inap_pr.`kd_jenis_prw` " +
-                    "WHERE kamar_inap.tgl_keluar BETWEEN ? AND ? " +
-                    "AND reg_periksa.`no_rawat` =  rawat_inap_pr.`no_rawat` " +
-                    "AND CONCAT(reg_periksa.kd_pj,penjab.png_jawab) LIKE '%%' " +
-                    "AND jns_perawatan_inap.`nm_perawatan` = 'ADMINISTRASI RAWAT INAP' " +
-                    "GROUP BY rawat_inap_pr.`no_rawat` " +
-                    "ORDER BY kamar_inap.tgl_keluar,kamar_inap.jam_keluar " +
-                    "),0)) AS menejemen "+
-                "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat "+
-                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                "inner join piutang_pasien on piutang_pasien.no_rawat=reg_periksa.no_rawat "
-                    + "LEFT JOIN rawat_inap_dr ON reg_periksa.no_rawat=rawat_inap_dr.no_rawat " +
-                    "LEFT JOIN rawat_inap_drpr ON reg_periksa.no_rawat=rawat_inap_drpr.no_rawat " +
-                    "LEFT JOIN rawat_inap_pr ON reg_periksa.no_rawat=rawat_inap_pr.no_rawat "
-                    + "LEFT JOIN rawat_jl_dr ON reg_periksa.no_rawat=rawat_jl_dr.no_rawat " +
-                    "LEFT JOIN rawat_jl_drpr ON reg_periksa.no_rawat=rawat_jl_drpr.no_rawat " +
-                    "LEFT JOIN rawat_jl_pr ON reg_periksa.no_rawat=rawat_jl_pr.no_rawat "
-                        + "where "+
-                "kamar_inap.tgl_keluar between ? and ? "+status+" and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? "+
-                    "AND reg_periksa.`no_rawat` =  rawat_inap_pr.`no_rawat` " +
-                    "GROUP BY rawat_inap_dr.no_rawat, rawat_inap_drpr.`no_rawat`, rawat_inap_pr.`no_rawat` "
-                + "order by kamar_inap.tgl_keluar,kamar_inap.jam_keluar");
+                "SELECT kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,kamar_inap.tgl_masuk,kamar_inap.tgl_keluar, " +
+                "penjab.png_jawab,kamar_inap.stts_pulang,kamar.kd_kamar, bangsal.nm_bangsal,piutang_pasien.uangmuka,piutang_pasien.totalpiutang " +
+                "FROM kamar_inap " +
+                "INNER JOIN reg_periksa ON kamar_inap.no_rawat=reg_periksa.no_rawat " +
+                "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                "INNER JOIN penjab ON reg_periksa.kd_pj=penjab.kd_pj " +
+                "INNER JOIN kamar ON kamar_inap.kd_kamar=kamar.kd_kamar " +
+                "INNER JOIN bangsal ON kamar.kd_bangsal=bangsal.kd_bangsal " +
+                "INNER JOIN piutang_pasien ON piutang_pasien.no_rawat=reg_periksa.no_rawat WHERE " +
+                "kamar_inap.tgl_keluar BETWEEN ? AND ? "
+                        + ""+status+" " +
+                "AND CONCAT(reg_periksa.kd_pj,penjab.png_jawab) LIKE ? " +
+                "ORDER BY kamar_inap.tgl_keluar,kamar_inap.jam_keluar");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(3,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                ps.setString(4,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(5,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
+                ps.setString(3,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
                 
                 rs=ps.executeQuery();
                 all=0;ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;
@@ -909,6 +890,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 ttlRalan_Paramedis=0;ttlTambahan=0;ttlPotongan=0;ttlKamar=0;
                 ttlRegistrasi=0;ttlHarian=0;ttlRetur_Obat=0;ttlResep_Pulang=0;
                 ttlService=0;ttlekses=0;ttldibayar=0;ttlsisa=0;ttldiskon=0;
+                ttlAlkes=0; ttlBhp=0; ttlAdmin=0;
                 ttltidakdibayar=0;
                 while(rs.next()){
                     ekses=0;dibayar=0;sisa=0;
@@ -1292,6 +1274,226 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                 }
                             }
 
+                            AlkesRanapDr=0;
+                            BhpRanapDr=0;
+                            ps2=koneksi.prepareStatement("SELECT " +
+                                "coalesce(SUM(rawat_inap_dr.material),0) AS material,coalesce(SUM(rawat_inap_dr.bhp),0) AS bhp " +
+                                "FROM pasien INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_inap_dr ON rawat_inap_dr.no_rawat=reg_periksa.no_rawat " +
+                                "INNER JOIN jns_perawatan_inap ON rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw " +
+                                "INNER JOIN dokter ON rawat_inap_dr.kd_dokter=dokter.kd_dokter " +
+                                "WHERE rawat_inap_dr.no_rawat = ? " +
+                                "GROUP BY rawat_inap_dr.no_rawat ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAlkes=ttlAlkes+rs2.getDouble(1);
+                                    AlkesRanapDr=rs2.getDouble(1);
+                                    ttlBhp=ttlBhp+rs2.getDouble(2);
+                                    BhpRanapDr=rs2.getDouble(2);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
+                            AlkesRanapPr=0;
+                            BhpRanapPr=0;
+                            ps2=koneksi.prepareStatement("SELECT " +
+                                "COALESCE(SUM(rawat_inap_pr.material),0) AS material,COALESCE(SUM(rawat_inap_pr.bhp),0) AS bhp " +
+                                "FROM pasien INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_inap_pr ON rawat_inap_pr.no_rawat=reg_periksa.no_rawat " +
+                                "INNER JOIN jns_perawatan_inap ON rawat_inap_pr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw " +
+                                "INNER JOIN petugas ON rawat_inap_pr.nip=petugas.nip " +
+                                "INNER JOIN penjab ON reg_periksa.kd_pj=penjab.kd_pj " +
+                                "WHERE rawat_inap_pr.no_rawat = ? " +
+                                "GROUP BY rawat_inap_pr.no_rawat ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAlkes=ttlAlkes+rs2.getDouble(1);
+                                    AlkesRanapPr=rs2.getDouble(1);
+                                    ttlBhp=ttlBhp+rs2.getDouble(2);
+                                    BhpRanapPr=rs2.getDouble(2);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
+                            AlkesRanapDrPr=0;
+                            BhpRanapDrPr=0;
+                            ps2=koneksi.prepareStatement("SELECT  " +
+                                "COALESCE(SUM(rawat_inap_drpr.material),0) AS material,COALESCE(SUM(rawat_inap_drpr.bhp),0) AS bhp " +
+                                "FROM pasien INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_inap_drpr ON rawat_inap_drpr.no_rawat=reg_periksa.no_rawat " +
+                                "INNER JOIN jns_perawatan_inap ON rawat_inap_drpr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw " +
+                                "INNER JOIN dokter ON rawat_inap_drpr.kd_dokter=dokter.kd_dokter " +
+                                "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli " +
+                                "INNER JOIN penjab ON reg_periksa.kd_pj=penjab.kd_pj " +
+                                "INNER JOIN petugas ON rawat_inap_drpr.nip=petugas.nip " +
+                                "WHERE rawat_inap_drpr.no_rawat = ? " +
+                                "GROUP BY rawat_inap_drpr.no_rawat ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAlkes=ttlAlkes+rs2.getDouble(1);
+                                    AlkesRanapDrPr=rs2.getDouble(1);
+                                    ttlBhp=ttlBhp+rs2.getDouble(2);
+                                    BhpRanapDrPr=rs2.getDouble(2);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
+                            AlkesRalanDr=0;
+                            BhpRalanDr=0;
+                            ps2=koneksi.prepareStatement("SELECT " +
+                                "COALESCE(SUM(rawat_jl_dr.material),0) AS material,COALESCE(SUM(rawat_jl_dr.bhp),0) AS bhp " +
+                                "FROM pasien INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_jl_dr ON reg_periksa.no_rawat=rawat_jl_dr.no_rawat " +
+                                "INNER JOIN dokter ON rawat_jl_dr.kd_dokter=dokter.kd_dokter " +
+                                "INNER JOIN jns_perawatan ON rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw " +
+                                "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli " +
+                                "INNER JOIN penjab ON reg_periksa.kd_pj=penjab.kd_pj " +
+                                "WHERE rawat_jl_dr.no_rawat = ? " +
+                                "GROUP BY rawat_jl_dr.no_rawat ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAlkes=ttlAlkes+rs2.getDouble(1);
+                                    AlkesRalanDr=rs2.getDouble(1);
+                                    ttlBhp=ttlBhp+rs2.getDouble(2);
+                                    BhpRalanDr=rs2.getDouble(2);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
+                            AlkesRalanPr=0;
+                            BhpRalanPr=0;
+                            ps2=koneksi.prepareStatement("SELECT " +
+                                "COALESCE(SUM(rawat_jl_pr.material),0) AS material,COALESCE(SUM(rawat_jl_pr.bhp),0) AS bhp " +
+                                "FROM pasien INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_jl_pr ON rawat_jl_pr.no_rawat=reg_periksa.no_rawat " +
+                                "INNER JOIN jns_perawatan ON rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw " +
+                                "INNER JOIN petugas ON rawat_jl_pr.nip=petugas.nip " +
+                                "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli " +
+                                "INNER JOIN penjab ON reg_periksa.kd_pj=penjab.kd_pj " +
+                                "WHERE rawat_jl_pr.no_rawat = ? " +
+                                "GROUP BY rawat_jl_pr.no_rawat ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAlkes=ttlAlkes+rs2.getDouble(1);
+                                    AlkesRalanPr=rs2.getDouble(1);
+                                    ttlBhp=ttlBhp+rs2.getDouble(2);
+                                    BhpRalanPr=rs2.getDouble(2);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
+                            AlkesRalanDrPr=0;
+                            BhpRalanDrPr=0;
+                            ps2=koneksi.prepareStatement("SELECT " +
+                                "COALESCE(SUM(rawat_jl_drpr.material),0) AS material,COALESCE(SUM(rawat_jl_drpr.bhp),0) AS bhp " +
+                                "FROM pasien INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_jl_drpr ON rawat_jl_drpr.no_rawat=reg_periksa.no_rawat " +
+                                "INNER JOIN jns_perawatan ON rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw " +
+                                "INNER JOIN dokter ON rawat_jl_drpr.kd_dokter=dokter.kd_dokter " +
+                                "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli " +
+                                "INNER JOIN penjab ON reg_periksa.kd_pj=penjab.kd_pj " +
+                                "INNER JOIN petugas ON rawat_jl_drpr.nip=petugas.nip " +
+                                "WHERE rawat_jl_drpr.no_rawat = ? " +
+                                "GROUP BY rawat_jl_drpr.no_rawat ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAlkes=ttlAlkes+rs2.getDouble(1);
+                                    AlkesRalanDrPr=rs2.getDouble(1);
+                                    ttlBhp=ttlBhp+rs2.getDouble(2);
+                                    BhpRalanDrPr=rs2.getDouble(2);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
+                            Admin=0;
+                            ps2=koneksi.prepareStatement("SELECT COALESCE(SUM(rawat_inap_pr.menejemen), 0) AS admin " +
+                                "FROM pasien " +
+                                "INNER JOIN reg_periksa ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+                                "INNER JOIN rawat_inap_pr ON rawat_inap_pr.no_rawat=reg_periksa.no_rawat " +
+                                "INNER JOIN jns_perawatan_inap ON jns_perawatan_inap.`kd_jenis_prw`=rawat_inap_pr.`kd_jenis_prw` " +
+                                "WHERE rawat_inap_pr.no_rawat=? " +
+                                "AND jns_perawatan_inap.`nm_perawatan` = 'ADMINISTRASI RAWAT INAP' " +
+                                "GROUP BY rawat_inap_pr.`no_rawat` ");
+                            try {
+                                ps2.setString(1,rs.getString("no_rawat"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    ttlAdmin=ttlAdmin+rs2.getDouble(1);
+                                    Admin=rs2.getDouble(1);
+                                    
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif 2: "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                            
                             ekses=rs.getDouble("uangmuka");
                             ttlekses=ttlekses+ekses;
                             dibayar=Sequel.cariIsiAngka("select sum(bayar_piutang.besar_cicilan) from bayar_piutang where bayar_piutang.no_rawat=?",rs.getString("no_rawat"));
@@ -1304,10 +1506,12 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             ttlsisa=ttlsisa+sisa;
 
                             tabMode.addRow(new Object[]{
+                            
                                 rs.getString("tgl_masuk"),rs.getString("tgl_keluar"),Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_rawat")),
                                 rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("png_jawab"),
                                 Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?",rs.getString("no_rawat")),
-                                Valid.SetAngka(rs.getDouble("menejemen")),Valid.SetAngka(rs.getDouble("material")),Valid.SetAngka(rs.getDouble("bhp")),
+                                Valid.SetAngka(Admin),Valid.SetAngka(AlkesRalanDrPr+AlkesRanapDrPr+AlkesRanapDr+AlkesRalanDr+AlkesRanapPr+AlkesRalanPr),
+                                Valid.SetAngka(BhpRalanDrPr+BhpRanapDrPr+BhpRalanDr+BhpRanapDr+BhpRalanPr+BhpRanapPr),
                                 Valid.SetAngka(Registrasi),
                                 Valid.SetAngka(Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis),
                                 Valid.SetAngka(Obat),Valid.SetAngka(Retur_Obat),Valid.SetAngka(Resep_Pulang),Valid.SetAngka(Laborat),Valid.SetAngka(Radiologi),Valid.SetAngka(Potongan),
@@ -1323,7 +1527,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 LCount2.setText(""+tabMode.getRowCount());
                 if(tabMode.getRowCount()>0){
                     tabMode.addRow(new Object[]{
-                            ">> Total ",":","","","","","","","","",Valid.SetAngka(ttlRegistrasi),Valid.SetAngka(ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis),
+                            ">> Total ",":","","","","","","",Valid.SetAngka(ttlAlkes),Valid.SetAngka(ttlBhp),Valid.SetAngka(ttlRegistrasi),Valid.SetAngka(ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis),
                             Valid.SetAngka(ttlObat),Valid.SetAngka(ttlRetur_Obat),Valid.SetAngka(ttlResep_Pulang),Valid.SetAngka(ttlLaborat),Valid.SetAngka(ttlRadiologi),Valid.SetAngka(ttlPotongan),
                             Valid.SetAngka(ttlTambahan),Valid.SetAngka(ttlKamar+ttlService),Valid.SetAngka(ttlOperasi),Valid.SetAngka(ttlHarian),Valid.SetAngka(all),
                             Valid.SetAngka(ttlekses),Valid.SetAngka(ttldibayar),Valid.SetAngka(ttldiskon),Valid.SetAngka(ttltidakdibayar),Valid.SetAngka(ttlsisa),""
