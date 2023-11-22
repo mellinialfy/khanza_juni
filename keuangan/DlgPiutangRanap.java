@@ -875,8 +875,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 "INNER JOIN kamar ON kamar_inap.kd_kamar=kamar.kd_kamar " +
                 "INNER JOIN bangsal ON kamar.kd_bangsal=bangsal.kd_bangsal " +
                 "INNER JOIN piutang_pasien ON piutang_pasien.no_rawat=reg_periksa.no_rawat WHERE " +
-                "kamar_inap.tgl_keluar BETWEEN ? AND ? "
-                        + ""+status+" " +
+                "kamar_inap.tgl_keluar BETWEEN ? AND ? "+status+" " +
                 "AND CONCAT(reg_periksa.kd_pj,penjab.png_jawab) LIKE ? " +
                 "ORDER BY kamar_inap.tgl_keluar,kamar_inap.jam_keluar");
             try {
