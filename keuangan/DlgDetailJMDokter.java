@@ -142,6 +142,8 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(carabayar.getTable().getSelectedRow()!= -1){
                     pilihancarabayar=carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString();
+                    
+
                 }     
                 prosesCari();
             }
@@ -204,6 +206,8 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
         Tgl1 = new widget.Tanggal();
         label18 = new widget.Label();
         Tgl2 = new widget.Tanggal();
+        label19 = new widget.Label();
+        Penjab = new widget.ComboBox();
         label17 = new widget.Label();
         kddokter = new widget.TextBox();
         nmdokter = new widget.TextBox();
@@ -310,6 +314,20 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
         });
         panelisi4.add(Tgl2);
 
+        label19.setText("Jenis Bayar : ");
+        label19.setName("label19"); // NOI18N
+        label19.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelisi4.add(label19);
+
+        Penjab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "BPJS", "Umum", "IKS" }));
+        Penjab.setName("Penjab"); // NOI18N
+        Penjab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PenjabActionPerformed(evt);
+            }
+        });
+        panelisi4.add(Penjab);
+
         label17.setText("Dokter :");
         label17.setName("label17"); // NOI18N
         label17.setPreferredSize(new java.awt.Dimension(70, 23));
@@ -317,6 +335,11 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
 
         kddokter.setName("kddokter"); // NOI18N
         kddokter.setPreferredSize(new java.awt.Dimension(80, 23));
+        kddokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kddokterActionPerformed(evt);
+            }
+        });
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 kddokterKeyPressed(evt);
@@ -327,6 +350,11 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
         nmdokter.setEditable(false);
         nmdokter.setName("nmdokter"); // NOI18N
         nmdokter.setPreferredSize(new java.awt.Dimension(203, 23));
+        nmdokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nmdokterActionPerformed(evt);
+            }
+        });
         panelisi4.add(nmdokter);
 
         BtnSeek2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
@@ -1163,6 +1191,18 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         prosesCari();
     }//GEN-LAST:event_TabRawatMouseClicked
 
+    private void kddokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kddokterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kddokterActionPerformed
+
+    private void nmdokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nmdokterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nmdokterActionPerformed
+
+    private void PenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PenjabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PenjabActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1189,6 +1229,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnSeek2;
     private widget.editorpane LoadHTML;
     private widget.editorpane LoadHTML2;
+    private widget.ComboBox Penjab;
     private javax.swing.JTabbedPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
@@ -1203,6 +1244,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Label label11;
     private widget.Label label17;
     private widget.Label label18;
+    private widget.Label label19;
     private widget.TextBox nmdokter;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi4;
@@ -2809,6 +2851,37 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
            }    
         }catch(Exception e){
             System.out.println("Catatan  "+e);
+        }
+    }
+    
+    private void penjab() {
+        Service=0;
+        ps2=koneksi.prepareStatement("select kd_pj, png_jawab from penjab where status='1'");
+        try {
+            ps2.setString(1,rs.getString("no_rawat"));
+            ps2.setString(2,"Service");
+            rs2=ps2.executeQuery();
+            while(rs2.next()){
+                ttlService=ttlService+rs2.getDouble(1);
+                Service=rs2.getDouble(1);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif 2: "+e);
+        } finally{
+            if(rs2!=null){
+                rs2.close();
+            }
+            if(ps2!=null){
+                ps2.close();
+            }
+        }
+        if(Penjab.getSelectedItem().toString().equals("Semua")){
+            
+            penjamin=" and reg_periksa.kd_pj IN()='"+Status.getSelectedItem().toString()+"' ";
+        } else if() {
+            
+        } else {
+            
         }
     }
     
