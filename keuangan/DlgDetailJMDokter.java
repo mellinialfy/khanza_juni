@@ -18,8 +18,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +55,9 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
     private String jml="",biaya="",jm="",uangrs="",bhp="",tarif="",tanggal="",kamar="",penjab="",norm="",pasien="",pilihancarabayar="",norawatbayi="";
     private boolean kelas=false,ranapgabung=false;
     private StringBuilder htmlContent;
+    List<String> listPenjamin = new ArrayList<String>();
+    private ResultSet rs2;
+    private PreparedStatement ps2;
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -1260,6 +1269,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(TabRawat.getSelectedIndex()==0){
             laporan1();
         }else if(TabRawat.getSelectedIndex()==1){
+            penjab();
             laporan2();
         }else if(TabRawat.getSelectedIndex()==2){
             laporan3();
@@ -2855,34 +2865,41 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
     
     private void penjab() {
-        Service=0;
-        ps2=koneksi.prepareStatement("select kd_pj, png_jawab from penjab where status='1'");
+        listPenjamin.clear();
+        String penjamin;
         try {
-            ps2.setString(1,rs.getString("no_rawat"));
-            ps2.setString(2,"Service");
-            rs2=ps2.executeQuery();
-            while(rs2.next()){
-                ttlService=ttlService+rs2.getDouble(1);
-                Service=rs2.getDouble(1);
+            if(Penjab.getSelectedItem().toString().equals("Umum")){
+                penjamin=" AND kd_pj IN('A05','A07','A08')";
+            } else if(Penjab.getSelectedItem().toString().equals("BPJS")) {
+                penjamin=" AND kd_pj='BPJ'";
+            } else if(Penjab.getSelectedItem().toString().equals("IKS")) {
+                penjamin=" AND kd_pj NOT IN('A05','A07','A08','BPJ')";
+            } else {
+                penjamin="";
             }
-        } catch (Exception e) {
-            System.out.println("Notif 2: "+e);
-        } finally{
-            if(rs2!=null){
-                rs2.close();
+            
+            ps2=koneksi.prepareStatement("select kd_pj, png_jawab from penjab where status='1' "+penjamin+"");
+            
+            try {
+                rs2=ps2.executeQuery();
+                while(rs2.next()){
+                    listPenjamin.add("'" + rs2.getString(1) +"'");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif penjab: "+e);
+            } finally{
+                if(rs2!=null){
+                    rs2.close();
+                }
+                if(ps2!=null){
+                    ps2.close();
+                }
             }
-            if(ps2!=null){
-                ps2.close();
-            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DlgDetailJMDokter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(Penjab.getSelectedItem().toString().equals("Semua")){
-            
-            penjamin=" and reg_periksa.kd_pj IN()='"+Status.getSelectedItem().toString()+"' ";
-        } else if() {
-            
-        } else {
-            
-        }
+        
+        
     }
     
     private void laporan2() {
@@ -2898,6 +2915,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 ttljml=0;
                 ttlbhp=0;
                 ttluangrs=0;
+                
+                String sListPenjamin = "";
+                for(int i=0; i<listPenjamin.size();i++){
+                    if(i==listPenjamin.size()-1) {
+                        sListPenjamin += listPenjamin.get(i).toString();
+                    } else {
+                        sListPenjamin += listPenjamin.get(i).toString() + ", ";
+                    }
+                   
+                }
+
                 while(rs.next()){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -2925,16 +2953,30 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     c=1;
                     //jmralan
                     if(chkRalan.isSelected()==true){
+//                        String penjam =  listPenjamin.getString("no_rawat1");
+//                        norawat_list = new ArrayList<String>(Arrays.asList(norawat.split(",")));
+//
+//
+//                        markers = ",?".repeat(norawat_list.size()).substring(1);
+                        
+                        
+                        
                         pspasienralan=koneksi.prepareStatement(
                             "select rawat_jl_dr.no_rawat,reg_periksa.no_rkm_medis,date_format(reg_periksa.tgl_registrasi,'%d-%m-%Y')as tgl_registrasi,pasien.nm_pasien,penjab.png_jawab,poliklinik.nm_poli "+
                             "from rawat_jl_dr inner join reg_periksa on rawat_jl_dr.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where rawat_jl_dr.kd_dokter=? and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj like ? group by rawat_jl_dr.no_rawat");
+                            "where rawat_jl_dr.kd_dokter=? and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +" ) group by rawat_jl_dr.no_rawat");
                         try {
+                    
                             pspasienralan.setString(1,rs.getString("kd_dokter"));
                             pspasienralan.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienralan.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            pspasienralan.setString(4,"%"+pilihancarabayar+"%");
+                            
+//                            for(int b=0; b<listPenjamin[].size();b++) {
+//                                
+//                                pspasienralan.setString(4,"%"+listPenjamin[].get(b)+"%");
+//                            }
+                            
                             rspasien=pspasienralan.executeQuery();
                             while(rspasien.next()){ 
                                 pstindakanralan=koneksi.prepareStatement(
@@ -3024,12 +3066,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "select rawat_jl_drpr.no_rawat,reg_periksa.no_rkm_medis,date_format(reg_periksa.tgl_registrasi,'%d-%m-%Y')as tgl_registrasi,pasien.nm_pasien,penjab.png_jawab,poliklinik.nm_poli "+
                             "from rawat_jl_drpr inner join reg_periksa on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where rawat_jl_drpr.kd_dokter=? and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj like ? group by rawat_jl_drpr.no_rawat");
+                            "where rawat_jl_drpr.kd_dokter=? and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by rawat_jl_drpr.no_rawat");
                         try {
                             pspasienralandrpr.setString(1,rs.getString("kd_dokter"));
                             pspasienralandrpr.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienralandrpr.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            pspasienralandrpr.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienralandrpr.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienralandrpr.executeQuery();
                             while(rspasien.next()){ 
                                 a=1; 
@@ -3124,12 +3166,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Radiolgi' as nm_poli "+
                             "from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where periksa_radiologi.kd_dokter=? and periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj like ? group by periksa_radiologi.no_rawat");
+                            "where periksa_radiologi.kd_dokter=? and periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by periksa_radiologi.no_rawat");
                         try {
                             pspasienradiologi.setString(1,rs.getString("kd_dokter"));
                             pspasienradiologi.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienradiologi.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            pspasienradiologi.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienradiologi.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienradiologi.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;   
@@ -3225,12 +3267,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Radiolgi' as nm_poli "+
                             "from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where periksa_radiologi.dokter_perujuk=? and periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj like ? group by periksa_radiologi.no_rawat");
+                            "where periksa_radiologi.dokter_perujuk=? and periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by periksa_radiologi.no_rawat");
                         try {
                             pspasienradiologi2.setString(1,rs.getString("kd_dokter"));
                             pspasienradiologi2.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienradiologi2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            pspasienradiologi2.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienradiologi2.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienradiologi2.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;     
@@ -3327,12 +3369,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Laborat' as nm_poli "+
                             "from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where periksa_lab.kd_dokter=? and periksa_lab.tgl_periksa between ? and ? and reg_periksa.kd_pj like ? group by periksa_lab.no_rawat");                    
+                            "where periksa_lab.kd_dokter=? and periksa_lab.tgl_periksa between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by periksa_lab.no_rawat");                    
                         try {
                             pspasienlab.setString(1,rs.getString("kd_dokter"));
                             pspasienlab.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienlab.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            pspasienlab.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienlab.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienlab.executeQuery();
                             while(rspasien.next()){                        
                                 a=1;   
@@ -3465,12 +3507,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Laborat' as nm_poli "+
                             "from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where periksa_lab.dokter_perujuk=? and periksa_lab.tgl_periksa between ? and ? and reg_periksa.kd_pj like ? group by periksa_lab.no_rawat");                    
+                            "where periksa_lab.dokter_perujuk=? and periksa_lab.tgl_periksa between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by periksa_lab.no_rawat");                    
                         try {
                             pspasienlab2.setString(1,rs.getString("kd_dokter"));
                             pspasienlab2.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienlab2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            pspasienlab2.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienlab2.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienlab2.executeQuery();
                             while(rspasien.next()){                        
                                 a=1;  
@@ -3605,12 +3647,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.operator1=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.operator1=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         try {
                             pspasienoperator1.setString(1,rs.getString("kd_dokter"));
                             pspasienoperator1.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                             pspasienoperator1.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                            pspasienoperator1.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienoperator1.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienoperator1.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;    
@@ -3715,12 +3757,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.operator2=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.operator2=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         try {
                             pspasienoperator2.setString(1,rs.getString("kd_dokter"));
                             pspasienoperator2.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                             pspasienoperator2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                            pspasienoperator2.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienoperator2.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienoperator2.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;  
@@ -3813,12 +3855,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.operator3=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.operator3=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         try {
                             pspasienoperator3.setString(1,rs.getString("kd_dokter"));
                             pspasienoperator3.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                             pspasienoperator3.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                            pspasienoperator3.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasienoperator3.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasienoperator3.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;      
@@ -3911,12 +3953,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.dokter_anak=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.dokter_anak=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         try {
                             pspasiendokter_anak.setString(1,rs.getString("kd_dokter"));
                             pspasiendokter_anak.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                             pspasiendokter_anak.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                            pspasiendokter_anak.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasiendokter_anak.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasiendokter_anak.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;   
@@ -4009,12 +4051,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.dokter_anestesi=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.dokter_anestesi=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         try {
                             pspasiendokter_anestesi.setString(1,rs.getString("kd_dokter"));
                             pspasiendokter_anestesi.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                             pspasiendokter_anestesi.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                            pspasiendokter_anestesi.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasiendokter_anestesi.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasiendokter_anestesi.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;  
@@ -4107,12 +4149,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.dokter_pjanak=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.dokter_pjanak=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         try {
                             pspasiendokter_pjanak.setString(1,rs.getString("kd_dokter"));
                             pspasiendokter_pjanak.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                             pspasiendokter_pjanak.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                            pspasiendokter_pjanak.setString(4,"%"+pilihancarabayar+"%");
+//                            pspasiendokter_pjanak.setString(4,"%"+pilihancarabayar+"%");
                             rspasien=pspasiendokter_pjanak.executeQuery();
                             while(rspasien.next()){ 
                                 a=1;    
@@ -4205,11 +4247,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "pasien.nm_pasien,penjab.png_jawab,'Kamar Operasi' as nm_poli "+
                             "from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                            "where operasi.dokter_umum=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj like ? group by operasi.no_rawat");
+                            "where operasi.dokter_umum=? and operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by operasi.no_rawat");
                         pspasiendokter_umum.setString(1,rs.getString("kd_dokter"));
                         pspasiendokter_umum.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                         pspasiendokter_umum.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                        pspasiendokter_umum.setString(4,"%"+pilihancarabayar+"%");
+//                        pspasiendokter_umum.setString(4,"%"+pilihancarabayar+"%");
                         rspasien=pspasiendokter_umum.executeQuery();
                         try {
                             while(rspasien.next()){ 
@@ -4302,12 +4344,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             if(ranapgabung==false){
                                 pspasienranap=koneksi.prepareStatement(
                                         "select rawat_inap_dr.no_rawat from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
-                                        "where rawat_inap_dr.kd_dokter=? and rawat_inap_dr.tgl_perawatan between ? and ? and reg_periksa.kd_pj like ? group by rawat_inap_dr.no_rawat");
+                                        "where rawat_inap_dr.kd_dokter=? and rawat_inap_dr.tgl_perawatan between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by rawat_inap_dr.no_rawat");
                                 try {
                                     pspasienranap.setString(1,rs.getString("kd_dokter"));
                                     pspasienranap.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                                     pspasienranap.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                                    pspasienranap.setString(4,"%"+pilihancarabayar+"%");
+//                                    pspasienranap.setString(4,"%"+pilihancarabayar+"%");
                                     rspasien=pspasienranap.executeQuery();
                                     while(rspasien.next()){  
                                         pskamar=koneksi.prepareStatement("select kamar_inap.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,kamar_inap.kd_kamar,bangsal.kd_bangsal,bangsal.nm_bangsal,"+
@@ -4481,12 +4523,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
                                 pspasienranapdrpr=koneksi.prepareStatement(
                                         "select rawat_inap_drpr.no_rawat from rawat_inap_drpr inner join reg_periksa on rawat_inap_drpr.no_rawat=reg_periksa.no_rawat "+
-                                        "where rawat_inap_drpr.kd_dokter=? and rawat_inap_drpr.tgl_perawatan between ? and ? and reg_periksa.kd_pj like ? group by rawat_inap_drpr.no_rawat");            
+                                        "where rawat_inap_drpr.kd_dokter=? and rawat_inap_drpr.tgl_perawatan between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") group by rawat_inap_drpr.no_rawat");            
                                 try {
                                     pspasienranapdrpr.setString(1,rs.getString("kd_dokter"));
                                     pspasienranapdrpr.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                                     pspasienranapdrpr.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                                    pspasienranapdrpr.setString(4,"%"+pilihancarabayar+"%");
+//                                    pspasienranapdrpr.setString(4,"%"+pilihancarabayar+"%");
                                     rspasien=pspasienranapdrpr.executeQuery();
                                     while(rspasien.next()){   
                                         pskamar=koneksi.prepareStatement("select kamar_inap.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,kamar_inap.kd_kamar,bangsal.kd_bangsal,bangsal.nm_bangsal,"+
@@ -4661,13 +4703,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }else if(ranapgabung==true){
                                 pspasienranap=koneksi.prepareStatement(
                                         "select rawat_inap_dr.no_rawat from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
-                                        "where rawat_inap_dr.kd_dokter=? and rawat_inap_dr.tgl_perawatan between ? and ? and reg_periksa.kd_pj like ? "+
+                                        "where rawat_inap_dr.kd_dokter=? and rawat_inap_dr.tgl_perawatan between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") "+
                                         "and rawat_inap_dr.no_rawat not in (select no_rawat2 from ranap_gabung) group by rawat_inap_dr.no_rawat");
                                 try {
                                     pspasienranap.setString(1,rs.getString("kd_dokter"));
                                     pspasienranap.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                                     pspasienranap.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                                    pspasienranap.setString(4,"%"+pilihancarabayar+"%");
+//                                    pspasienranap.setString(4,"%"+pilihancarabayar+"%");
                                     rspasien=pspasienranap.executeQuery();
                                     while(rspasien.next()){  
                                         norawatbayi="";
@@ -4879,13 +4921,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
                                 pspasienranapdrpr=koneksi.prepareStatement(
                                         "select rawat_inap_drpr.no_rawat from rawat_inap_drpr inner join reg_periksa on rawat_inap_drpr.no_rawat=reg_periksa.no_rawat "+
-                                        "where rawat_inap_drpr.kd_dokter=? and rawat_inap_drpr.tgl_perawatan between ? and ? and reg_periksa.kd_pj like ? "+
+                                        "where rawat_inap_drpr.kd_dokter=? and rawat_inap_drpr.tgl_perawatan between ? and ? and reg_periksa.kd_pj in( "+ sListPenjamin +") "+
                                         "and rawat_inap_drpr.no_rawat not in (select no_rawat2 from ranap_gabung) group by rawat_inap_drpr.no_rawat");            
                                 try {
                                     pspasienranapdrpr.setString(1,rs.getString("kd_dokter"));
                                     pspasienranapdrpr.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                                     pspasienranapdrpr.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                                    pspasienranapdrpr.setString(4,"%"+pilihancarabayar+"%");
+//                                    pspasienranapdrpr.setString(4,"%"+pilihancarabayar+"%");
                                     rspasien=pspasienranapdrpr.executeQuery();
                                     while(rspasien.next()){   
                                         norawatbayi="";
