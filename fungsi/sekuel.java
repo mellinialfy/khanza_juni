@@ -103,6 +103,25 @@ public final class sekuel {
         }            
     }
     
+    public void simpan(String table,String value,String value1,String sama){
+        try {
+            ps=connect.prepareStatement("insert into "+table+" values("+value+","+value1+")");
+            try{                  
+                ps.executeUpdate();
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);    
+            }finally{
+                if(ps != null){
+                    ps.close();
+                }                
+            }
+            
+            SimpanTrack("insert into "+table+" values("+value+","+value1+")");
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e); 
+        }            
+    }
+    
     public boolean menyimpantf(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
@@ -292,7 +311,8 @@ public final class sekuel {
             SimpanTrack("insert into "+table+" values("+dicari+")");
             return true;
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);  
+            System.out.println("Notifikasi : "+e); 
+            e.printStackTrace();
             if(e.toString().contains("Duplicate")){
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada "+sama+" yang sama dimasukkan sebelumnya...!");
             }else{
@@ -781,6 +801,44 @@ public final class sekuel {
                 }
             }
             SimpanTrack("delete from "+table+" where "+field+"='"+nilai_field+"'");
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    public void hapus(String table,String update,String acuan_field){
+        try {
+            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{                        
+                ps.executeUpdate();       
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus.");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+            SimpanTrack("update "+table+" set "+update+" where "+acuan_field);
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    public void edit(String table,String update,String acuan_field){
+        try {
+            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{                        
+                ps.executeUpdate();       
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Mungkin kode sudah digunakan sebelumnya...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+            SimpanTrack("update "+table+" set "+update+" where "+acuan_field);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
