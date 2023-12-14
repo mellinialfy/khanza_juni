@@ -374,7 +374,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnGrpReflek = new javax.swing.ButtonGroup();
         BtnGrpDisposisiNeona = new javax.swing.ButtonGroup();
         BtnGrpGenetalia = new javax.swing.ButtonGroup();
-        jPanel2 = new javax.swing.JPanel();
+        pStig = new javax.swing.JPanel();
+        saveBtn = new javax.swing.JButton();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -607,7 +608,16 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         timePicker2.setDisplayText(JamNeonatologi);
         timePicker2.setName("timePicker2"); // NOI18N
 
-        jPanel2.setName("jPanel2"); // NOI18N
+        pStig.setName("pStig"); // NOI18N
+
+        saveBtn.setText("SIMPAN");
+        saveBtn.setName("saveBtn"); // NOI18N
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
+        pStig.add(saveBtn);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -945,7 +955,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         jLabel31.setBounds(0, 370, 150, 23);
 
         TglDerma.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        TglDerma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2023" }));
         TglDerma.setDisplayFormat("dd-MM-yyyy");
         TglDerma.setName("TglDerma"); // NOI18N
         TglDerma.setOpaque(false);
@@ -2335,7 +2345,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnDropJamDisposisi.setBounds(450, 520, 28, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023 15:41:38" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2023 13:26:58" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -2389,7 +2399,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         BtnShowJamNeo.setBounds(450, 1300, 28, 23);
 
         TglDerma1.setForeground(new java.awt.Color(50, 70, 50));
-        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        TglDerma1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2023" }));
         TglDerma1.setDisplayFormat("dd-MM-yyyy");
         TglDerma1.setName("TglDerma1"); // NOI18N
         TglDerma1.setOpaque(false);
@@ -2501,6 +2511,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbKontrolDisposisi.setText("Kontrol");
         rbKontrolDisposisi.setActionCommand("Kontrol");
         rbKontrolDisposisi.setName("rbKontrolDisposisi"); // NOI18N
+        rbKontrolDisposisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbKontrolDisposisiActionPerformed(evt);
+            }
+        });
         FormInput.add(rbKontrolDisposisi);
         rbKontrolDisposisi.setBounds(170, 550, 90, 19);
 
@@ -2519,12 +2534,14 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(rbDirawatDisposisi);
         rbDirawatDisposisi.setBounds(170, 580, 98, 21);
 
+        rbAda.setActionCommand("Ada");
         rbAda.setBackground(new java.awt.Color(255, 255, 255));
         BtnGrpAnus.add(rbAda);
         rbAda.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         rbAda.setForeground(new java.awt.Color(50, 50, 50));
         rbAda.setText("Ada");
         rbAda.setName("rbAda"); // NOI18N
+        rbAda.setActionCommand("Ada");
         rbAda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbAdaActionPerformed(evt);
@@ -2533,12 +2550,19 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         FormInput.add(rbAda);
         rbAda.setBounds(170, 970, 98, 21);
 
+        rbTidakAda.setActionCommand("Tidak ada");
         rbTidakAda.setBackground(new java.awt.Color(255, 255, 255));
         BtnGrpAnus.add(rbTidakAda);
         rbTidakAda.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         rbTidakAda.setForeground(new java.awt.Color(50, 50, 50));
         rbTidakAda.setText("Tidak ada");
         rbTidakAda.setName("rbTidakAda"); // NOI18N
+        rbTidakAda.setActionCommand("Tidak ada");
+        rbTidakAda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTidakAdaActionPerformed(evt);
+            }
+        });
         FormInput.add(rbTidakAda);
         rbTidakAda.setBounds(330, 970, 80, 19);
 
@@ -2548,6 +2572,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbBolehPulangNeona.setForeground(new java.awt.Color(50, 50, 50));
         rbBolehPulangNeona.setText("Boleh pulang");
         rbBolehPulangNeona.setName("rbBolehPulangNeona"); // NOI18N
+        rbBolehPulangNeona.setActionCommand("Boleh pulang");
+        rbBolehPulangNeona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbBolehPulangNeonaActionPerformed(evt);
+            }
+        });
         FormInput.add(rbBolehPulangNeona);
         rbBolehPulangNeona.setBounds(170, 1300, 98, 21);
 
@@ -2557,6 +2587,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbKontrolNeona.setForeground(new java.awt.Color(50, 50, 50));
         rbKontrolNeona.setText("Kontrol");
         rbKontrolNeona.setName("rbKontrolNeona"); // NOI18N
+        rbKontrolNeona.setActionCommand("Kontrol");
         rbKontrolNeona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbKontrolNeonaActionPerformed(evt);
@@ -2571,6 +2602,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbDirawatNeona.setForeground(new java.awt.Color(50, 50, 50));
         rbDirawatNeona.setText("Dirawat");
         rbDirawatNeona.setName("rbDirawatNeona"); // NOI18N
+        rbDirawatNeona.setActionCommand("Dirawat");
+        rbDirawatNeona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDirawatNeonaActionPerformed(evt);
+            }
+        });
         FormInput.add(rbDirawatNeona);
         rbDirawatNeona.setBounds(170, 1360, 98, 21);
 
@@ -2586,6 +2623,11 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbKelainan.setForeground(new java.awt.Color(50, 50, 50));
         rbKelainan.setText("Kelainan:");
         rbKelainan.setName("rbKelainan"); // NOI18N
+        rbKelainan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbKelainanActionPerformed(evt);
+            }
+        });
         FormInput.add(rbKelainan);
         rbKelainan.setBounds(330, 940, 98, 21);
 
@@ -2595,6 +2637,12 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         rbNormal.setForeground(new java.awt.Color(50, 50, 50));
         rbNormal.setText("Normal");
         rbNormal.setName("rbNormal"); // NOI18N
+        rbNormal.setActionCommand("Normal");
+        rbNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNormalActionPerformed(evt);
+            }
+        });
         FormInput.add(rbNormal);
         rbNormal.setBounds(170, 940, 100, 19);
 
@@ -2647,7 +2695,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2661,7 +2709,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2806,8 +2854,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         disposisineona = BtnGrpDisposisiNeona.getSelection().getActionCommand();
         
         
-//        System.out.println(BtnGrpFungsiKelenjarKeringat.getSelection().getActionCommand());
-        
+        System.out.println(BtnGrpDisposisiNeona.getSelection().getActionCommand());
+        System.out.println(BtnGrpAnus.getSelection().getActionCommand());
         
         
         
@@ -3197,9 +3245,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnKeluarActionPerformed(null);
-        }else{Valid.pindah(evt,BtnEdit,TCari);}
+//        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+//            BtnKeluarActionPerformed(null);
+//        }else{Valid.pindah(evt,BtnEdit,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -3581,7 +3629,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 panel.setBackground(Color.white);
 
                 panel.add(cb[i],BorderLayout.PAGE_START);
+                
                 jPanel1.add(panel);
+
+
                 
                 
                 
@@ -3640,7 +3691,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             
         } else {
             stigclick = 0;
-            
+            pStig.setVisible(false);
             
             //Get the components in the panel
             Component[] componentsss = jPanel1.getComponents();
@@ -3752,9 +3803,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 panel.add(cb[i],BorderLayout.PAGE_START);
                 jPanel1.add(panel);
                 
-                
-                
-
             }
             
             
@@ -5895,6 +5943,34 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbDirawatDisposisiActionPerformed
 
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void rbTidakAdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTidakAdaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbTidakAdaActionPerformed
+
+    private void rbNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNormalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbNormalActionPerformed
+
+    private void rbKontrolDisposisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKontrolDisposisiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbKontrolDisposisiActionPerformed
+
+    private void rbKelainanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKelainanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbKelainanActionPerformed
+
+    private void rbBolehPulangNeonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbBolehPulangNeonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbBolehPulangNeonaActionPerformed
+
+    private void rbDirawatNeonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDirawatNeonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbDirawatNeonaActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -6104,7 +6180,6 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.Label jLabel98;
     private widget.Label jLabel99;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -6112,6 +6187,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator14;
     private widget.Label label11;
     private widget.Label label14;
+    private javax.swing.JPanel pStig;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private javax.swing.JRadioButton rbAda;
@@ -6126,6 +6202,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbKontrolNeona;
     private javax.swing.JRadioButton rbNormal;
     private javax.swing.JRadioButton rbTidakAda;
+    private javax.swing.JButton saveBtn;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane10;
@@ -6147,6 +6224,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
+        
         try{
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
@@ -6893,7 +6971,10 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             Rambut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             Kuku.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             
+            System.out.println(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            
             if(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()== "Hiperhidrosis") {
+                
                 rbHiperhidrosis.isSelected();
             } else {
                 rbAnshidrosis.isSelected();
@@ -6904,7 +6985,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             DiagnosaKerjaDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
             RencanaKerjaDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             TerapiDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Boleh Pulang") {
+            
+            
+            if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Boleh pulang") {
                 rbBolehPulangDisposisi.isSelected();
             } else if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()== "Kontrol"){
                 rbKontrolDisposisi.isSelected();
@@ -6917,6 +7000,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             TempatDerma.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
             NoBed.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
             WarnaMukosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
+            
+            System.out.println(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
             if(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString()== "Ada") {
                 rbAda.isSelected();
             } else {
@@ -6928,7 +7013,7 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
             DiagnosaKerjaNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
             RencanaKerjaNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
             TerapiNeonatologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Boleh Pulang") {
+            if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Boleh pulang") {
                 rbBolehPulangNeona.isSelected();
             } else if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString()== "Kontrol"){
                 rbKontrolNeona.isSelected();
@@ -6986,7 +7071,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                     TglLahir.setText(rs.getString("tgl_lahir"));
                 }
             } catch (Exception e) {
-                System.out.println("Notif : "+e);
+                System.out.println("Notif israwat: "+e);
+                e.printStackTrace();
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -6996,7 +7082,8 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif : "+e);
+            System.out.println("Notif israwatt: "+e);
+            e.printStackTrace();
         }
     }
     
@@ -7015,7 +7102,25 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
         NoBed.setEnabled(false);
         KdKamar.setEnabled(false);
         NmKamar.setEnabled(false);
+        BtnKamar.setEnabled(false);
         Genetalia.setEnabled(false);
+        Moro.setEnabled(false);
+        Tonick.setEnabled(false);
+        Lainnya.setEnabled(false);
+        Grasping.setEnabled(false);
+        Swallow.setEnabled(false);
+        Suck.setEnabled(false);
+        Step.setEnabled(false);
+        Root.setEnabled(false);
+        Babinski.setEnabled(false);
+        JamNeonatologi.setEnabled(false);
+        BtnShowJamNeo.setEnabled(false);
+        TglDerma1.setEnabled(false);
+        TempatNeonatologi.setEnabled(false);
+        NoBed1.setEnabled(false);
+        KdKamar1.setEnabled(false);
+        NmKamar1.setEnabled(false);
+        BtnKamar1.setEnabled(false);
     }
     
     public void isCek(){
@@ -7037,7 +7142,9 @@ public final class RMAsesmenAwalMedisKulitKelamin extends javax.swing.JDialog {
 
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
+       isReady();
        tampil();
+       
     }
     
     private void isMenu(){
