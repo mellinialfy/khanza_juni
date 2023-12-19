@@ -67,7 +67,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
     private JsonNode response;
     private FileReader myObj;
     String no_rawat,no_rm,pasien,jk,tgllahir,respon,tindakan,
-            sbuli,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
+            id,kd_petugas,nm_petugas,tgl_asuhan,finger="",pilihan="",kamar,namakamar,alamat,umur;
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -1108,7 +1108,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                             "where reg_periksa.no_rawat='"+no_rawat+"'");
                 
             }
-//            no_rawat,no_rm,pasien,jk,tgllahir,ginjal_kanan,ginjal_kiri,sbuli,kd_petugas,nm_petugas,tgl_asuhan;
+
             Map<String, Object> param = new HashMap<>();
             param.put("noperiksa",no_rawat);
             param.put("norm",no_rm);
@@ -1128,7 +1128,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            param.put("hasil","Ginjal Kanan\t: "+respon + "\n\nGinjal Kiri\t: "+tindakan+"\n\nBuli\t\t: " +sbuli);
+            param.put("hasil","Ginjal Kanan\t: "+respon + "\n\nGinjal Kiri\t: "+tindakan+"\n\nBuli\t\t: " +id);
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kd_petugas);
             param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+nm_petugas+"\nID "+(finger.equals("")?kd_petugas:finger)+"\n"+Valid.SetTgl3(tgl[0]));  
@@ -1916,7 +1916,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
             tgllahir = tbObat.getValueAt(tbObat.getSelectedRow(),4).toString();
             tindakan = tbObat.getValueAt(tbObat.getSelectedRow(),6).toString();
             respon = tbObat.getValueAt(tbObat.getSelectedRow(),7).toString();
-            sbuli = tbObat.getValueAt(tbObat.getSelectedRow(),8).toString();
+            id = tbObat.getValueAt(tbObat.getSelectedRow(),8).toString();
             kd_petugas = tbObat.getValueAt(tbObat.getSelectedRow(),9).toString();
             nm_petugas = tbObat.getValueAt(tbObat.getSelectedRow(),10).toString();
             
