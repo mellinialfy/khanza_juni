@@ -845,6 +845,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                 })==true){
 
                     emptTeks();
+                    tampil();
             }
         }
     
@@ -941,13 +942,13 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
 
-        if(tbObat.getSelectedRow()== -1){
-               JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu...!!!!"); 
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        if(tbObat.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            TCari.requestFocus();
+        }else if(tbObat.getRowCount()!=0){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            
             getData();
-            tgl_asuhan = Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19);
-            String[] tgl = tgl_asuhan.split(" ");
             
             umur = Sequel.cariIsi("select umur from pasien where no_rkm_medis=?",no_rm);
             alamat = Sequel.cariIsi("select concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat from pasien inner join kelurahan "
@@ -967,48 +968,33 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                 
             }
 
-            Map<String, Object> param = new HashMap<>();
-            param.put("noperiksa",no_rawat);
-            param.put("norm",no_rm);
-            param.put("namapasien",pasien);
-            param.put("jkel",jk);
-//            param.put("umur",umur);
-            param.put("lahir",Valid.SetTgl3(tgllahir));
-            param.put("tanggal",Valid.SetTgl3(tgl[0]));
-            param.put("petugas",nm_petugas);
-//            param.put("alamat",alamat);
-//            param.put("kamar",kamar);
-//            param.put("namakamar",namakamar);
-            param.put("jam",tgl[1]);
-            param.put("namars",akses.getnamars());
-//            param.put("alamatrs",akses.getalamatrs());
-//            param.put("kotars",akses.getkabupatenrs());
-//            param.put("propinsirs",akses.getpropinsirs());
-//            param.put("kontakrs",akses.getkontakrs());
-//            param.put("emailrs",akses.getemailrs());
-            param.put("hasil","Ginjal Kanan\t: "+respon + "\n\nGinjal Kiri\t: "+tindakan+"\n\nBuli\t\t: " +id);
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kd_petugas);
-            param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+nm_petugas+"\nID "+(finger.equals("")?kd_petugas:finger)+"\n"+Valid.SetTgl3(tgl[0]));  
-
-            pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih hasil pemeriksaan..!","Hasil Pemeriksaan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","PDF Model 1"},"Model 1");
-//            pilihan = opil == null ? null : opil.toString();
-            if(pilihan!=null && pilihan !="null") {
-                switch (pilihan) {
-                    case "Model 1":
-                          Valid.MyReport("rptImplementasiKeperawatan.jrxml","report","::[ Implementasi Keperawatan ]::",param);
-                          System.out.println(param);
-                          break;
-                    case "PDF Model 1":
-                          Valid.MyReportPDF("rptImplementasiKeperawatan.jrxml","report","::[ Implementasi Keperawatan ]::",param);
-                          break;
-                    
-                }    
-            }
-                                
             
+            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+            
+            for(i=0;i<tbObat.getRowCount();i++){  
+                Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
+                    ""+i,Valid.SetTgl3(tbObat.getValueAt(i,5).toString().split(" ")[0]),tbObat.getValueAt(i,5).toString().substring(11,19),tbObat.getValueAt(i,6).toString(),
+                    tbObat.getValueAt(i,7).toString(),tbObat.getValueAt(i,10).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
+                });
+            }
+            
+            Map<String, Object> param = new HashMap<>();  
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());   
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("noperiksa",tbObat.getValueAt(0,0));
+                param.put("norm",tbObat.getValueAt(0,1));
+                param.put("namapasien",tbObat.getValueAt(0,2));
+                param.put("jkel",tbObat.getValueAt(0,3));
+                param.put("lahir",tbObat.getValueAt(0,4));
+            Valid.MyReportqry("rptImplementasiKeperawatan.jasper","report","::[ Implementasi Keperawatan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
+        
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -1224,7 +1210,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                         "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
                         "INNER JOIN tb_implementasi_keperawatan ON reg_periksa.no_rawat=tb_implementasi_keperawatan.no_rawat " +
                         "INNER JOIN petugas ON tb_implementasi_keperawatan.nip=petugas.nip " +
-                        "WHERE tb_implementasi_keperawatan.tanggal BETWEEN ? AND ? " +
+                        "WHERE reg_periksa.no_rawat= ? " +
                         "AND pasien.no_rkm_medis=? " +
                         "ORDER BY tb_implementasi_keperawatan.tanggal DESC ");
 
@@ -1247,9 +1233,8 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                 
             try {
                 if(TCari.getText().equals("")){
-                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    ps.setString(3,TNoRM.getText());
+                    ps.setString(1,TNoRw.getText());
+                    ps.setString(2,TNoRM.getText());
                 }else{
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
