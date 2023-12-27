@@ -104,7 +104,7 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 //        81
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 11; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -114,19 +114,22 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
             else if(i==2){
                 column.setPreferredWidth(160);
             }else if(i==3){
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(90);
             }else if(i==4){
-                column.setPreferredWidth(60);
-            }else if(i==5){
                 column.setPreferredWidth(100);
+            }else if(i==5){
+                column.setPreferredWidth(110);
             }else if(i==6){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(160);
             }else if(i==7){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(160);
             }else if(i==8){
-                column.setPreferredWidth(-10);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else if(i==9){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(100);
+            }else if(i==10){
+                column.setPreferredWidth(120);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -1210,40 +1213,39 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                         "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
                         "INNER JOIN tb_implementasi_keperawatan ON reg_periksa.no_rawat=tb_implementasi_keperawatan.no_rawat " +
                         "INNER JOIN petugas ON tb_implementasi_keperawatan.nip=petugas.nip " +
-                        "WHERE reg_periksa.no_rawat= ? " +
+                        "WHERE tb_implementasi_keperawatan.tanggal BETWEEN ? AND ? "
+                                + "and reg_periksa.no_rawat= ? " +
                         "AND pasien.no_rkm_medis=? " +
                         "ORDER BY tb_implementasi_keperawatan.tanggal DESC ");
 
             }else{
                 ps=koneksi.prepareStatement(
-                        "SELECT tb_implementasi_keperawatan.id, reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,IF(pasien.jk='L','Laki-Laki','Perempuan') AS jk, " +
-                        "pasien.tgl_lahir,tb_implementasi_keperawatan.tanggal, " +
-                        "tb_implementasi_keperawatan.tindakan,tb_implementasi_keperawatan.respon, " +
-                        "tb_implementasi_keperawatan.nip,petugas.nama " +
+                        "SELECT tb_implementasi_keperawatan.id, reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien, " +
+                        "IF(pasien.jk='L','Laki-Laki','Perempuan') AS jk, pasien.tgl_lahir,tb_implementasi_keperawatan.tanggal, " +
+                        "tb_implementasi_keperawatan.tindakan,tb_implementasi_keperawatan.respon, tb_implementasi_keperawatan.nip,petugas.nama " +
                         "FROM reg_periksa " +
                         "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
                         "INNER JOIN tb_implementasi_keperawatan ON reg_periksa.no_rawat=tb_implementasi_keperawatan.no_rawat " +
                         "INNER JOIN petugas ON tb_implementasi_keperawatan.nip=petugas.nip " +
                         "WHERE tb_implementasi_keperawatan.tanggal BETWEEN ? AND ? " +
-                        "AND pasien.no_rkm_medis=? " +
-                        "AND (reg_periksa.no_rawat LIKE ? OR pasien.no_rkm_medis LIKE ? OR pasien.nm_pasien LIKE ? OR " +
-                        "tb_implementasi_keperawatan.nip LIKE ? OR petugas.nama LIKE ?) " +
-                        "ORDER BY tb_implementasi_keperawatan.tanggal DESC");
+                        "AND reg_periksa.no_rawat= ? AND pasien.no_rkm_medis=? " +
+                        "AND (tb_implementasi_keperawatan.nip LIKE ? OR petugas.nama LIKE ?) " +
+                        "ORDER BY tb_implementasi_keperawatan.tanggal DESC ");
             }
                 
             try {
                 if(TCari.getText().equals("")){
-                    ps.setString(1,TNoRw.getText());
-                    ps.setString(2,TNoRM.getText());
+                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                    ps.setString(3,TNoRw.getText());
+                    ps.setString(4,TNoRM.getText());
                 }else{
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    ps.setString(3,TNoRM.getText());
-                    ps.setString(4,"%"+TCari.getText()+"%");
+                    ps.setString(3,TNoRw.getText());
+                    ps.setString(4,TNoRM.getText());
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
-                    ps.setString(7,"%"+TCari.getText()+"%");
-                    ps.setString(8,"%"+TCari.getText()+"%");
                 }   
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -1269,7 +1271,6 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
                           rs.getString("nip"),rs.getString("nama")
                     });
                 }
-                System.out.println(tabMode);
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
                 e.printStackTrace();
@@ -1539,21 +1540,21 @@ public final class RMImplementasiKeperawatan extends javax.swing.JDialog {
     
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
-        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
-//        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan_igd());  
-        if(akses.getjml2()>=1){
-            KdPetugas.setEditable(false);
-            BtnDokter.setEnabled(false);
-            KdPetugas.setText(akses.getkode());
-            Sequel.cariIsi("select petugas.nama from petugas where petugas.nip=?", NmPetugas,KdPetugas.getText());
-            if(NmPetugas.getText().equals("")){
-                KdPetugas.setText("");
-                JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
-            }
-        }             
+//        BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
+//        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
+//        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
+//        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_igd());
+////        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan_igd());  
+//        if(akses.getjml2()>=1){
+//            KdPetugas.setEditable(false);
+//            BtnDokter.setEnabled(false);
+//            KdPetugas.setText(akses.getkode());
+//            Sequel.cariIsi("select petugas.nama from petugas where petugas.nip=?", NmPetugas,KdPetugas.getText());
+//            if(NmPetugas.getText().equals("")){
+//                KdPetugas.setText("");
+//                JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
+//            }
+//        }             
     }
 
     public void setTampil(){
