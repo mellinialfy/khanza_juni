@@ -898,6 +898,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        ppKirim = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
         MnRMRawatJalan = new javax.swing.JMenu();
         MnAwalKeperawatan = new javax.swing.JMenu();
@@ -1298,6 +1299,23 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas2 = new widget.Table();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        ppKirim.setBackground(new java.awt.Color(255, 255, 254));
+        ppKirim.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppKirim.setForeground(new java.awt.Color(50, 50, 50));
+        ppKirim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/checked.png"))); // NOI18N
+        ppKirim.setActionCommand("Kirim Berkas R.M");
+        ppKirim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppKirim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppKirim.setLabel("Kirim Berkas R.M");
+        ppKirim.setName("ppKirim"); // NOI18N
+        ppKirim.setPreferredSize(new java.awt.Dimension(180, 26));
+        ppKirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppKirimBtnPrintActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppKirim);
 
         MnDataRM.setBackground(new java.awt.Color(255, 255, 254));
         MnDataRM.setForeground(new java.awt.Color(50, 50, 50));
@@ -6185,7 +6203,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-06-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6198,7 +6216,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-06-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6338,7 +6356,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-06-2023" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2024" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -13725,6 +13743,30 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_MnCheckListKriteriaMasukICUActionPerformed
 
+    private void ppKirimBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKirimBtnPrintActionPerformed
+        // TODO add your handling code here:
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan mengklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(Sequel.cariInteger("select count(no_rawat) from mutasi_berkas where no_rawat=?",TNoRw.getText())==0){
+
+                Sequel.menyimpan("mutasi_berkas", "'"+TNoRw.getText()+"', 'Sudah Dikirim', now(), '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'");
+            }else{
+                Sequel.mengedit("mutasi_berkas","no_rawat=?","status='Sudah Dikirim', dikirim=now()",1,new String[]{TNoRw.getText()});
+            }
+            
+            Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
+            if(tbPetugas.getSelectedRow()>-1){
+                tabMode.setValueAt("Berkas Diterima",tbPetugas.getSelectedRow(),19);
+            }
+        }
+        
+    }//GEN-LAST:event_ppKirimBtnPrintActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -14125,6 +14167,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem ppGrafikPerpoli2;
     private javax.swing.JMenuItem ppIKP;
     private javax.swing.JMenuItem ppIKP1;
+    private javax.swing.JMenuItem ppKirim;
     private javax.swing.JMenuItem ppMonitoringAsuhanGizi;
     private javax.swing.JMenuItem ppPasienCorona;
     private javax.swing.JMenuItem ppPerawatanCorona;
