@@ -58,7 +58,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "Tgl.Operasi","No.Rawat","Pasien","Jns.Ans","","","","","","","","","","","","","","","","","","","","","","","","","","",
+                "Tgl.Operasi","No.Rawat","Pasien","Jns.Ans","Jam Mulai Anestesi","Jam Mulai Operasi","","","","","","","","","","","","","","","","","","","","","","","","","","",
                 "","","","","Diagnosa Pre-operatif","Diagnosa Post-operatif","Jaringan Yang di-Eksisi/-Insisi","Kirim PA","Selesai Operasi",
                 "Laporan Operasi"
             }){
@@ -81,17 +81,21 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 column.setPreferredWidth(70);
             }else if(i==4){
                 column.setPreferredWidth(200);
-            }else if(i==34){
-                column.setPreferredWidth(150);
-            }else if(i==35){
-                column.setPreferredWidth(150);
+            }else if(i==5){
+                column.setPreferredWidth(70);
+            }else if(i==6){
+                column.setPreferredWidth(70);
             }else if(i==36){
-                column.setPreferredWidth(170);
+                column.setPreferredWidth(150);
             }else if(i==37){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(150);
             }else if(i==38){
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(170);
             }else if(i==39){
+                column.setPreferredWidth(50);
+            }else if(i==40){
+                column.setPreferredWidth(120);
+            }else if(i==41){
                 column.setPreferredWidth(400);
             }else{
                 column.setPreferredWidth(130);
@@ -3310,12 +3314,12 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         }
         
         if(TCari.getText().trim().equals("")&&kdmem.getText().trim().equals("")&&NoRawat.getText().trim().equals("")){
-            sql="select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,operasi.jenis_anasthesi,"+
+            sql="select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,operasi.jenis_anasthesi,operasi.jam_anestesi,operasi.jam_operasi,"+
                 "operasi.tgl_operasi from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 " where "+tanggal+" group by operasi.no_rawat,operasi.tgl_operasi order by operasi.tgl_operasi,operasi.no_rawat ";
         }else{
-            sql="select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,operasi.jenis_anasthesi,"+
+            sql="select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,operasi.jenis_anasthesi,operasi.jam_anestesi,operasi.jam_operasi,"+
                 "operasi.tgl_operasi from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 " where "+tanggal+mem+norawat+" and operasi.no_rawat like '%"+TCari.getText()+"%' or "+
@@ -3352,7 +3356,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                 }
                 tabMode.addRow(new Object[]{
                     rs.getString("tgl_operasi"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+", "+rs.getString("nm_pasien"),rs.getString("jenis_anasthesi"),
-                    "Perawatan","Operator 1","Operator 2","Operator 3","Asisten Operator 1","Asisten Operator 2","Asisten Operator 3","Instrumen","Dokter Anak",
+                    rs.getString("jam_anestesi"),rs.getString("jam_operasi"),"Perawatan","Operator 1","Operator 2","Operator 3","Asisten Operator 1","Asisten Operator 2","Asisten Operator 3","Instrumen","Dokter Anak",
                     "Perawat Resusitas","Dokter Anestesi","Asisten Anestesi 1","Asisten Anestesi 2","Bidan 1","Bidan 2","Bidan 3","Perawat Luar","Onloop 1",
                     "Onloop 2","Onloop 3","Onloop 4","Onloop 5","Sewa OK/VK","Alat","Akomodasi","N.M.S.","Sarpras","Dokter PJ Anak","Dokter Umum","Biaya Perawatan",
                     diagnosa_preop,diagnosa_postop,jaringan_dieksekusi,permintaan_pa,selesaioperasi,laporan_operasi

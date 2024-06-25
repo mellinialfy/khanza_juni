@@ -7411,7 +7411,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 i=tbKasirRalan.getSelectedColumn();
                 if(i==0){
                     if(akses.gettindakan_ralan()==true){
-                        MnDataRalanActionPerformed(null);
+                        i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                        if(i==JOptionPane.YES_OPTION){
+                            MnDataRalanActionPerformed(null);
+                            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
+                            Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
+                        }
                     }
                 }else if(i==1){
                     if(akses.getberi_obat()==true){

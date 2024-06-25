@@ -658,6 +658,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         Laporan = new widget.TextArea();
         jLabel10 = new widget.Label();
         btnTemplate = new widget.Button();
+        jLabel11 = new widget.Label();
+        jamAnestesi = new widget.TextBox();
+        jLabel12 = new widget.Label();
+        jamOperasi = new widget.TextBox();
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -1031,7 +1035,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         label11.setName("label11"); // NOI18N
         label11.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label11);
-        label11.setBounds(406, 40, 101, 23);
+        label11.setBounds(410, 400, 101, 23);
 
         tgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tgl.setName("tgl"); // NOI18N
@@ -1041,7 +1045,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(tgl);
-        tgl.setBounds(510, 40, 150, 23);
+        tgl.setBounds(510, 400, 130, 23);
 
         jLabel3.setText("No.Rawat :");
         jLabel3.setName("jLabel3"); // NOI18N
@@ -1900,17 +1904,22 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         label12.setName("label12"); // NOI18N
         label12.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label12);
-        label12.setBounds(406, 400, 101, 23);
+        label12.setBounds(640, 400, 50, 23);
 
         tgl2.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tgl2.setName("tgl2"); // NOI18N
+        tgl2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tgl2ActionPerformed(evt);
+            }
+        });
         tgl2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tgl2KeyPressed(evt);
             }
         });
         FormInput.add(tgl2);
-        tgl2.setBounds(510, 400, 150, 23);
+        tgl2.setBounds(690, 400, 130, 23);
 
         PreOp.setHighlighter(null);
         PreOp.setName("PreOp"); // NOI18N
@@ -2001,6 +2010,41 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         });
         FormInput.add(btnTemplate);
         btnTemplate.setBounds(479, 460, 28, 23);
+
+        jLabel11.setText("Jam Mulai Anes:");
+        jLabel11.setName("jLabel11"); // NOI18N
+        FormInput.add(jLabel11);
+        jLabel11.setBounds(410, 40, 90, 23);
+
+        jamAnestesi.setHighlighter(null);
+        jamAnestesi.setName("jamAnestesi"); // NOI18N
+        jamAnestesi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jamAnestesiActionPerformed(evt);
+            }
+        });
+        jamAnestesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jamAnestesiKeyPressed(evt);
+            }
+        });
+        FormInput.add(jamAnestesi);
+        jamAnestesi.setBounds(510, 40, 100, 23);
+
+        jLabel12.setText("Jam Mulai Operasi:");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(610, 40, 90, 23);
+
+        jamOperasi.setHighlighter(null);
+        jamOperasi.setName("jamOperasi"); // NOI18N
+        jamOperasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jamOperasiKeyPressed(evt);
+            }
+        });
+        FormInput.add(jamOperasi);
+        jamOperasi.setBounds(710, 40, 92, 23);
 
         scrollPane1.setViewportView(FormInput);
 
@@ -2690,6 +2734,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.textKosong(TNoRw,"Pasien");
         }else if(jenis.getText().trim().equals("")){
             Valid.textKosong(jenis,"Jenis");
+        }else if(jamAnestesi.getText().trim().equals("")){
+            Valid.textKosong(jamAnestesi,"jam mulai anestesi");
+        }else if(jamOperasi.getText().trim().equals("")){
+            Valid.textKosong(jamOperasi,"jam mulai operasi");
         }else if(kdoperator1.getText().trim().equals("")||nmoperator1.getText().trim().equals("")){
             Valid.textKosong(kdoperator1,"Operator 1");
         }else if(kdoperator2.getText().trim().equals("")||nmoperator2.getText().trim().equals("")){
@@ -2753,7 +2801,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 for(i=0;i<tbtindakan.getRowCount();i++){
                     if(tabMode.getValueAt(i,0).toString().equals("true")){
                         if(Sequel.menyimpantf2("operasi","'"+TNoRw.getText()+"','"+Valid.SetTgl(tgl.getSelectedItem()+"")+" "+tgl.getSelectedItem().toString().substring(11,19)
-                            +"','"+jenis.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
+                            +"','"+jenis.getText()+"','"+jamAnestesi.getText()+"','"+jamOperasi.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
                             +"','"+kdasistoperator1.getText()+"','"+kdasistoperator2.getText()+"','"+kdasistoperator3.getText()+"','"+kdInstrumen.getText()
                             +"','"+kddranak.getText()+"','"+kdprwresust.getText()+"','"+kdanestesi.getText()+"','"+kdasistanestesi.getText()+"','"+kdasistanestesi2.getText()
                             +"','"+kdbidan.getText()+"','"+kdbidan2.getText()+"','"+kdbidan3.getText()+"','"+kdprwluar.getText()
@@ -3005,6 +3053,22 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         template.setVisible(true);
     }//GEN-LAST:event_btnTemplateActionPerformed
 
+    private void tgl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgl2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tgl2ActionPerformed
+
+    private void jamAnestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jamAnestesiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jamAnestesiKeyPressed
+
+    private void jamOperasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jamOperasiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jamOperasiKeyPressed
+
+    private void jamAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jamAnestesiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jamAnestesiActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3075,6 +3139,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button btndrumum;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
+    private widget.Label jLabel11;
+    private widget.Label jLabel12;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
@@ -3085,6 +3151,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private widget.TextBox jamAnestesi;
+    private widget.TextBox jamOperasi;
     private widget.TextBox jenis;
     private widget.TextBox kdInstrumen;
     private widget.TextBox kdanestesi;
