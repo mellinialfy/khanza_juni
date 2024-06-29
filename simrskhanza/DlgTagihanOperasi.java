@@ -487,7 +487,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                     kelas_operasi="Yes";
                 }  
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasia : "+e);
             }finally{
                 if(rsset_tarif != null){
                     rsset_tarif.close();
@@ -497,7 +497,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notifikasiz : "+e);
         } 
         
     }
@@ -2801,7 +2801,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 for(i=0;i<tbtindakan.getRowCount();i++){
                     if(tabMode.getValueAt(i,0).toString().equals("true")){
                         if(Sequel.menyimpantf2("operasi","'"+TNoRw.getText()+"','"+Valid.SetTgl(tgl.getSelectedItem()+"")+" "+tgl.getSelectedItem().toString().substring(11,19)
-                            +"','"+jenis.getText()+"','"+jamAnestesi.getText()+"','"+jamOperasi.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
+                            +"','"+jenis.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
                             +"','"+kdasistoperator1.getText()+"','"+kdasistoperator2.getText()+"','"+kdasistoperator3.getText()+"','"+kdInstrumen.getText()
                             +"','"+kddranak.getText()+"','"+kdprwresust.getText()+"','"+kdanestesi.getText()+"','"+kdasistanestesi.getText()+"','"+kdasistanestesi2.getText()
                             +"','"+kdbidan.getText()+"','"+kdbidan2.getText()+"','"+kdbidan3.getText()+"','"+kdprwluar.getText()
@@ -2835,7 +2835,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             +"','"+tbtindakan.getValueAt(i,28).toString()
                             +"','"+tbtindakan.getValueAt(i,29).toString()
                             +"','"+tbtindakan.getValueAt(i,30).toString()
-                            +"','"+tbtindakan.getValueAt(i,31).toString()+"','"+status+"'","data")==true){
+                            +"','"+tbtindakan.getValueAt(i,31).toString()+"','"+status+"','"+jamAnestesi.getText()+"','"+jamOperasi.getText()+"'","data")==true){
                             ttljmdokter=ttljmdokter+Double.parseDouble(tbtindakan.getValueAt(i,4).toString())+
                                     Double.parseDouble(tbtindakan.getValueAt(i,5).toString())+
                                     Double.parseDouble(tbtindakan.getValueAt(i,6).toString())+
@@ -3469,7 +3469,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                    rs.getDouble("jumlah")});
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasie : "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -3488,7 +3488,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             }                  
         }catch(SQLException e){
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notifikasiq : "+e);
         }
         
     }
@@ -3559,7 +3559,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             }
         }catch(SQLException e){
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notifikasiw : "+e);
         }
     }
 
