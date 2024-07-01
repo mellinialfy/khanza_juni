@@ -3120,21 +3120,22 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         }else if(!Laporan.getText().equals("")){
             Sequel.queryu("delete from laporan_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1)+"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +"'");
             Sequel.menyimpan("laporan_operasi","?,?,?,?,?,?,?,?","laporan operasi",8,new String[]{
-                tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),PreOp.getText(),
+                tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),
+                Valid.SetTgl(tgl1.getSelectedItem()+"")+" "+tgl1.getSelectedItem().toString().substring(11,19),
+                PreOp.getText(),
                 PostOp.getText(),Jaringan.getText(),Valid.SetTgl(tgl2.getSelectedItem()+"")+" "+tgl2.getSelectedItem().toString().substring(11,19),
                 DikirimPA.getSelectedItem().toString(),Laporan.getText()
             });
                     
             Sequel.mengedittf("operasi", "no_rawat=? and tgl_operasi=?", 
-                    "tgl_operasi=?, jam_anestesi=?, jam_operasi=?", 
-                    5, new String[]{
-                        tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),
-                        tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),
-                        Valid.SetTgl(tgl1.getSelectedItem()+"")+" "+tgl1.getSelectedItem().toString().substring(11,19),
-                        jamAnestesi.getText(), jamOperasi.getText()
-                        
-                    });
-            
+                "tgl_operasi=?, jam_anestesi=?, jam_operasi=?", 
+                5, new String[]{
+                    Valid.SetTgl(tgl1.getSelectedItem()+"")+" "+tgl1.getSelectedItem().toString().substring(11,19),
+                    jamAnestesi.getText(), jamOperasi.getText(),
+                    tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),
+                    tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+
+                });
             JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!");
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
