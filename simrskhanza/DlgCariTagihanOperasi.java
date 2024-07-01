@@ -3424,7 +3424,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 " where "+tanggal+" group by operasi.no_rawat,operasi.tgl_operasi order by operasi.tgl_operasi,operasi.no_rawat ";
         }else{
-            sql="select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,operasi.jenis_anasthesi,operasi.jam_anestesi,operasi.jam_operasi,"+
+            sql="select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,operasi.jenis_anasthesi,ifnull(operasi.jam_anestesi, '-') as jam_anestesi,ifnull(operasi.jam_operasi, '-') as jam_operasi,"+
                 "operasi.tgl_operasi from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 " where "+tanggal+mem+norawat+" and operasi.no_rawat like '%"+TCari.getText()+"%' or "+
@@ -3444,7 +3444,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
             rs=koneksi.prepareStatement(sql).executeQuery();
             while(rs.next()){
                 total=0;
-                diagnosa_preop="";diagnosa_postop="";jaringan_dieksekusi="";selesaioperasi="";permintaan_pa="";laporan_operasi="";
+                diagnosa_preop="";diagnosa_postop="";jaringan_dieksekusi="";selesaioperasi="";permintaan_pa="";laporan_operasi="";jam_anestesi="";jam_operasi="";
                 rs2=koneksi.prepareStatement(
                         "select diagnosa_preop, diagnosa_postop, jaringan_dieksekusi, selesaioperasi, permintaan_pa, laporan_operasi "+
                         "from laporan_operasi where no_rawat='"+rs.getString("no_rawat")+"' and tanggal='"+rs.getString("tgl_operasi")+"'").executeQuery();
