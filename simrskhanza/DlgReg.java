@@ -13759,9 +13759,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 Sequel.mengedit("mutasi_berkas","no_rawat=?","status='Sudah Dikirim', dikirim=now()",1,new String[]{TNoRw.getText()});
             }
             
-            Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Sudah Dikirim'");
+            Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Terkirim'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Sudah Dikirim",tbPetugas.getSelectedRow(),19);
+                tabMode.setValueAt("Terkirim",tbPetugas.getSelectedRow(),19);
             }
         }
         
