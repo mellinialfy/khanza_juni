@@ -54,7 +54,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private boolean aktif=false,semua;
     private String alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",
             NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",
-            InformasiTambahan="",Klinis="",finger="";
+            InformasiTambahan,Klinis,finger="";
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -1507,6 +1507,7 @@ private void tbRadiologiRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
+                e.printStackTrace();
             }
         }
 }//GEN-LAST:event_tbRadiologiRalanMouseClicked
@@ -2383,7 +2384,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                     "select permintaan_radiologi.noorder,permintaan_radiologi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_radiologi.tgl_permintaan,"+
                     "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_radiologi.tgl_sampel='0000-00-00','',permintaan_radiologi.tgl_sampel) as tgl_sampel,if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel,"+
-                    "permintaan_radiologi.tgl_hasil,if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
+                    "if(permintaan_radiologi.tgl_hasil='0000-00-00','',permintaan_radiologi.tgl_hasil) as tgl_hasil,if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
                     "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis "+
                     "from permintaan_radiologi inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -2443,9 +2444,11 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                             ps2.close();
                         }
                     }
+                    System.out.println(rs.getString("diagnosa_klinis"));
                 }
                 rs.last();
                 LCount.setText(""+rs.getRow());
+                
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -2545,6 +2548,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
             Ruang=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),11).toString();
             InformasiTambahan=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),12).toString();
             Klinis=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),13).toString();
+            
         }
     }
     
@@ -2872,8 +2876,6 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         KodeDokter="";
         DokterPerujuk="";
         Ruang="";
-        InformasiTambahan="";
-        Klinis="";
     }
     
     private void isMenu(){

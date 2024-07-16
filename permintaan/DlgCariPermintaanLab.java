@@ -4092,6 +4092,8 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     
     private void getData() {
+        System.out.println("select:" + tbLabRalan.getSelectedRow());
+        
         if(tbLabRalan.getSelectedRow()!= -1){
             NoPermintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),0).toString();
             NoRawat=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),1).toString();
@@ -4107,6 +4109,10 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             JamSampel=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),6).toString();
             Hasil=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),7).toString();
             JamHasil=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),8).toString();
+            
+            System.out.println("d:" +tbLabRalan.getSelectedRow());
+            System.out.println("k:" +tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),13).toString());
+            System.out.println("kl:" +DiagnosaKlinis);
         }
     }
     
