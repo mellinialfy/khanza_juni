@@ -2216,6 +2216,9 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             ttljmdokter=0;ttljmpetugas=0;ttlkso=0;ttlpendapatan=0;ttlbhp=0;ttljasasarana=0;ttljmperujuk=0;ttlmenejemen=0;
             Sequel.AutoComitFalse();
             sukses=true;
+            
+            Sequel.meghapus("permintaan_pemeriksaan_radiologi","noorder",noorder);
+
             for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
                 if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
                     proyeksi="";
@@ -2273,6 +2276,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     }else{
                         dosis=tbPemeriksaan.getValueAt(i,18).toString();
                     }
+        
                     
                     if(Sequel.menyimpantf2("periksa_radiologi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Pemeriksaan",24,new String[]{
                         TNoRw.getText(),KdPtg.getText(),tbPemeriksaan.getValueAt(i,1).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
@@ -2282,6 +2286,11 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                         tbPemeriksaan.getValueAt(i,10).toString(),tbPemeriksaan.getValueAt(i,3).toString(),
                         KodePj.getText(),status,proyeksi, kV, mAS, FFD, BSF, inak, jml_penyinaran, dosis
                     })==true){
+                        
+                        Sequel.menyimpan2("permintaan_pemeriksaan_radiologi","?,?,?","pemeriksaan lab",3,new String[]{
+                            noorder,tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
+                        });
+
                         if(!noorder.equals("")){
                             if(Sequel.cariIsi("select stts_bayar from permintaan_pemeriksaan_radiologi where noorder='"+noorder+"' and kd_jenis_prw='"+tbPemeriksaan.getValueAt(i,1).toString()+"'").equals("Belum")){
                                 ttlbhp=ttlbhp+Double.parseDouble(tbPemeriksaan.getValueAt(i,5).toString());
