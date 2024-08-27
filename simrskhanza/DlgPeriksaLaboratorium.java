@@ -3086,6 +3086,9 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ttljmdokter=0;ttljmpetugas=0;ttlkso=0;ttlpendapatan=0;ttlbhp=0;ttljasasarana=0;ttljmperujuk=0;ttlmenejemen=0;
             Sequel.AutoComitFalse();
             sukses=true;
+            
+            Sequel.meghapus("permintaan_pemeriksaan_lab","noorder",noorder);
+            
             for(i=0;i<tbTarif.getRowCount();i++){ 
                 if(tbTarif.getValueAt(i,0).toString().equals("true")){
                     if(Sequel.menyimpantf2("periksa_lab","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'PK'","Kode Pemeriksaan",16,new String[]{
@@ -3095,6 +3098,12 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             tbTarif.getValueAt(i,7).toString(),tbTarif.getValueAt(i,8).toString(),tbTarif.getValueAt(i,9).toString(),
                             tbTarif.getValueAt(i,10).toString(),tbTarif.getValueAt(i,3).toString(),KodePj.getText(),status  
                         })==true){
+                        
+                        Sequel.menyimpan2("permintaan_pemeriksaan_lab","?,?,?","pemeriksaan lab",3,new String[]{
+                            noorder,tbTarif.getValueAt(i,1).toString(),"Belum"
+                        });
+                        
+                        
                             if(!noorder.equals("")){
                                 if(Sequel.cariIsi("select permintaan_pemeriksaan_lab.stts_bayar from permintaan_pemeriksaan_lab where permintaan_pemeriksaan_lab.noorder='"+noorder+"' and permintaan_pemeriksaan_lab.kd_jenis_prw='"+tbTarif.getValueAt(i,1).toString()+"'").equals("Belum")){
                                     ttlbhp=ttlbhp+Double.parseDouble(tbTarif.getValueAt(i,5).toString());
