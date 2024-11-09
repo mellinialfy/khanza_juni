@@ -42,7 +42,8 @@ public class DlgProyeksiBeriObat extends javax.swing.JDialog {
 
         Object[] row={"Tgl.Beri","No.Rawat","Barang","Satuan","Biaya Obat","Jml.Obat",
                       "Subtotal Biaya","Emb+Tsl","Total Biaya",
-                      "Harga Beli","Total Beli","Keuntungan"};
+                      "Harga Beli","Total Beli","Keuntungan Beli",
+                      "Harga Dasar","Total Dasar","Keuntungan Dasar"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -51,7 +52,7 @@ public class DlgProyeksiBeriObat extends javax.swing.JDialog {
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 15; i++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(70);
@@ -76,6 +77,12 @@ public class DlgProyeksiBeriObat extends javax.swing.JDialog {
             }else if(i==10){
                 column.setPreferredWidth(90);
             }else if(i==11){
+                column.setPreferredWidth(90);
+            }else if(i==12){
+                column.setPreferredWidth(90);
+            }else if(i==13){
+                column.setPreferredWidth(90);
+            }else if(i==14){
                 column.setPreferredWidth(90);
             }
         }
@@ -417,6 +424,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "kodesatuan.satuan,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.jml, "+
                         "(detail_pemberian_obat.biaya_obat*detail_pemberian_obat.jml) as subtotal,"+
                         "(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah) as tambahan,detail_pemberian_obat.total, "+
+                        "databarang.h_beli,(databarang.h_beli * detail_pemberian_obat.jml) AS total_beli, "+
+                        "(detail_pemberian_obat.total-(databarang.h_beli * detail_pemberian_obat.jml)) AS keuntungan_beli, "+
+                    
                         "detail_pemberian_obat.h_beli,(detail_pemberian_obat.h_beli * detail_pemberian_obat.jml) as total_asal, "+
                         "(detail_pemberian_obat.total-(detail_pemberian_obat.h_beli * detail_pemberian_obat.jml)) as keuntungan "+
                         "from detail_pemberian_obat inner join databarang inner join kodesatuan "+
@@ -572,6 +582,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "kodesatuan.satuan,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.jml, "+
                         "(detail_pemberian_obat.biaya_obat*detail_pemberian_obat.jml) as subtotal,"+
                         "(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah)as tambahan,detail_pemberian_obat.total, "+
+                        "databarang.h_beli,(databarang.h_beli * detail_pemberian_obat.jml) AS total_beli, "+
+                        "(detail_pemberian_obat.total-(databarang.h_beli * detail_pemberian_obat.jml)) AS keuntungan_beli, "+
+                    
                         "detail_pemberian_obat.h_beli,(detail_pemberian_obat.h_beli * detail_pemberian_obat.jml) as total_asal, "+
                         "(detail_pemberian_obat.total-(detail_pemberian_obat.h_beli * detail_pemberian_obat.jml)) as keuntungan "+
                         "from detail_pemberian_obat inner join databarang inner join kodesatuan "+
@@ -598,7 +611,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 df2.format(rs.getDouble(10)),
                                 df2.format(rs.getDouble(11)),
                                 df2.format(rs.getDouble(12)),
-                                df2.format(rs.getDouble(13))};
+                                df2.format(rs.getDouble(13)),
+                                df2.format(rs.getDouble(14)),
+                                df2.format(rs.getDouble(15)),
+                                df2.format(rs.getDouble(16))};
                 tabMode.addRow(data);  
             }  
             LTotal.setText(df2.format(total));                

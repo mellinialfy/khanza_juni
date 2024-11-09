@@ -58,7 +58,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="";
+    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="", sip;
     private double total=0,jumlahtotal=0;
     private Properties prop = new Properties();
     private DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
@@ -1921,6 +1921,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
+            if(sip.equals("")) {
+                sip = "-";
+            }
             
             Map<String, Object> param = new HashMap<>();  
             param.put("namars",akses.getnamars());
@@ -1936,6 +1939,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("pasien",TPasien.getText());
             param.put("norm",TNoRm.getText());
             param.put("peresep",NmDokter.getText());
+            param.put("sip",sip); 
             param.put("noresep",NoResep.getText());
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdDokter.getText());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmDokter.getText()+"\nID "+(finger.equals("")?KdDokter.getText():finger)+"\n"+DTPBeri.getSelectedItem());  
@@ -2498,11 +2502,13 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRm.getText());
                 Sequel.cariIsi("select resep_obat.kd_dokter from resep_obat where resep_obat.no_resep=?",KdDokter,NoResep.getText());
                 NmDokter.setText(dokter.tampil3(KdDokter.getText()));
+                sip = Sequel.cariIsi("select dokter.no_ijn_praktek from dokter where dokter.kd_dokter=?",KdDokter.getText());
                 cmbJam.setSelectedItem(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(11,13));
                 cmbMnt.setSelectedItem(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(14,16));
                 cmbDtk.setSelectedItem(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(17,19));
                 Valid.SetTgl(DTPBeri,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));  
                 
+                System.out.println(KdDokter.getText() + "getdata");
                 TabDataMouseClicked(null);
             }
             getno=0;
@@ -2540,6 +2546,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         isForm();
         KdDokter.setText(kodedokter);
         NmDokter.setText(namadokter);
+        sip = Sequel.cariIsi("select dokter.no_ijn_praktek from dokter where dokter.kd_dokter=? ",KdDokter.getText());
+        
         this.status=status;
     }
     

@@ -525,10 +525,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnGudang = new widget.Button();
         jLabel10 = new widget.Label();
         jLabel11 = new widget.Label();
-        jLabel12 = new widget.Label();
+        Lpenjamin = new widget.Label();
         TPasien = new widget.TextBox();
         TNoRM = new widget.TextBox();
         LblNoRawat = new widget.TextBox();
+        jLabel13 = new widget.Label();
+        jLabel14 = new widget.Label();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -846,7 +848,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         jLabel8.setBounds(4, 40, 65, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2023" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -955,11 +957,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(188, 10, 65, 23);
 
-        jLabel12.setText("Nama Pasien :");
-        jLabel12.setName("jLabel12"); // NOI18N
-        jLabel12.setPreferredSize(new java.awt.Dimension(68, 23));
-        FormInput.add(jLabel12);
-        jLabel12.setBounds(365, 10, 80, 23);
+        Lpenjamin.setText("x");
+        Lpenjamin.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        Lpenjamin.setName("Lpenjamin"); // NOI18N
+        Lpenjamin.setPreferredSize(new java.awt.Dimension(68, 23));
+        FormInput.add(Lpenjamin);
+        Lpenjamin.setBounds(770, 10, 120, 23);
 
         TPasien.setEditable(false);
         TPasien.setName("TPasien"); // NOI18N
@@ -978,6 +981,18 @@ public final class DlgCariObat extends javax.swing.JDialog {
         LblNoRawat.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(LblNoRawat);
         LblNoRawat.setBounds(72, 10, 123, 23);
+
+        jLabel13.setText("Nama Pasien :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        jLabel13.setPreferredSize(new java.awt.Dimension(68, 23));
+        FormInput.add(jLabel13);
+        jLabel13.setBounds(365, 10, 80, 23);
+
+        jLabel14.setText("Penjamin :");
+        jLabel14.setName("jLabel14"); // NOI18N
+        jLabel14.setPreferredSize(new java.awt.Dimension(68, 23));
+        FormInput.add(jLabel14);
+        jLabel14.setBounds(690, 10, 80, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -2030,6 +2045,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Label LTotal;
     private widget.Label LTotalTagihan;
     private widget.TextBox LblNoRawat;
+    private widget.Label Lpenjamin;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
@@ -2046,7 +2062,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
-    private widget.Label jLabel12;
+    private widget.Label jLabel13;
+    private widget.Label jLabel14;
     private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -3415,7 +3432,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnGudang.setEnabled(akses.getakses_depo_obat());
     }
     
-    public void setNoRm(String norwt,String norm,String nama,String tanggal, String jam) {        
+    public void setNoRm(String norwt,String norm,String nama,String tanggal, String jam) { 
         aktifpcare="no";
         TNoRw.setText(norwt);
         LblNoRawat.setText(norwt);
@@ -3424,7 +3441,11 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         noresep="";
         Tanggal.setText(tanggal);
         Jam.setText(jam);  
-        KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
+        
+        String kd_pj = Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt);
+        KdPj.setText(kd_pj);
+        
+        Lpenjamin.setText(Sequel.cariIsi("SELECT penjab.`png_jawab` FROM penjab WHERE penjab.`kd_pj`=?",kd_pj));
         kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ralan.hargajual/100) from set_harga_obat_ralan where set_harga_obat_ralan.kd_pj=?",KdPj.getText());
         TCari.requestFocus();
     }

@@ -101,7 +101,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }else if(i==11){
                 column.setPreferredWidth(120);
             }else if(i==12){
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(150);
             }else if(i==13){
                 column.setPreferredWidth(65);
             }else if(i==14){
