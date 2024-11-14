@@ -7441,15 +7441,20 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                 }
                                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Terkirim'");
                                 
+                                if(tbKasirRalan.getSelectedRow()>-1){
+                                    tabModekasir.setValueAt("Terkirim",tbKasirRalan.getSelectedRow(),10);
+                                }
+                                
                                 i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
                                 if(i==JOptionPane.YES_OPTION){
                                     MnDataRalanActionPerformed(null);
                                     Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
                                     Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
+                                    
+                                    if(tbKasirRalan.getSelectedRow()>-1){
+                                        tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                                    }
                                 }
-                                MnDataRalanActionPerformed(null);
-                                Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
-                                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
                             } 
                         } else if(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),10).toString().equals("Terkirim")){
                             i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -7457,6 +7462,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                 MnDataRalanActionPerformed(null);
                                 Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
                                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
+                                
+                                if(tbKasirRalan.getSelectedRow()>-1){
+                                    tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                                }
                             } 
                         }
                         else{
