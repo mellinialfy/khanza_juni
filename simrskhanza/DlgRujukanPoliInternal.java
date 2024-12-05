@@ -175,6 +175,8 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         TNoRw = new widget.TextBox();
         TNoRM = new widget.TextBox();
         TPasien = new widget.TextBox();
+        jLabel15 = new widget.Label();
+        DTPReg = new widget.Tanggal();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         jLabel14 = new widget.Label();
@@ -189,7 +191,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Rujukan Poli Internal ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Rujukan Poli Internal ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -214,6 +216,11 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
 
         TDokter.setEditable(false);
         TDokter.setName("TDokter"); // NOI18N
+        TDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TDokterActionPerformed(evt);
+            }
+        });
         FormInput.add(TDokter);
         TDokter.setBounds(175, 42, 180, 23);
 
@@ -269,25 +276,57 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         TNoRw.setEditable(false);
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
+        TNoRw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TNoRwActionPerformed(evt);
+            }
+        });
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TNoRwKeyPressed(evt);
             }
         });
         FormInput.add(TNoRw);
-        TNoRw.setBounds(73, 12, 153, 23);
+        TNoRw.setBounds(73, 12, 130, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
-        TNoRM.setBounds(228, 12, 110, 23);
+        TNoRM.setBounds(205, 12, 110, 23);
 
         TPasien.setEditable(false);
         TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
-        TPasien.setBounds(340, 12, 389, 23);
+        TPasien.setBounds(318, 12, 200, 23);
+
+        jLabel15.setText("Tanggal :");
+        jLabel15.setName("jLabel15"); // NOI18N
+        FormInput.add(jLabel15);
+        jLabel15.setBounds(520, 10, 70, 23);
+
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2024" }));
+        DTPReg.setDisplayFormat("dd-MM-yyyy");
+        DTPReg.setName("DTPReg"); // NOI18N
+        DTPReg.setOpaque(false);
+        DTPReg.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                DTPRegItemStateChanged(evt);
+            }
+        });
+        DTPReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DTPRegActionPerformed(evt);
+            }
+        });
+        DTPReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DTPRegKeyPressed(evt);
+            }
+        });
+        FormInput.add(DTPReg);
+        DTPReg.setBounds(600, 10, 90, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.CENTER);
         FormInput.getAccessibleContext().setAccessibleName("");
@@ -352,8 +391,8 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         }else if(kddokter.getText().trim().equals("")||TDokter.getText().trim().equals("")){
             Valid.textKosong(kddokter,"dokter");
         }else{          
-            if(Sequel.menyimpantf("rujukan_internal_poli","?,?,?","Rujukan Sama",3,new String[]{
-                    TNoRw.getText(),kddokter.getText(),kdpoli.getText()
+            if(Sequel.menyimpantf("rujukan_internal_poli","?,?,?,?","Rujukan Sama",4,new String[]{
+                    TNoRw.getText(),kddokter.getText(),kdpoli.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+"")
                 })==true){
                 BtnKeluarActionPerformed(evt);
             }                      
@@ -459,6 +498,26 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         
     }//GEN-LAST:event_TNoRwKeyPressed
 
+    private void TNoRwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNoRwActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TNoRwActionPerformed
+
+    private void DTPRegItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPRegItemStateChanged
+//        isNumber();
+    }//GEN-LAST:event_DTPRegItemStateChanged
+
+    private void DTPRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPRegKeyPressed
+        Valid.pindah(evt,TNoRw,BtnDokter);
+    }//GEN-LAST:event_DTPRegKeyPressed
+
+    private void TDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TDokterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TDokterActionPerformed
+
+    private void DTPRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DTPRegActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DTPRegActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -480,6 +539,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
     private widget.Button BtnUnit;
+    private widget.Tanggal DTPReg;
     private widget.PanelBiasa FormInput;
     private widget.TextBox TDokter;
     private widget.TextBox TNoRM;
@@ -489,6 +549,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel13;
     private widget.Label jLabel14;
+    private widget.Label jLabel15;
     private widget.Label jLabel19;
     private widget.Label jLabel3;
     private widget.TextBox kddokter;
@@ -511,6 +572,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     public void isCek(){
         BtnSimpan.setEnabled(true);
     }
+    
 
 
 
