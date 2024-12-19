@@ -4437,7 +4437,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                     psdokterralan2.setString(1,TNoRw.getText());
                                     rsdokterralan2=psdokterralan2.executeQuery();
                                     while(rsdokterralan2.next()){
-                                        dokterrujukan=dokterrujukan+", "+rsdokterralan2.getString("nm_dokter");
+                                        tabModeRwJlDr.addRow(new Object[]{true,"",rsdokterralan2.getString("nm_dokter"),"",null,null,null,null,"Dokter"});   
+//                                        dokterrujukan=dokterrujukan+", "+rsdokterralan2.getString("nm_dokter");
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Dokter : "+e);
@@ -4449,7 +4450,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                         psdokterralan2.close();
                                     }
                                 }
-                                tabModeRwJlDr.addRow(new Object[]{true,"",rsdokterralan.getString("nm_dokter")+dokterrujukan,"",null,null,null,null,"Dokter"});   
+                                tabModeRwJlDr.addRow(new Object[]{true,"",rsdokterralan.getString("nm_dokter"),"",null,null,null,null,"Dokter"});   
                             }
                         }else{
                             if(rsdokterralan.next()){

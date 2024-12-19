@@ -2898,8 +2898,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         } catch (SQLException ex) {
             Logger.getLogger(DlgDetailJMDokter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }
     
     private void laporan2() {
@@ -2923,7 +2921,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     } else {
                         sListPenjamin += listPenjamin.get(i).toString() + ", ";
                     }
-                   
                 }
 
                 while(rs.next()){
@@ -2953,13 +2950,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     c=1;
                     //jmralan
                     if(chkRalan.isSelected()==true){
-//                        String penjam =  listPenjamin.getString("no_rawat1");
-//                        norawat_list = new ArrayList<String>(Arrays.asList(norawat.split(",")));
-//
-//
-//                        markers = ",?".repeat(norawat_list.size()).substring(1);
-                        
-                        
+//                      
                         
                         pspasienralan=koneksi.prepareStatement(
                             "select rawat_jl_dr.no_rawat,reg_periksa.no_rkm_medis,date_format(reg_periksa.tgl_registrasi,'%d-%m-%Y')as tgl_registrasi,pasien.nm_pasien,penjab.png_jawab,poliklinik.nm_poli "+
@@ -2971,12 +2962,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             pspasienralan.setString(1,rs.getString("kd_dokter"));
                             pspasienralan.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             pspasienralan.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            
-//                            for(int b=0; b<listPenjamin[].size();b++) {
-//                                
-//                                pspasienralan.setString(4,"%"+listPenjamin[].get(b)+"%");
-//                            }
-                            
+//                            pspasienralandrpr.setString(4,"%"+pilihancarabayar+"%");
+
                             rspasien=pspasienralan.executeQuery();
                             while(rspasien.next()){ 
                                 pstindakanralan=koneksi.prepareStatement(
