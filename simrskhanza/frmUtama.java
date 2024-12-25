@@ -1582,6 +1582,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
         BtnToolReg = new widget.ButtonBig();
+        BtnToolBook = new widget.ButtonBig();
         btnToolIGD = new widget.ButtonBig();
         jSeparator5 = new javax.swing.JSeparator();
         btnToolLab = new widget.ButtonBig();
@@ -1875,7 +1876,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27/06/2023" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28/06/2023" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7004,6 +7005,24 @@ public class frmUtama extends javax.swing.JFrame {
         });
         internalFrame1.add(BtnToolReg);
 
+        BtnToolBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/PatientFile.png"))); // NOI18N
+        BtnToolBook.setMnemonic('R');
+        BtnToolBook.setText("Booking");
+        BtnToolBook.setToolTipText("Alt+R");
+        BtnToolBook.setEnabled(false);
+        BtnToolBook.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnToolBook.setIconTextGap(2);
+        BtnToolBook.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BtnToolBook.setName("BtnToolBook"); // NOI18N
+        BtnToolBook.setPreferredSize(new java.awt.Dimension(100, 38));
+        BtnToolBook.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnToolBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnToolBookActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(BtnToolBook);
+
         btnToolIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Doctor.png"))); // NOI18N
         btnToolIGD.setMnemonic('D');
         btnToolIGD.setText("IGD/UGD");
@@ -8149,6 +8168,7 @@ public class frmUtama extends javax.swing.JFrame {
         switch (BtnLog.getText().trim()) {
             case "Log Out":
                 BtnToolReg.setEnabled(false);
+                BtnToolBook.setEnabled(false);
                 BtnToolKamnap.setEnabled(false);
                 BtnToolKasir.setEnabled(false);
                 btnToolIGD.setEnabled(false);
@@ -8192,6 +8212,7 @@ public class frmUtama extends javax.swing.JFrame {
                 if(akses.getjml1()>=1){    
                     BtnMenu.setEnabled(true);
                     BtnToolReg.setEnabled(true);
+                    BtnToolBook.setEnabled(true);
                     BtnToolKamnap.setEnabled(true);
                     BtnToolKasir.setEnabled(true); 
                     btnToolIGD.setEnabled(true);
@@ -8229,6 +8250,7 @@ public class frmUtama extends javax.swing.JFrame {
                     MnGantiPassword.setEnabled(true);
                     MnPengajuanCutiPegawai.setEnabled(true);
                     BtnToolReg.setEnabled(akses.getregistrasi());
+                    BtnToolBook.setEnabled(akses.getbooking_registrasi());
                     if((akses.getkamar_inap()==true)||(akses.getbilling_ranap()==true)||(akses.gettindakan_ranap()==true)){
                         BtnToolKamnap.setEnabled(true);
                     }else{
@@ -8273,6 +8295,7 @@ public class frmUtama extends javax.swing.JFrame {
                 }else if((akses.getjml1()==0)&&(akses.getjml2()==0)){
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
                     BtnToolReg.setEnabled(false);
+                    BtnToolBook.setEnabled(false);
                     BtnToolKamnap.setEnabled(false);
                     BtnToolKasir.setEnabled(false);
                     MnGantiPassword.setEnabled(false);  
@@ -14445,6 +14468,27 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnInfoMobileJKNActionPerformed
 
+    private void BtnToolBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolBookActionPerformed
+        // TODO add your handling code here:
+//        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//        isTutup();
+//        reg.emptTeks();    
+//        reg.isCek();
+//        reg.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+//        reg.setLocationRelativeTo(PanelUtama);
+//        reg.setVisible(true);
+//        this.setCursor(Cursor.getDefaultCursor()); 
+        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgBookingRegistrasi form=new DlgBookingRegistrasi(this,false);
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnToolBookActionPerformed
+
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20385,6 +20429,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig BtnLog;
     private widget.Button BtnLogin;
     private widget.ButtonBig BtnMenu;
+    private widget.ButtonBig BtnToolBook;
     private widget.ButtonBig BtnToolJualObat;
     private widget.ButtonBig BtnToolKamnap;
     private widget.ButtonBig BtnToolKasir;
@@ -21094,7 +21139,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     }
     
     private void setToolbar(){
-        if(internalFrame1.getWidth()<(BtnMenu.getWidth()+BtnToolReg.getWidth()+btnToolIGD.getWidth()+
+        if(internalFrame1.getWidth()<(BtnMenu.getWidth()+BtnToolReg.getWidth()+BtnToolBook.getWidth()+btnToolIGD.getWidth()+
                 btnToolLab.getWidth()+btnToolRad.getWidth()+BtnToolJualObat.getWidth()+BtnToolKamnap.getWidth()+
                 BtnToolKasir.getWidth()+BtnLog.getWidth()+BtnClose.getWidth()+8)){
             internalFrame1.setSize(new Dimension(PanelUtama.getWidth(),90));
