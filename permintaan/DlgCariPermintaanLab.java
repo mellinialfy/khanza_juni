@@ -2344,6 +2344,9 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     param.put("noperiksa",NoPermintaan);
                     norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",NoRawat);
                     param.put("norm",norm);
+                    param.put("penjab",Sequel.cariIsi("SELECT penjab.`png_jawab` FROM reg_periksa " +
+                        "JOIN penjab ON penjab.`kd_pj` = reg_periksa.`kd_pj`" +
+                        "WHERE reg_periksa.no_rawat = ? ",NoRawat));
                     param.put("pekerjaan",Sequel.cariIsi("select pasien.pekerjaan from pasien where pasien.no_rkm_medis=?",norm));
                     param.put("noktp",Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?",norm));
                     param.put("namapasien",Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",norm));
