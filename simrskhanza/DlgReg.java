@@ -6838,7 +6838,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoReg.getText().trim().equals("")){
-            Valid.textKosong(TNoReg,"No.Regristrasi");
+            Valid.textKosong(TNoReg,"No.Registrasi");
         }else if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }else if(TDokter.getText().trim().equals("")){
@@ -6856,6 +6856,18 @@ public final class DlgReg extends javax.swing.JDialog {
                 "inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat where kamar_inap.stts_pulang='-' and pasien.no_rkm_medis=?",TNoRM.getText())>0){
             JOptionPane.showMessageDialog(null,"Pasien sedang dalam masa perawatan di kamar inap..!!");
             TNoRM.requestFocus();
+        }else if(Sequel.cariInteger(
+                "SELECT COUNT(booking_registrasi.`no_reg`) FROM booking_registrasi " +
+                "WHERE no_reg = ? AND kd_dokter = ? AND tanggal_periksa = ?",TNoReg.getText(),KdDokter.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""))>0){
+            isNumber();
+            JOptionPane.showMessageDialog(null,"Sudah ada nomor antrean yang sama. Silakan coba lagi");
+            TNoReg.requestFocus();
+        }else if(Sequel.cariInteger(
+                "SELECT COUNT(reg_periksa.`no_rawat`) FROM reg_periksa " +
+                "WHERE no_reg = ? AND kd_dokter = ? AND tgl_registrasi = ?",TNoReg.getText(),KdDokter.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""))>0){
+            isNumber();
+            JOptionPane.showMessageDialog(null,"Sudah ada nomor antrean yang sama. Silakan coba lagi");
+            TNoReg.requestFocus();
         }else{
             if(akses.getkode().equals("Admin Utama")){
                 isRegistrasi();
@@ -7030,6 +7042,18 @@ public final class DlgReg extends javax.swing.JDialog {
             Valid.textKosong(kdpoli,"poliklinik");
         }else if(TBiaya.getText().trim().equals("")){
             Valid.textKosong(TBiaya,"biaya regristrasi");
+        }else if(Sequel.cariInteger(
+                "SELECT COUNT(booking_registrasi.`no_reg`) FROM booking_registrasi " +
+                "WHERE no_reg = ? AND kd_dokter = ? AND tanggal_periksa = ? AND no_rkm_medis <> '"+TNoRM.getText()+"'",TNoReg.getText(),KdDokter.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""))>0){
+            isNumber();
+            JOptionPane.showMessageDialog(null,"Sudah ada nomor antrean yang sama. Silakan coba lagi");
+            TNoReg.requestFocus();
+        }else if(Sequel.cariInteger(
+                "SELECT COUNT(reg_periksa.`no_rawat`) FROM reg_periksa " +
+                "WHERE no_reg = ? AND kd_dokter = ? AND tgl_registrasi = ? AND no_rkm_medis <> '"+TNoRM.getText()+"'",TNoReg.getText(),KdDokter.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""))>0){
+            isNumber();
+            JOptionPane.showMessageDialog(null,"Sudah ada nomor antrean yang sama. Silakan coba lagi");
+            TNoReg.requestFocus();
         }else{
             if(tbPetugas.getSelectedRow()>-1){
                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
