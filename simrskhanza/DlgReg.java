@@ -9910,6 +9910,78 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     if(tbPetugas.getSelectedRow()>-1){
                         tabMode.setValueAt("Batal",tbPetugas.getSelectedRow(),19);
                     }
+                    
+                    
+                    int mjkn = Sequel.cariInteger("SELECT COUNT(referensi_mobilejkn_bpjs.nobooking) AS mjkn " +
+                            "FROM referensi_mobilejkn_bpjs " +
+                            "INNER JOIN pasien ON referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis " +
+                            "WHERE referensi_mobilejkn_bpjs.no_rawat = '"+TNoRw.getText()+"' AND referensi_mobilejkn_bpjs.norm = '"+TNoRM.getText()+"'");
+            
+                    if(mjkn > 0) {
+
+                        String nobooking = "", checkinstatus = "", nomorreferensi = "";
+
+                        try {
+                            ps=koneksi.prepareStatement(
+                                "SELECT referensi_mobilejkn_bpjs.nobooking, referensi_mobilejkn_bpjs.status, referensi_mobilejkn_bpjs.nomorreferensi " +
+                                    "FROM referensi_mobilejkn_bpjs " +
+                                    "INNER JOIN pasien ON referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis " +
+                                    "WHERE referensi_mobilejkn_bpjs.no_rawat = ? and referensi_mobilejkn_bpjs.norm = ?");
+                            try {
+                                ps.setString(1,TNoRw.getText());
+                                ps.setString(2,TNoRM.getText());
+                                rs=ps.executeQuery();
+                                if(rs.next()){
+                                   nobooking = rs.getString("nobooking");
+                                   checkinstatus = rs.getString("status");
+                                   nomorreferensi = rs.getString("nomorreferensi");
+
+                                }
+
+
+                                if(!nobooking.isEmpty()){
+            //                    System.out.println(nobooking);
+            //                    System.out.println(checkinstatus);
+                                    if(checkinstatus.equals("Belum")) {
+                                        if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
+                                            nobooking
+                                        })==true){
+
+                                            Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
+                                                TNoRM.getText(),TNoRw.getText(), 
+                                                nomorreferensi,"Dibatalkan oleh Admin","Belum",nobooking
+                                            });
+                                        }
+                                    } else if(checkinstatus.equals("Checkin")) {
+                                        i=JOptionPane.showConfirmDialog(null, "Status pasien sudah 'Check in', apakah ingin ubah menjadi 'Batal'?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                                        if(i==JOptionPane.YES_OPTION){
+
+                                            if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
+                                                nobooking
+                                            })==true){
+                                                Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
+                                                    TNoRM.getText(),TNoRw.getText(), 
+                                                    nomorreferensi,"Dibatalkan oleh Admin","Belum",nobooking
+                                                });
+                                            }
+                                        }
+                                    }
+                                } 
+
+                            } catch (Exception e) {
+                                System.out.println("Notif : "+e);
+                            } finally{
+                                if(rs!=null){
+                                    rs.close();
+                                }
+                                if(ps!=null){
+                                    ps.close();
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } 
+                    }
                 }
             }
         }

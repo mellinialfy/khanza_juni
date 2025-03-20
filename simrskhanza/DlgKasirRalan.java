@@ -44,6 +44,8 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -167,8 +169,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psotomatis,psotomatis2,pskasir,pscaripiutang,psrekening;
-    private ResultSet rskasir,rsrekening;
+    private PreparedStatement psotomatis,psotomatis2,pskasir,pscaripiutang,psrekening,ps;
+    private ResultSet rskasir,rsrekening, rs;
     private String aktifkanparsial="no",kamar_inap_kasir_ralan=Sequel.cariIsi("select set_jam_minimal.kamar_inap_kasir_ralan from set_jam_minimal"),caripenjab="",filter="no",bangsal=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),nonota="",
             sqlpsotomatis2="insert into rawat_jl_dr values (?,?,?,?,?,?,?,?,?,?,?,'Belum')",
             sqlpsotomatis2petugas="insert into rawat_jl_pr values (?,?,?,?,?,?,?,?,?,?,?,'Belum')",
@@ -7427,6 +7429,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     }
                 }               
             }else if(evt.getClickCount()==2){
+                
                 i=tbKasirRalan.getSelectedColumn();
                 if(i==0){
                     if(akses.gettindakan_ralan()==true){
@@ -7434,12 +7437,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Terkirim ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
                             if(i==JOptionPane.YES_OPTION){
                                 
-                                if(Sequel.cariInteger("select count(no_rawat) from mutasi_berkas where no_rawat=?",TNoRw.getText())==0){
-                                    Sequel.menyimpan("mutasi_berkas", "'"+TNoRw.getText()+"', 'Sudah Dikirim', now(), '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'");
+                                if(Sequel.cariInteger("select count(no_rawat) from mutasi_berkas where no_rawat=?",TNoRwCari.getText())==0){
+                                    Sequel.menyimpan("mutasi_berkas", "'"+TNoRwCari.getText()+"', 'Sudah Dikirim', now(), '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'");
                                 }else{
-                                    Sequel.mengedit("mutasi_berkas","no_rawat=?","status='Sudah Dikirim', dikirim=now()",1,new String[]{TNoRw.getText()});
+                                    Sequel.mengedit("mutasi_berkas","no_rawat=?","status='Sudah Dikirim', dikirim=now()",1,new String[]{TNoRwCari.getText()});
                                 }
-                                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Terkirim'");
+                                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRwCari,"stts='Terkirim'");
                                 
                                 if(tbKasirRalan.getSelectedRow()>-1){
                                     tabModekasir.setValueAt("Terkirim",tbKasirRalan.getSelectedRow(),10);
@@ -7448,24 +7451,40 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                 i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
                                 if(i==JOptionPane.YES_OPTION){
                                     MnDataRalanActionPerformed(null);
-                                    Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
-                                    Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
-                                    
-                                    if(tbKasirRalan.getSelectedRow()>-1){
-                                        tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
-                                    }
+                                    //TimeUnit.SECONDS.sleep(1);
+                                    CompletableFuture.delayedExecutor(5, TimeUnit.SECONDS).execute(()->{
+                                        try{
+                                            
+                                            Sequel.menyimpan("mutasi_berkas","'"+TNoRwCari.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRwCari.getText()+"'");
+                                            Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRwCari,"stts='Berkas Diterima'");
+
+                                            if(tbKasirRalan.getSelectedRow()>-1){
+                                                tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                                            }
+                                        }catch(Exception e){
+                                            System.out.println("Error after delay: " + e);
+                                        }
+                                    });
                                 }
                             } 
                         } else if(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),10).toString().equals("Terkirim")){
                             i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
                             if(i==JOptionPane.YES_OPTION){
                                 MnDataRalanActionPerformed(null);
-                                Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
-                                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
-                                
-                                if(tbKasirRalan.getSelectedRow()>-1){
-                                    tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
-                                }
+                                //TimeUnit.SECONDS.sleep(1);
+                                CompletableFuture.delayedExecutor(5, TimeUnit.SECONDS).execute(()->{
+                                    try{
+                                        
+                                        Sequel.menyimpan("mutasi_berkas","'"+TNoRwCari.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRwCari.getText()+"'");
+                                        Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRwCari,"stts='Berkas Diterima'");
+
+                                        if(tbKasirRalan.getSelectedRow()>-1){
+                                            tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                                        }
+                                    }catch(Exception e){
+                                        System.out.println("Error after delay: " + e);
+                                    }
+                                });
                             } 
                         }
                         else{
@@ -7486,14 +7505,61 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     }                    
                 }else if(i==14){
                     if(akses.gettindakan_ralan()==true){
-                        if(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),10).toString().equals("Belum")  || tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),10).toString().equals("Terkirim")){
+                        if(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),10).toString().equals("Belum")){
+                            i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Terkirim ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                            if(i==JOptionPane.YES_OPTION){
+                                
+                                if(Sequel.cariInteger("select count(no_rawat) from mutasi_berkas where no_rawat=?",TNoRwCari.getText())==0){
+                                    Sequel.menyimpan("mutasi_berkas", "'"+TNoRwCari.getText()+"', 'Sudah Dikirim', now(), '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'");
+                                }else{
+                                    Sequel.mengedit("mutasi_berkas","no_rawat=?","status='Sudah Dikirim', dikirim=now()",1,new String[]{TNoRwCari.getText()});
+                                }
+                                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRwCari,"stts='Terkirim'");
+                                
+                                if(tbKasirRalan.getSelectedRow()>-1){
+                                    tabModekasir.setValueAt("Terkirim",tbKasirRalan.getSelectedRow(),10);
+                                }
+                                
+                                i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                                if(i==JOptionPane.YES_OPTION){
+                                    MnDataRalanActionPerformed(null);
+                                    //TimeUnit.SECONDS.sleep(1);
+                                    CompletableFuture.delayedExecutor(5, TimeUnit.SECONDS).execute(()->{
+                                        try{
+                                            
+                                            Sequel.menyimpan("mutasi_berkas","'"+TNoRwCari.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRwCari.getText()+"'");
+                                            Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRwCari,"stts='Berkas Diterima'");
+
+                                            if(tbKasirRalan.getSelectedRow()>-1){
+                                                tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                                            }
+                                        }catch(Exception e){
+                                                System.out.println("Error after delay: " + e);
+                                        }
+                                    });
+                                }
+                            } 
+                        } else if(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),10).toString().equals("Terkirim")){
                             i=JOptionPane.showConfirmDialog(null, "Mau sekalian update status pasien Berkas Diterima ???","Konfirmasi",JOptionPane.YES_NO_OPTION);
                             if(i==JOptionPane.YES_OPTION){
                                 MnDataRalanActionPerformed(null);
-                                Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
-                                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
+                                //TimeUnit.SECONDS.sleep(1);
+                                CompletableFuture.delayedExecutor(5, TimeUnit.SECONDS).execute(()->{
+                                    try{
+                                        
+                                        Sequel.menyimpan("mutasi_berkas","'"+TNoRwCari.getText()+"','Sudah Diterima',now() - interval 10 minute,now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRwCari.getText()+"'");
+                                        Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRwCari,"stts='Berkas Diterima'");
+
+                                        if(tbKasirRalan.getSelectedRow()>-1){
+                                            tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                                        }
+                                    }catch(Exception e){
+                                        System.out.println("Error after delay: " + e);
+                                    }
+                                });
                             } 
-                        } else{
+                        }
+                        else{
                             MnDataRalanActionPerformed(null);
                         }
                     }
@@ -8122,6 +8188,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
+            
             if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
             }else {
@@ -8129,8 +8196,86 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 if(tbKasirRalan.getSelectedRow()>-1){
                     tabModekasir.setValueAt("Batal",tbKasirRalan.getSelectedRow(),10);
                 }
+                
+                
+                int mjkn = Sequel.cariInteger("SELECT COUNT(referensi_mobilejkn_bpjs.nobooking) AS mjkn " +
+                            "FROM referensi_mobilejkn_bpjs " +
+                            "INNER JOIN pasien ON referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis " +
+                            "WHERE referensi_mobilejkn_bpjs.no_rawat = '"+TNoRwCari.getText()+"' AND referensi_mobilejkn_bpjs.norm = '"+TNoRMCari.getText()+"'");
+            
+                if(mjkn > 0) {
+
+                    String nobooking = "", checkinstatus = "", nomorreferensi = "";
+
+                    try {
+                        ps=koneksi.prepareStatement(
+                            "SELECT referensi_mobilejkn_bpjs.nobooking, referensi_mobilejkn_bpjs.status, referensi_mobilejkn_bpjs.nomorreferensi " +
+                                "FROM referensi_mobilejkn_bpjs " +
+                                "INNER JOIN pasien ON referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis " +
+                                "WHERE referensi_mobilejkn_bpjs.no_rawat = ? and referensi_mobilejkn_bpjs.norm = ?");
+                        try {
+                            ps.setString(1,TNoRwCari.getText());
+                            ps.setString(2,TNoRMCari.getText());
+                            rs=ps.executeQuery();
+                            if(rs.next()){
+                               nobooking = rs.getString("nobooking");
+                               checkinstatus = rs.getString("status");
+                               nomorreferensi = rs.getString("nomorreferensi");
+
+                            }
+
+
+                            if(!nobooking.isEmpty()){
+        //                    System.out.println(nobooking);
+        //                    System.out.println(checkinstatus);
+                                if(checkinstatus.equals("Belum")) {
+                                    if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
+                                        nobooking
+                                    })==true){
+
+                                        Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
+                                            TNoRMCari.getText(),TNoRwCari.getText(), 
+                                            nomorreferensi,"Dibatalkan oleh Admin","Belum",nobooking
+                                        });
+                                    }
+                                } else if(checkinstatus.equals("Checkin")) {
+                                    i=JOptionPane.showConfirmDialog(null, "Status pasien sudah 'Check in', apakah ingin ubah menjadi 'Batal'?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                                    if(i==JOptionPane.YES_OPTION){
+
+                                        if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
+                                            nobooking
+                                        })==true){
+                                            Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
+                                                TNoRMCari.getText(),TNoRwCari.getText(), 
+                                                nomorreferensi,"Dibatalkan oleh Admin","Belum",nobooking
+                                            });
+                                        }
+                                    }
+                                }
+                            } 
+
+                        } catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } finally{
+                            if(rs!=null){
+                                rs.close();
+                            }
+                            if(ps!=null){
+                                ps.close();
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } 
+                }
+                
             }
         }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_MnBatalActionPerformed
 
     private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnOperasiActionPerformed
@@ -13796,7 +13941,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             pskasir=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                 "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"+
                 "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur, "+
-                "reg_periksa.status_bayar,reg_periksa.status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp "+
+                "reg_periksa.status_bayar,reg_periksa.status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp, pasien.jk "+
                 "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+
                 "reg_periksa.tgl_registrasi between ? and ? and reg_periksa.status_lanjut='Ralan' "+tampildiagnosa+
@@ -13831,7 +13976,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 rskasir=pskasir.executeQuery();
                 while(rskasir.next()){
                     tabModekasir.addRow(new String[] {
-                        rskasir.getString(5),rskasir.getString(6),rskasir.getString(7),rskasir.getString(8)+" ("+rskasir.getString("umur")+")",
+                        rskasir.getString(5),rskasir.getString(6),rskasir.getString(7),rskasir.getString(8)+" ("+rskasir.getString("umur")+")"+" ("+rskasir.getString("jk")+")",
                         rskasir.getString(9),rskasir.getString(10),rskasir.getString(11),rskasir.getString(12),Valid.SetAngka(rskasir.getDouble(13)),
                         rskasir.getString("png_jawab"),rskasir.getString(14),rskasir.getString("no_rawat"),rskasir.getString("tgl_registrasi"),
                         rskasir.getString("jam_reg"),rskasir.getString(1),rskasir.getString("status_bayar"),rskasir.getString("status_poli"),
@@ -13861,7 +14006,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             pskasir=koneksi.prepareStatement("select reg_periksa.no_rawat,rujukan_internal_poli.tanggal,reg_periksa.jam_reg,"+
                 "rujukan_internal_poli.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"+
                 "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.stts,penjab.png_jawab,rujukan_internal_poli.kd_poli,"+
-                "concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,reg_periksa.kd_pj,pasien.no_tlp "+
+                "concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,reg_periksa.kd_pj,pasien.no_tlp, pasien.jk "+
                 "from reg_periksa inner join rujukan_internal_poli on rujukan_internal_poli.no_rawat=reg_periksa.no_rawat "+
                 "inner join dokter on rujukan_internal_poli.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join poliklinik on rujukan_internal_poli.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
@@ -13895,7 +14040,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 while(rskasir.next()){
                     tabModekasir2.addRow(new String[] {
                         rskasir.getString("kd_dokter"),rskasir.getString("nm_dokter"),
-                        rskasir.getString("no_rkm_medis"),rskasir.getString("nm_pasien")+" ("+rskasir.getString("umur")+")",
+                        rskasir.getString("no_rkm_medis"),rskasir.getString("nm_pasien")+" ("+rskasir.getString("umur")+")"+" ("+rskasir.getString("jk")+")",
                         rskasir.getString("nm_poli"),rskasir.getString("p_jawab"),rskasir.getString("almt_pj"),rskasir.getString("hubunganpj"),
                         rskasir.getString("png_jawab"),rskasir.getString("stts"),rskasir.getString("no_rawat"),rskasir.getString("tanggal"),
                         rskasir.getString("jam_reg"),rskasir.getString("kd_poli"),rskasir.getString("kd_pj"),rskasir.getString("no_tlp")
