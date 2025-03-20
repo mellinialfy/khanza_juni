@@ -28,11 +28,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -2551,6 +2554,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         sip = Sequel.cariIsi("select dokter.no_ijn_praktek from dokter where dokter.kd_dokter=? ",KdDokter.getText());
         
         this.status=status;
+    }
+    
+    
+    public void setNoRm1(String norm){
+        
+        TCari.setText(norm);
+        String tgl_perawatan = Sequel.cariIsi("SELECT tgl_perawatan FROM resep_obat " +
+                    "INNER JOIN reg_periksa ON resep_obat.no_rawat=reg_periksa.no_rawat " +
+                    "WHERE no_rkm_medis = ? " +
+                    "ORDER BY tgl_perawatan DESC LIMIT 1 OFFSET 2",norm);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = dateFormat.parse(tgl_perawatan);
+//            System.out.println("Date: " + date1);
+            Valid.SetTgl2(DTPCari1,format.format(date1)+" 00:00:00");
+        } catch (ParseException e) {
+            System.err.println("Error parsing date: " + e.getMessage());
+        }
+        
     }
     
     public void setDokterRalan(){
